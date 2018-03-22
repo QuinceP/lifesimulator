@@ -1,0 +1,31 @@
+page-career {
+  .career-img-col {
+    display: flex;
+    .career-img {
+      width: 150px;
+      height: 150px;
+      align-self: center;
+    }
+  }
+  .find-job-button {
+    //margin: 12px;
+  }
+
+  .needs-button-row {
+    ion-col {
+      display: flex;
+      justify-content: center;
+      ion-buttons {
+        width: 100%;
+        height: 100%;
+        button {
+          //font-size: 250%;
+          height: 100%;
+          ion-icon {
+            font-size: 2em;
+          }
+        }
+      }
+    }
+  }
+}

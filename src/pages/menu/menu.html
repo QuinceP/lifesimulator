@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'Menu' | translate}}</ion-title>
+    <ion-buttons end class="clock">
+      <span class="time-display">{{'Day' | translate}} {{timeSvc.days}}&nbsp;</span>
+      <span class="time-display">{{timeSvc.date.format('HH:mm:ss')}}</span>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center *ngFor="let page of pages" (click)="navCtrl.setRoot(page.page)">
+        <h3>{{page.name | translate}}</h3>
+        <ion-icon text-center [name]="page.icon"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

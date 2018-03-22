@@ -1,0 +1,31 @@
+page-skills {
+  .icon-demo {
+    float:left;
+    position: relative;
+    width: 30%;
+    //padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+    margin:1.66%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:cover;
+
+    text-align: center;
+  }
+  .icon-demo ion-icon {
+    font-size: 4em;
+    color: white;
+  }
+  .icon-demo ion-row {
+    height: 100%;
+    flex-wrap: wrap;
+  }
+  .icon-demo ion-col {
+    flex: 0 0 25%;
+    max-width: 25%;
+    text-align: center;
+    padding: 10px 5px;
+  }
+  .selected-skill {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}

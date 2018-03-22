@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title></ion-title>
+    <ion-buttons end class="clock">
+      <span class="time-display">Day {{timeSvc.days}}&nbsp;</span>
+      <span class="time-display">{{timeSvc.date.format('HH:mm:ss')}}</span>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>Careers</ion-card-header>
+    <ion-list>
+      <ion-item-group>
+        <ng-container *ngFor="let career of careerSvc.Careers" >
+          <ion-item ion-item detail-push (click)="goToCareerDetail(career)">
+            <ion-thumbnail item-start>
+              <img src="{{career.icon}}"/>
+            </ion-thumbnail>
+            {{career.title}} {{highestLevel(career)}}/{{career.jobs.length}}
+            <ion-icon item-end name="arrow-forward"></ion-icon>
+          </ion-item>
+        </ng-container>
+      </ion-item-group>
+    </ion-list>
+  </ion-card>
+</ion-content>

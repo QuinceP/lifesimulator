@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Housing</ion-title>
+    <ion-buttons end class="clock">
+      <span class="time-display">Day {{timeSvc.days}}&nbsp;</span>
+      <span class="time-display">{{timeSvc.date.format('HH:mm:ss')}}</span>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card class="house-card" *ngFor="let house of housingSvc.houses; let i = index">
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <h2>{{house.title}}</h2>
+        </ion-col>
+        <ion-col text-end>
+          <h2
+            [ngStyle]="{'color': playerSvc.player.money > house.price ? progressColors.primary : progressColors.danger}">
+            {{house.price | currency: 'USD':'1.2-2'}}</h2>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <img [src]="house.img"/>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <p class="word-wrap">{{loremIpsum[i]}}</p>
+        </ion-item>
+      </ion-list>
+      <button ion-button text-center large color="secondary" class="buy-button" [disabled]="house === playerSvc.player.house"
+      (click)="buyHouse(house)">
+      {{house === playerSvc.player.house ? 'Owned':'Buy'}}
+      </button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

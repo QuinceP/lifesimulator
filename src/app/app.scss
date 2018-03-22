@@ -1,0 +1,100 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.label-col {
+  display: flex;
+  align-items: center;
+  h2, h2:first-child {
+    margin: 0 2% 5px;
+    padding: 3px;
+  }
+}
+
+ion-content {
+  background: $app-background !important;
+}
+
+h1, h3, h4, h5, h6, span, ion-input, ion-select {
+  color: white;
+}
+
+.tab-button-text {
+  color: color($colors, dark);
+}
+
+.clock {
+  display: flex;
+  align-items: center;
+  .time-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .time-display {
+    padding: 0 12px;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #fff;
+  }
+}
+
+.needs-button-row {
+  height: 125px;
+  ion-col {
+    display: flex;
+    justify-content: center;
+    ion-buttons {
+      width: 125px;
+      height: 100%;
+      button {
+        height: 100%;
+        ion-icon {
+          font-size: 500%;
+        }
+      }
+    }
+  }
+}
+
+.disabled {
+  opacity: .4;
+}
+
+ion-select, ion-input {
+  border: 1px solid white;
+}
+
+.word-wrap {
+  white-space: normal;
+}
+
+progress-bar {
+  .progress-outer {
+    padding: 0 !important;
+    margin: 0 !important;
+    .progress-inner {
+      padding: 0 !important;
+    }
+  }
+}
+
+.game-alert, .alert-button {
+  background-color: color($colors, secondary) !important;
+}
+
+.toast-message {
+  white-space: pre-line;
+}

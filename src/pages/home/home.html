@@ -1,0 +1,177 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'Me' | translate}}</ion-title>
+    <ion-buttons end class="clock">
+      <span class="time-display">{{'Day' | translate}} {{timeSvc.days}}&nbsp;</span>
+      <span class="time-display">{{timeSvc.date.format('HH:mm:ss')}}</span>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <h4 class="label-title">{{player.firstName}} {{player.lastName}}</h4>
+      </ion-col>
+      <ion-col class="label-col" col-6>
+        <h4 class="label-title">{{player.age}} Years Old</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row class="needs-button-row">
+      <ion-col>
+        <button ion-button icon-only (click)="eat()">
+          <ion-icon name="pizza"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-only (click)="mood()">
+          <ion-icon name="happy"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-only (click)="doctor()">
+          <ion-icon name="medkit"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-only (click)="refresh()">
+          <ion-icon name="refresh-circle"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <h4 class="label-title">Country</h4>
+      </ion-col>
+      <ion-col class="label-col" col-6>
+        <h4 class="label-title">{{player.nationality}}</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <h4 class="label-title">Money</h4>
+      </ion-col>
+      <ion-col class="label-col" col-6>
+        <h4 class="money">{{player.money | currency: 'USD':'1.2-2'}}</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <ion-row>
+          <h4 class="label-title">Mood</h4>
+        </ion-row>
+        <ion-row>
+          <span class="status-span">{{getStatus(player.mood, StatusTypes.Mood)}}</span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 class="progress-col">
+        <progress-bar [progress]="player.mood" [color]="Helpers.getColor(player.mood)"></progress-bar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <ion-row>
+          <h4 class="label-title">Hunger</h4>
+        </ion-row>
+        <ion-row>
+          <span class="status-span">{{getStatus(player.hunger, StatusTypes.Hunger)}}</span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 class="progress-col">
+        <progress-bar [progress]="player.hunger" [color]="Helpers.getColor(player.hunger)"></progress-bar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <ion-row>
+          <h4 class="label-title">Health</h4>
+        </ion-row>
+        <ion-row>
+          <span class="status-span">{{getStatus(player.health, StatusTypes.Health)}}</span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 class="progress-col">
+        <progress-bar [progress]="player.health" [color]="Helpers.getColor(player.health)"></progress-bar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <ion-row>
+          <h4 class="label-title">Appearance</h4>
+        </ion-row>
+        <ion-row>
+          <span class="status-span">{{getStatus(player.appearance, StatusTypes.Appearance)}}</span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 class="progress-col">
+        <progress-bar [progress]="player.appearance" [color]="Helpers.getColor(player.appearance)"></progress-bar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <ion-row>
+          <h4 class="label-title">Intelligence</h4>
+        </ion-row>
+        <ion-row>
+          <span class="status-span">{{getStatus(player.intelligence, StatusTypes.Intelligence)}}</span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 class="progress-col">
+        <progress-bar [progress]="player.intelligence" [color]="Helpers.getColor(player.intelligence)"></progress-bar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <ion-row>
+          <h4 class="label-title">Agility</h4>
+        </ion-row>
+        <ion-row>
+          <span class="status-span">{{getStatus(player.agility, StatusTypes.Agility)}}</span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 class="progress-col">
+        <progress-bar [progress]="player.agility" [color]="Helpers.getColor(player.agility)"></progress-bar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <ion-row>
+          <h4 class="label-title">Charisma</h4>
+        </ion-row>
+        <ion-row>
+          <span class="status-span">{{getStatus(player.charisma, StatusTypes.Charisma)}}</span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 class="progress-col">
+        <progress-bar [progress]="player.charisma" [color]="Helpers.getColor(player.charisma)"></progress-bar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <ion-row>
+          <h4 class="label-title">Dexterity</h4>
+        </ion-row>
+        <ion-row>
+          <span class="status-span">{{getStatus(player.dexterity, StatusTypes.Dexterity)}}</span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 class="progress-col">
+        <progress-bar [progress]="player.dexterity" [color]="Helpers.getColor(player.dexterity)"></progress-bar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <ion-row>
+          <h4 class="label-title">Strength</h4>
+        </ion-row>
+        <ion-row>
+          <span class="status-span">{{getStatus(player.strength, StatusTypes.Strength)}}</span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 class="progress-col">
+        <progress-bar [progress]="player.strength" [color]="Helpers.getColor(player.strength)"></progress-bar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

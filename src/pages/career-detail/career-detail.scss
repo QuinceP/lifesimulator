@@ -1,0 +1,21 @@
+page-career-detail {
+.job-card {
+  ion-thumbnail {
+    display: flex;
+    .career-level {
+      align-self: center;
+      font-size: 350%;
+    }
+  }
+}
+  .job-card.next {
+    border: 5px solid color($colors, secondary);
+  }
+
+  .job-card.current {
+    background: rgba(34, 203, 134, 0.3);
+    ion-item {
+      background: rgb(34, 203, 134);
+    }
+  }
+}

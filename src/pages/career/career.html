@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Career</ion-title>
+    <ion-buttons end class="clock">
+      <span class="time-display">Day {{timeSvc.days}}&nbsp;</span>
+      <span class="time-display">{{timeSvc.date.format('HH:mm:ss')}}</span>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-row>
+              <ion-col class="career-img-col">
+                <img class="career-img" src="{{player.career.icon}}"/>
+              </ion-col>
+              <ion-col>
+                <ion-row>
+                  <ion-col>
+                    <h3>Current Job: {{player.job.title}}</h3>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <h3>Career: {{player.career.title}}</h3>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <h3>Career Level: {{player.job.careerLevel}}</h3>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <h3>Hourly Rate: {{player.job.hourlyRate | currency:'USD':true:'1.2-2'}}</h3>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <button ion-button block class="find-job-button" color="secondary"
+                [ngStyle]="{'background-color': player.career.color}" (click)="goToCareersList()">Find a Job
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="needs-button-row">
+      <ion-col>
+        <ion-buttons start>
+          <button #workButton ion-button block large icon-start [ngStyle]="{'background-color': player.career.color}"
+                  (click)="work()" [disabled]="player.career == careerSvc.Unemployed">
+            <ion-icon name="time"></ion-icon>
+            Work 1 Hour
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col>
+        <ion-buttons end>
+          <button #workButton ion-button block large icon-start (click)="work(8)"
+                  [ngStyle]="{'background-color': player.career.color}"
+                  [disabled]="player.career == careerSvc.Unemployed">
+            <ion-icon name="time"></ion-icon>
+            Work 8 Hours
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,17 @@
+page-home {
+  .label-col {
+    display: inline-block;
+    .label-title {
+      margin: 0;
+    }
+  }
+
+  .progress-col {
+    progress-bar {
+      div.progress-outer {
+        margin-left: 0;
+      }
+    }
+  }
+}
+

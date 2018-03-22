@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let lang of translateSvc.supportedLanguages">
+        <button  (click)="translateSvc.selectLang(lang.value)" class="btn btn-default" [class.btn-primary]="translateSvc.isCurrentLang(lang.value)">
+          {{ lang.display }}
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <h1>{{'hello' | translate}}</h1>
+    </ion-row>
+  </ion-grid>
+</ion-content>

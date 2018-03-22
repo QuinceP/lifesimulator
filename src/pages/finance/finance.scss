@@ -1,0 +1,16 @@
+page-finance {
+  .balance-title h1 {
+    font-size: 100%;
+  }
+  .account-balance {
+    text-align: center;
+    font-size: 95%;
+  }
+
+  .money-flow {
+    display: inline-grid;
+    justify-content: center;
+    align-items: center;
+    font-size: 150%;
+  }
+}
