@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { AlertController, NavController, ToastController } from 'ionic-angular';
 import { PlayerService } from '../../services/player-service';
 import { Person } from '../../models/person';
@@ -6,6 +6,7 @@ import { Helpers } from '../../utilities/helpers';
 import { TimeService } from '../../services/time-service';
 import { Action } from '../../models/action';
 import { TranslateService } from '../../utilities/translate/translate-service';
+import { Lumberjack } from '../../services/lumberjack';
 
 export enum StatusTypes {
   Mood,
@@ -25,13 +26,28 @@ export enum StatusTypes {
 })
 export class HomePage {
   private player: Person;
+  private StatusTypes = StatusTypes;
+  private Helpers = Helpers;
+  private Statuses: {
+    Mood: string[];
+    Hunger: string[];
+    Health: string[];
+    Appearance: string[];
+    Intelligence: string[];
+    Agility: string[];
+    Charisma: string[];
+    Dexterity: string[];
+    Strength: string[];
+  };
 
 
   constructor(public navCtrl: NavController,
               private playerSvc: PlayerService,
               public timeSvc: TimeService,
               public alertCtrl: AlertController,
-              public translateSvc: TranslateService) {
+              public translateSvc: TranslateService,
+              public lumberjack: Lumberjack,
+              public changeRef: ChangeDetectorRef) {
     this.player = this.playerSvc.player;
     this.Statuses = {
       Mood: ['Depressed', 'Unhappy', 'Content', 'Happy', 'Elated'],
@@ -43,16 +59,11 @@ export class HomePage {
       Charisma: ['Socially Inept', 'Awkward', 'Average', 'Charming', 'Magnetic'],
       Dexterity: ['Oafish', 'Clumsy', 'Average', 'Deft', 'Nimble'],
       Strength: ['Feeble', 'Weak', 'Average', 'Strong', 'Powerful']
-  };
+    };
 
     // for (let status in this.Statuses){
     // }
   }
-
-  private StatusTypes = StatusTypes;
-  private Helpers = Helpers;
-
-  private Statuses;
 
   eat() {
     if (this.player.hunger < 100) {
@@ -85,7 +96,17 @@ export class HomePage {
   increaseNeed(nee) {
   }
 
+  die() {
+    this.playerSvc.die();
+    this.playerSvc.birth();
+    this.player = this.playerSvc.player;
+  }
+
   ionViewDidLoad() {
+    this.showBirthAlert();
+  }
+
+  showBirthAlert() {
     let alert = this.alertCtrl.create({
       message: 'Your name is ' + this.playerSvc.player.firstName + ' ' +
       this.playerSvc.player.lastName + '. You were born in '
@@ -94,8 +115,7 @@ export class HomePage {
         text: 'Dismiss',
         cssClass: 'game-alert'
       }],
-    });
-    // alert.present();
+    }).present();
   }
 
   refresh() {
@@ -153,6 +173,4 @@ export class HomePage {
         return this.Statuses.Strength[statusLevel];
     }
   }
-
-
 }

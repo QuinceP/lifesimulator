@@ -32,10 +32,22 @@ export class TimeService {
   private _years: number = 0;
   private _days: number = 0;
 
-  constructor(private playerSvc: PlayerService, protected lumberjack: Lumberjack) {
+  constructor(private playerSvc: PlayerService,
+              protected lumberjack: Lumberjack) {
+    this.bigBang();
+  }
+
+  /**
+   * The beginning of time 🌌
+   * Sends user to home page upon death.
+   */
+  bigBang(navigateToHome: boolean = false) {
     this.date = moment();
     this.date.hour(0).minute(0).second(0).millisecond(0);
     this.startDate = moment(this.date);
+    this.days = 0;
+    this.years = 0;
+    this.lumberjack.warn('Time reset to beginning.');
   }
 
   get years(): number {
@@ -74,14 +86,15 @@ export class TimeService {
     this.days = this.date.diff(this.startDate, 'days');
   }
 
-  static starvationRate(): number{
+  static starvationRate(): number {
     return +((100 / STARVATION_HOURS).toFixed(2));
   }
 
-  static healthRate(): number{
+  static healthRate(): number {
     return +((100 / FATAL_HEALTH_HOURS).toFixed(2));
   }
-  static depressionRate(): number{
+
+  static depressionRate(): number {
     return +((100 / SUICIDE_HOURS).toFixed(2));
   }
 
@@ -92,8 +105,9 @@ export class TimeService {
     action.act(actionCount).then(() => {
         this.date.add(action.durationInHours, 'hours');
         this.getDays();
-        if(this.playerSvc.player.health <= 0|| this.playerSvc.player.hunger <= 0 || this.playerSvc.player.mood <= 0){
+        if (this.playerSvc.player.health <= 0 || this.playerSvc.player.hunger <= 0 || this.playerSvc.player.mood <= 0) {
           this.playerSvc.die();
+          this.bigBang(true);
         }
       },
       (err) => {

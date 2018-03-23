@@ -6,6 +6,8 @@ import { Software } from '../models/career';
 import CountryLanguage from 'country-language';
 import faker from 'faker';
 import { Lumberjack } from './lumberjack';
+import { AlertController } from 'ionic-angular';
+import { Subject } from 'rxjs/Subject';
 
 
 
@@ -19,8 +21,9 @@ export class PlayerService {
   /**
    * Births a new player upon initializing.
    * @param {Lumberjack} lumberjack
+   * @param {AlertController} alertCtrl
    */
-  constructor(protected lumberjack: Lumberjack) {
+  constructor(protected lumberjack: Lumberjack, protected alertCtrl: AlertController) {
     this.birth();
   }
 
@@ -61,7 +64,15 @@ export class PlayerService {
    * Action to take when player dies.
    */
   die() {
-    this.lumberjack.error('u ded');
+    this.lumberjack.info('Player has perished.');
+    let alert = this.alertCtrl.create({
+      message: 'You died.',
+      buttons: [{
+        text: 'Dismiss',
+        cssClass: 'game-alert'
+      }],
+    });
+    alert.present();
   }
 
   /**
