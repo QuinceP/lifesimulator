@@ -18,8 +18,9 @@ import { TimeService } from '../../services/time-service';
   templateUrl: 'career-list.html',
 })
 export class CareerListPage {
-
+  careers: Career[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public careerSvc: CareerService, public playerSvc: PlayerService, public timeSvc: TimeService) {
+    this.careers = this.careerSvc.Careers;
   }
 
   highestLevel(career: Career){
@@ -30,9 +31,6 @@ export class CareerListPage {
     else {
       return 0;
     }
-  }
-
-  ionViewDidLoad() {
   }
 
   goToCareerDetail(career: Career) {

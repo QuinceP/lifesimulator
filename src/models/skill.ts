@@ -20,8 +20,8 @@ export class Skill {
     this.currentExp = 0;
     this.action = action;
     this.color = color;
-    this.level = 1;
-    this.totalExp = this.calcExp(1);
+    this.level = 0;
+    this.totalExp = this.calcExp(0);
   }
 
   calcExp(level: number){

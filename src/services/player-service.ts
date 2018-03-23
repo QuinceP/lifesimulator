@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { Person } from '../models/person';
 import { countries } from '../models/country';
 import { Helpers } from '../utilities/helpers';
-import { Software } from '../models/career';
 import CountryLanguage from 'country-language';
 import faker from 'faker';
 import { Lumberjack } from './lumberjack';
 import { AlertController } from 'ionic-angular';
-import { Subject } from 'rxjs/Subject';
+import { CareerService } from './career-service';
 
 
 
@@ -23,7 +22,9 @@ export class PlayerService {
    * @param {Lumberjack} lumberjack
    * @param {AlertController} alertCtrl
    */
-  constructor(protected lumberjack: Lumberjack, protected alertCtrl: AlertController) {
+  constructor(protected lumberjack: Lumberjack,
+              protected alertCtrl: AlertController,
+              protected careerSvc: CareerService) {
     this.birth();
   }
 
@@ -54,10 +55,11 @@ export class PlayerService {
     this.player.charisma = Helpers.weightedRandom(100, 2);
     this.player.dexterity = Helpers.weightedRandom(100, 2);
     this.player.strength = Helpers.weightedRandom(100, 2);
-    this.player.career = Software;
-    this.player.pastCareers.push(Software);
+    this.player.career = this.careerSvc.Software;
+    this.player.pastCareers.push(this.careerSvc.Software);
+    this.lumberjack.info(this.player.pastCareers);
     this.player.pastCareers[0].highestLevel = 1;
-    this.player.job = Software.jobs[0];
+    this.player.job = this.careerSvc.Software.jobs[0];
     this.showBirthAlert();
   }
 

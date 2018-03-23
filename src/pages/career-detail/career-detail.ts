@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
-import { Career, Software } from '../../models/career';
+import { Career } from '../../models/career';
 import { Helpers } from '../../utilities/helpers';
 import { Job, Requirement } from '../../models/job';
 import { CareerService } from '../../services/career-service';
