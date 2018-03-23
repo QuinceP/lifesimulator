@@ -58,6 +58,19 @@ export class PlayerService {
     this.player.pastCareers.push(Software);
     this.player.pastCareers[0].highestLevel = 1;
     this.player.job = Software.jobs[0];
+    this.showBirthAlert();
+  }
+
+  showBirthAlert() {
+    let alert = this.alertCtrl.create({
+      message: 'Your name is ' + this.player.firstName + ' ' +
+      this.player.lastName + '. You were born in '
+      + this.player.nationality + '.',
+      buttons: [{
+        text: 'Dismiss',
+        cssClass: 'game-alert'
+      }],
+    }).present();
   }
 
   /**

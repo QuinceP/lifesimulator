@@ -102,22 +102,6 @@ export class HomePage {
     this.player = this.playerSvc.player;
   }
 
-  ionViewDidLoad() {
-    this.showBirthAlert();
-  }
-
-  showBirthAlert() {
-    let alert = this.alertCtrl.create({
-      message: 'Your name is ' + this.playerSvc.player.firstName + ' ' +
-      this.playerSvc.player.lastName + '. You were born in '
-      + this.playerSvc.player.nationality + '.',
-      buttons: [{
-        text: 'Dismiss',
-        cssClass: 'game-alert'
-      }],
-    }).present();
-  }
-
   refresh() {
     this.playerSvc.birth();
     this.player = this.playerSvc.player;
