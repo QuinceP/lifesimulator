@@ -5,8 +5,10 @@ import { House } from '../models/house';
 
 export class HousingService {
   private _houses: House[];
+  homeless: House;
 
   constructor() {
+    this.homeless = new House('Homeless', 0, '');
     let bench = new House('Bench', 0, 'bench.jpg');
     let tent = new House('Tent', 500, 'tent.jpg');
     let attic = new House('Attic', 200, 'attic.jpg');

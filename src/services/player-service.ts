@@ -7,6 +7,7 @@ import faker from 'faker';
 import { Lumberjack } from './lumberjack';
 import { AlertController } from 'ionic-angular';
 import { CareerService } from './career-service';
+import { HousingService } from './housing-service';
 
 /**
  * Class to provide player data.
@@ -23,7 +24,8 @@ export class PlayerService {
    */
   constructor(protected lumberjack: Lumberjack,
               protected alertCtrl: AlertController,
-              protected careerSvc: CareerService) {
+              protected careerSvc: CareerService,
+              protected housingSvc: HousingService) {
     this.birth();
   }
 
@@ -56,9 +58,9 @@ export class PlayerService {
     this.player.strength = Helpers.weightedRandom(100, 2);
     this.player.career = this.careerSvc.Software;
     this.player.pastCareers.push(this.careerSvc.Software);
-    this.lumberjack.info(this.player.pastCareers);
     this.player.pastCareers[0].highestLevel = 1;
     this.player.job = this.careerSvc.Software.jobs[0];
+    this.player.house = this.housingSvc.homeless;
     this.showBirthAlert();
   }
 
