@@ -32,9 +32,10 @@ export class TranslateService {
   private translate(key: string): string {
     // private perform translation
     let translation = key;
+    let lowercaseKey = key.toLowerCase();
 
-    if (_translations[this.currentLang] && _translations[this.currentLang][key]) {
-      return _translations[this.currentLang][key];
+    if (_translations[this.currentLang] && _translations[this.currentLang][lowercaseKey]) {
+      return _translations[this.currentLang][lowercaseKey];
     }
 
     return translation;

@@ -1,8 +1,8 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{'Me' | translate}}</ion-title>
+    <ion-title>{{'Me' | translate | titlecase}}</ion-title>
     <ion-buttons end class="clock">
-      <span class="time-display">{{'Day' | translate}} {{timeSvc.days}}&nbsp;</span>
+      <span class="time-display">{{'Day' | translate | titlecase}} {{timeSvc.days}}&nbsp;</span>
       <span class="time-display">{{timeSvc.date.format('HH:mm:ss')}}</span>
     </ion-buttons>
   </ion-navbar>

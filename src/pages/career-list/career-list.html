@@ -20,7 +20,7 @@
             <ion-thumbnail item-start>
               <img src="{{career.icon}}"/>
             </ion-thumbnail>
-            {{career.title}} {{highestLevel(career)}}/{{career.jobs.length}}
+            {{career.title | translate | titlecase}} {{highestLevel(career)}}/{{career.jobs.length}}
             <ion-icon item-end name="arrow-forward"></ion-icon>
           </ion-item>
         </ng-container>

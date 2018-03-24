@@ -15,10 +15,10 @@
     <ion-card-header no-padding>
       <ion-item>
           <h1 class="career-level" [ngStyle]="{'color': getJobColor(job)}">{{job.careerLevel}}</h1>
-        {{job.title | translate}}
+        {{job.title | translate | titlecase}}
       </ion-item>
       <ion-item>
-       <p class="job-description"> {{job.description}}</p>
+       <p class="job-description"> {{job.description | translate}}</p>
       </ion-item>
       <ion-item>
         {{job.hourlyRate | currency: 'USD':'1.2-2'}}/hr

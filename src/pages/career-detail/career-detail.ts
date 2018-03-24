@@ -7,6 +7,7 @@ import { CareerService } from '../../services/career-service';
 import { PlayerService } from '../../services/player-service';
 import { TimeService } from '../../services/time-service';
 import { SkillService } from '../../services/skill-service';
+import { TranslateService } from '../../utilities/translate/translate-service';
 
 @Component({
   selector: 'page-career-detail',
@@ -18,9 +19,14 @@ export class CareerDetailPage {
   private progressColors = Helpers.progressColors;
   private mint: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public careerSvc: CareerService,
-              private toastCtrl: ToastController, public playerSvc: PlayerService, public timeSvc: TimeService,
-              public skillSvc: SkillService) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public careerSvc: CareerService,
+              private toastCtrl: ToastController,
+              public playerSvc: PlayerService,
+              public timeSvc: TimeService,
+              public skillSvc: SkillService,
+              public translateSvc: TranslateService) {
     this.career = navParams.get('career');
     this.mint = Helpers.hexToRgbA(this.progressColors.primary, 0.4);
   }
@@ -89,7 +95,7 @@ export class CareerDetailPage {
         }
 
         let toast = this.toastCtrl.create({
-          message: 'You got the ' + job.title + ' job!',
+          message: 'You got the ' + this.translateSvc.instant(job.title).toTitleCase() + ' job!',
           position: 'top',
           duration: 10000,
           showCloseButton: true,
@@ -98,7 +104,7 @@ export class CareerDetailPage {
         toast.present();
       }
       else {
-        let message = 'You didn\'t get the ' + job.title + ' job. You need:';
+        let message = 'You didn\'t get the ' + this.translateSvc.instant(job.title).toTitleCase() + ' job. You need:';
         for (let req of reqResults.failedReqs) {
           message += '\n' + req.skill.name + ' level ' + req.level;
         }

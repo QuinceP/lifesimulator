@@ -24,6 +24,7 @@ export class PlayerService {
    * @param {Lumberjack} lumberjack
    * @param {AlertController} alertCtrl
    * @param careerSvc
+   * @param housingSvc
    */
   constructor(protected lumberjack: Lumberjack,
               protected alertCtrl: AlertController,
