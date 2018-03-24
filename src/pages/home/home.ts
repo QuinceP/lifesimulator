@@ -2,23 +2,12 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { PlayerService } from '../../services/player-service';
 import { Person } from '../../models/person';
-import { Helpers } from '../../utilities/helpers';
 import { TimeService } from '../../services/time-service';
 import { Action } from '../../models/action';
 import { TranslateService } from '../../utilities/translate/translate-service';
 import { Lumberjack } from '../../services/lumberjack';
-
-export enum StatusTypes {
-  Mood,
-  Hunger,
-  Health,
-  Appearance,
-  Intelligence,
-  Agility,
-  Charisma,
-  Dexterity,
-  Strength
-}
+import { StatusComponent, StatusTypes } from '../../components/status-bar/status-bar';
+import { Helpers } from '../../utilities/helpers';
 
 @Component({
   selector: 'page-home',
@@ -26,20 +15,9 @@ export enum StatusTypes {
 })
 export class HomePage {
   private player: Person;
-  private StatusTypes = StatusTypes;
-  private Helpers = Helpers;
-  private Statuses: {
-    Mood: string[];
-    Hunger: string[];
-    Health: string[];
-    Appearance: string[];
-    Intelligence: string[];
-    Agility: string[];
-    Charisma: string[];
-    Dexterity: string[];
-    Strength: string[];
-  };
-
+  statusComponent;
+  Helpers;
+  statusTypes;
 
   constructor(public navCtrl: NavController,
               private playerSvc: PlayerService,
@@ -49,20 +27,8 @@ export class HomePage {
               public lumberjack: Lumberjack,
               public changeRef: ChangeDetectorRef) {
     this.player = this.playerSvc.player;
-    this.Statuses = {
-      Mood: ['Depressed', 'Unhappy', 'Content', 'Happy', 'Elated'],
-      Hunger: ['Starving', 'Hungry', 'Content', 'Full', 'Stuffed'],
-      Health: ['Dying', 'Ill', 'Average', 'Excellent', 'Healthy'],
-      Appearance: ['Hideous', 'Ugly', 'Average', 'Attractive', 'Gorgeous'],
-      Intelligence: ['Idiot', 'Dumb', 'Average', 'Smart', 'Genius'],
-      Agility: ['Sluggish', 'Slow', 'Average', 'Quick', 'Swift'],
-      Charisma: ['Socially Inept', 'Awkward', 'Average', 'Charming', 'Magnetic'],
-      Dexterity: ['Oafish', 'Clumsy', 'Average', 'Deft', 'Nimble'],
-      Strength: ['Feeble', 'Weak', 'Average', 'Strong', 'Powerful']
-    };
-
-    // for (let status in this.Statuses){
-    // }
+    this.Helpers = Helpers;
+    this.statusTypes = StatusTypes;
   }
 
   eat() {
@@ -107,54 +73,11 @@ export class HomePage {
     this.player = this.playerSvc.player;
   }
 
-  getStatusLevel(value: number): number {
-    if (value >= 80) {
-      return 4;
-    }
-    else if (value >= 60) {
-      return 3;
-    }
-    else if (value >= 40) {
-      return 2;
-    }
-    else if (value >= 20) {
-      return 1;
-    }
-    else {
-      return 0;
-    }
+  getStatus(value: number, statusType: StatusTypes): string{
+    return StatusComponent.getStatus(value, statusType);
   }
 
-  getStatus(value: number, statusType: StatusTypes): string {
-    let statusLevel = this.getStatusLevel(value);
-
-    switch (statusType) {
-      case StatusTypes.Mood:
-        return this.Statuses.Mood[statusLevel];
-
-      case StatusTypes.Hunger:
-        return this.Statuses.Hunger[statusLevel];
-
-      case StatusTypes.Health:
-        return this.Statuses.Health[statusLevel];
-
-      case StatusTypes.Appearance:
-        return this.Statuses.Appearance[statusLevel];
-
-      case StatusTypes.Intelligence:
-        return this.Statuses.Intelligence[statusLevel];
-
-      case StatusTypes.Agility:
-        return this.Statuses.Agility[statusLevel];
-
-      case StatusTypes.Charisma:
-        return this.Statuses.Charisma[statusLevel];
-
-      case StatusTypes.Dexterity:
-        return this.Statuses.Dexterity[statusLevel];
-
-      case StatusTypes.Strength:
-        return this.Statuses.Strength[statusLevel];
-    }
+  getStatusLevel(value: number): number{
+    return StatusComponent.getStatusLevel(value);
   }
 }

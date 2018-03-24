@@ -1,0 +1,18 @@
+status-bar {
+  .label-col {
+    display: inline-block;
+    .label-title {
+      margin: 0;
+    }
+  }
+  .progress-col {
+    padding: 0;
+  }
+  ion-grid.status-grid {
+    padding-top: 0;
+    .status-col {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}

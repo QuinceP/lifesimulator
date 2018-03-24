@@ -7,6 +7,7 @@ import faker from 'faker';
 import { Lumberjack } from './lumberjack';
 import { AlertController } from 'ionic-angular';
 import { CareerService } from './career-service';
+import { Subject } from 'rxjs/Subject';
 import { HousingService } from './housing-service';
 
 /**
@@ -15,6 +16,8 @@ import { HousingService } from './housing-service';
 @Injectable()
 export class PlayerService {
   public player: Person;
+  playerSubject= new Subject<Person>();
+  playerObservable = this.playerSubject.asObservable();
 
   /**
    * Births a new player upon initializing.
@@ -62,6 +65,7 @@ export class PlayerService {
     this.player.job = this.careerSvc.Software.jobs[0];
     this.player.house = this.housingSvc.homeless;
     this.showBirthAlert();
+    this.playerSubject.next(this.player);
   }
 
   showBirthAlert() {

@@ -2,10 +2,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { PlayerService } from '../services/player-service';
-import { ComponentsModule } from '../components/components.module';
 import { ProgressBarModule } from 'angular-progress-bar';
 import { CareerPage } from '../pages/career/career';
 import { CareerListPage } from '../pages/career-list/career-list';
@@ -29,6 +27,8 @@ import { TranslatePipe } from '../utilities/translate/translate-pipe';
 import { SettingsPage } from '../pages/settings/settings';
 import { Lumberjack } from '../services/lumberjack';
 import { ConsoleLoggerService } from '../services/console-logger-service';
+import { StatusComponent } from '../components/status-bar/status-bar';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @NgModule({
   declarations: [
@@ -46,12 +46,12 @@ import { ConsoleLoggerService } from '../services/console-logger-service';
     SkillsPage,
     CasinoPage,
     SettingsPage,
-    TranslatePipe
+    TranslatePipe,
+    StatusComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    ComponentsModule,
     ProgressBarModule
   ],
   bootstrap: [IonicApp],
