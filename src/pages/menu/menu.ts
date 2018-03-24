@@ -12,11 +12,16 @@ import { CasinoPage } from '../casino/casino';
 import { SettingsPage } from '../settings/settings';
 import { TranslateService } from '../../utilities/translate/translate-service';
 import { Lumberjack } from '../../services/lumberjack';
+import { PlayerService } from '../../services/player-service';
 
+/**
+ * An item on the main menu, containing its display and navigation properties.
+ */
 interface MenuItem {
   page: any;
   name: string;
   icon: string;
+  color: string;
 }
 
 @Component({
@@ -30,17 +35,19 @@ export class MenuPage {
               public navParams: NavParams,
               public timeSvc: TimeService,
               public translateSvc: TranslateService,
-              public lumberjack: Lumberjack) {
+              public lumberjack: Lumberjack,
+              public playerSvc: PlayerService) {
+
     this.pages = [
-      { page: HomePage, name: 'Me', icon: 'person' },
-      { page: CareerPage, name: 'Career', icon: 'briefcase' },
-      { page: FinancePage, name: 'Finance', icon: 'cash' },
-      { page: SkillsPage, name: 'Skills', icon: 'bulb' },
-      { page: HousingPage, name: 'Housing', icon: 'home' },
-      { page: SocialPage, name: 'Social', icon: 'people' },
-      { page: EducationPage, name: 'Education', icon: 'school' },
-      { page: CasinoPage, name: 'Casino', icon: 'game-controller-a' },
-      { page: SettingsPage, name: 'Settings', icon: 'settings' }
+      { page: HomePage, name: 'Me', icon: 'person', color: "primary" },
+      { page: CareerPage, name: 'Career', icon: 'briefcase', color: "secondary" },
+      { page: FinancePage, name: 'Finance', icon: 'cash', color: "danger" },
+      { page: SkillsPage, name: 'Skills', icon: 'bulb' , color: "warning"},
+      { page: HousingPage, name: 'Housing', icon: 'home', color: "primary" },
+      { page: SocialPage, name: 'Social', icon: 'people', color: "secondary" },
+      { page: EducationPage, name: 'Education', icon: 'school', color: "danger" },
+      { page: CasinoPage, name: 'Casino', icon: 'game-controller-a', color: "warning" },
+      { page: SettingsPage, name: 'Settings', icon: 'settings' , color: "primary"}
     ]
   }
 }

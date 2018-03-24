@@ -13,7 +13,7 @@
     <ion-row>
       <ion-col text-center *ngFor="let page of pages" (click)="navCtrl.setRoot(page.page)">
         <h3>{{page.name | translate}}</h3>
-        <ion-icon text-center [name]="page.icon"></ion-icon>
+        <ion-icon [color]="page.color" text-center [name]="page.icon"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>
