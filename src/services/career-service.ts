@@ -37,13 +37,11 @@ export class CareerService {
   }
 }
 
-
 // export const Medical: Career = new Career('Medical', undefined, 'medical.png', Helpers.progressColors.danger);
 // export const Business: Career = new Career('Business', undefined, 'business.png', Helpers.progressColors.secondary);
 // export const Music: Career = new Career('Music', undefined, 'music.png', Helpers.progressColors.primary);
 // export const Art: Career = new Career('Art', undefined, 'art.png', Helpers.progressColors.secondary);
 // export const Education: Career = new Career('Education', undefined, 'education.png', Helpers.progressColors.warning);
 // export const Military: Career = new Career('Military', undefined, 'military.png', Helpers.progressColors.danger);
-
 
 //Helpers.getColor(Helpers.getPercentage(job.careerLevel, job.career.jobs.length))

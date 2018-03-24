@@ -14,5 +14,6 @@ export class Lumberjack implements Lumber {
   warn: any;
   error: any;
 
-  invokeConsoleMethod(type: string, args?: any): void {}
+  invokeConsoleMethod(type: string, args?: any): void {
+  }
 }

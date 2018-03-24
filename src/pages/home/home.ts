@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
-import { AlertController, NavController, ToastController } from 'ionic-angular';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { AlertController, NavController } from 'ionic-angular';
 import { PlayerService } from '../../services/player-service';
 import { Person } from '../../models/person';
 import { Helpers } from '../../utilities/helpers';

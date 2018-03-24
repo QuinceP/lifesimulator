@@ -1,17 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FinanceService } from '../../services/finance-service';
 import { PlayerService } from '../../services/player-service';
 import { Helpers } from '../../utilities/helpers';
 import { TimeService } from '../../services/time-service';
 import { Lumberjack } from '../../services/lumberjack';
 
-/**
- * Generated class for the FinancePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 export enum AccountActions {
   Deposit,
   Withdraw
@@ -33,19 +27,17 @@ export class FinancePage {
               public playerSvc: PlayerService,
               public toastCtrl: ToastController,
               public timeSvc: TimeService,
-              protected lumberjack: Lumberjack){
+              protected lumberjack: Lumberjack) {
   }
 
-  change(){
+  change() {
     // lumberjack.info(this.selectedActionAmount)
   }
 
-
-
-  withdraw(){
-    let withdrawalAmount:number = +this.selectedActionAmount;
-    if (!isNaN(parseFloat(withdrawalAmount.toString())) && isFinite(withdrawalAmount)){
-      if (this.financeSvc.accountBalance < +this.selectedActionAmount){
+  withdraw() {
+    let withdrawalAmount: number = +this.selectedActionAmount;
+    if (!isNaN(parseFloat(withdrawalAmount.toString())) && isFinite(withdrawalAmount)) {
+      if (this.financeSvc.accountBalance < +this.selectedActionAmount) {
         this.lumberjack.info('insuffiecient funds')
         withdrawalAmount = this.financeSvc.accountBalance;
         this.playerSvc.player.money += withdrawalAmount;
@@ -62,14 +54,14 @@ export class FinancePage {
       duration: 1500,
       closeButtonText: 'Ok',
       showCloseButton: true,
-      message: 'Withdrew '+ withdrawalAmount
+      message: 'Withdrew ' + withdrawalAmount
     }).present();
   }
 
-  deposit(){
-    let depositAmount:number = +this.selectedActionAmount;
-    if (!isNaN(parseFloat(depositAmount.toString())) && isFinite(depositAmount)){
-      if (this.playerSvc.player.money < +this.selectedActionAmount){
+  deposit() {
+    let depositAmount: number = +this.selectedActionAmount;
+    if (!isNaN(parseFloat(depositAmount.toString())) && isFinite(depositAmount)) {
+      if (this.playerSvc.player.money < +this.selectedActionAmount) {
         this.lumberjack.info('insuffiecient funds')
         depositAmount = this.playerSvc.player.money;
         this.financeSvc.accountBalance += depositAmount;
@@ -86,9 +78,7 @@ export class FinancePage {
       duration: 1500,
       closeButtonText: 'Ok',
       showCloseButton: true,
-      message: 'Deposited '+ depositAmount
+      message: 'Deposited ' + depositAmount
     }).present();
   }
-
-
 }

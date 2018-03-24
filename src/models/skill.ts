@@ -1,4 +1,3 @@
-import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 
 export const EXP_CONSTANT = 0.1;

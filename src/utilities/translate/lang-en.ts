@@ -13,5 +13,4 @@ export const LANG_EN_TRANS = {
   'casino': 'casino',
   'settings': 'settings',
   'day': 'day',
-
 };

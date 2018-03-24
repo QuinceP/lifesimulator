@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { House } from '../models/House';
+import { House } from '../models/house';
 
 @Injectable()
 
 export class HousingService {
   private _houses: House[];
 
-  constructor(){
+  constructor() {
     let bench = new House('Bench', 0, 'bench.jpg');
     let tent = new House('Tent', 500, 'tent.jpg');
     let attic = new House('Attic', 200, 'attic.jpg');
@@ -26,7 +26,6 @@ export class HousingService {
       attic,
       bedroom, apartment1,
       apartment2, tinyHouse, smallHouse, house, bigHouse, mansion, penthouse
-
     ]
   }
 

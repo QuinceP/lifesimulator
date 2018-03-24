@@ -1,17 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { CareerService } from '../../services/career-service';
 import { PlayerService } from '../../services/player-service';
 import { CareerDetailPage } from '../career-detail/career-detail';
 import { Career } from '../../models/career';
 import { TimeService } from '../../services/time-service';
-
-/**
- * Generated class for the CareerListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-career-list',
@@ -19,11 +12,12 @@ import { TimeService } from '../../services/time-service';
 })
 export class CareerListPage {
   careers: Career[];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public careerSvc: CareerService, public playerSvc: PlayerService, public timeSvc: TimeService) {
     this.careers = this.careerSvc.Careers;
   }
 
-  highestLevel(career: Career){
+  highestLevel(career: Career) {
     if (this.playerSvc.player.pastCareers.indexOf(career) > -1) {
       let i = this.playerSvc.player.pastCareers.indexOf(career);
       return this.playerSvc.player.pastCareers[i].highestLevel;

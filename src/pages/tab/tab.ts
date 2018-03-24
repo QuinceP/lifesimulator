@@ -10,6 +10,5 @@ export class TabPage {
   tab1Root = MenuPage;
 
   constructor() {
-
   }
 }

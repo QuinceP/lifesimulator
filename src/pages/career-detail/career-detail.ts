@@ -5,17 +5,8 @@ import { Helpers } from '../../utilities/helpers';
 import { Job, Requirement } from '../../models/job';
 import { CareerService } from '../../services/career-service';
 import { PlayerService } from '../../services/player-service';
-import { CareerPage } from '../career/career';
 import { TimeService } from '../../services/time-service';
-import { Skill } from '../../models/skill';
 import { SkillService } from '../../services/skill-service';
-
-/**
- * Generated class for the CareerDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-career-detail',
@@ -34,9 +25,6 @@ export class CareerDetailPage {
     this.mint = Helpers.hexToRgbA(this.progressColors.primary, 0.4);
   }
 
-  ionViewDidLoad() {
-  }
-
   highestLevel() {
     if (this.playerSvc.player.pastCareers.indexOf(this.career) > -1) {
       let i = this.playerSvc.player.pastCareers.indexOf(this.career);
@@ -47,9 +35,9 @@ export class CareerDetailPage {
     }
   }
 
-  requirementsMet(): {requirementsMet: boolean, failedReqs: Requirement[]} {
+  requirementsMet(): { requirementsMet: boolean, failedReqs: Requirement[] } {
     let met: boolean = true;
-    let failedReqs: Requirement[] =[];
+    let failedReqs: Requirement[] = [];
     let requirements: Requirement[];
     if (this.playerSvc.player.pastCareers.indexOf(this.career) > -1) {
       let i = this.playerSvc.player.pastCareers.indexOf(this.career);
@@ -59,7 +47,6 @@ export class CareerDetailPage {
     else {
       requirements = this.career.jobs[0].requirements;
     }
-
 
     if (requirements) {
       for (let requirement of requirements) {
@@ -71,7 +58,7 @@ export class CareerDetailPage {
       }
     }
 
-    return {requirementsMet: met, failedReqs: failedReqs};
+    return { requirementsMet: met, failedReqs: failedReqs };
   }
 
   apply() {
@@ -86,7 +73,7 @@ export class CareerDetailPage {
         job = this.career.jobs[0];
       }
 
-      let reqResults: {requirementsMet: boolean, failedReqs: Requirement[]} = this.requirementsMet();
+      let reqResults: { requirementsMet: boolean, failedReqs: Requirement[] } = this.requirementsMet();
 
       if (reqResults.requirementsMet) {
         this.playerSvc.player.job = job;
@@ -112,7 +99,7 @@ export class CareerDetailPage {
       }
       else {
         let message = 'You didn\'t get the ' + job.title + ' job. You need:';
-        for (let req of reqResults.failedReqs){
+        for (let req of reqResults.failedReqs) {
           message += '\n' + req.skill.name + ' level ' + req.level;
         }
         let toast = this.toastCtrl.create({
@@ -135,7 +122,6 @@ export class CareerDetailPage {
       });
       toast.present();
     }
-
   }
 
   getJobColor(job: Job) {
@@ -143,7 +129,6 @@ export class CareerDetailPage {
       let career: Career = this.careerSvc.Careers.find((element) => {
         return element.title === job.career;
       });
-      // Helpers.getColor(Helpers.getPercentage(job.careerLevel, job.career.jobs.length))
       return Helpers.getColor(Helpers.getPercentage(job.careerLevel, career.jobs.length));
     }
     catch (err) {

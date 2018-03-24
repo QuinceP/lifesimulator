@@ -1,8 +1,7 @@
 import { Job } from './job';
-import { Helpers } from '../utilities/helpers';
-import { Programming } from '../services/skill-service';
-import { CareerService } from '../services/career-service';
+
 const JOB_ICONS_PATH = "assets/icon/jobs/";
+
 export class Career {
   private _title: string;
   private _jobs: Job[];
@@ -10,7 +9,7 @@ export class Career {
   private _color: string;
   private _highestLevel: number = 0;
 
-  constructor(title: string, jobs: Job[], icon: string="unemployed.png", color: string = "#000000") {
+  constructor(title: string, jobs: Job[], icon: string = "unemployed.png", color: string = "#000000") {
     this.jobs = jobs;
     this.title = title;
     this.icon = icon;

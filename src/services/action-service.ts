@@ -6,7 +6,6 @@ import { Action } from '../models/action';
 export class ActionService {
   private actions: Action[] = [];
 
-  constructor(){
-
+  constructor() {
   }
 }

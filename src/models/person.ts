@@ -1,6 +1,6 @@
 import { Job } from './job';
 import { Career } from './career';
-import { House } from './House';
+import { House } from './house';
 
 export class Person {
   private _firstName: string;

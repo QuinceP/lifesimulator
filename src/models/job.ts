@@ -1,4 +1,3 @@
-import { Career } from './career';
 import { Skill } from './skill';
 
 export interface Requirement {

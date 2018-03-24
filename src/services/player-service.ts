@@ -8,8 +8,6 @@ import { Lumberjack } from './lumberjack';
 import { AlertController } from 'ionic-angular';
 import { CareerService } from './career-service';
 
-
-
 /**
  * Class to provide player data.
  */
@@ -21,6 +19,7 @@ export class PlayerService {
    * Births a new player upon initializing.
    * @param {Lumberjack} lumberjack
    * @param {AlertController} alertCtrl
+   * @param careerSvc
    */
   constructor(protected lumberjack: Lumberjack,
               protected alertCtrl: AlertController,
