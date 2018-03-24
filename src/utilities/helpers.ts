@@ -1,4 +1,5 @@
 import Color from 'color';
+import faker from 'faker';
 
 export class Helpers {
 
@@ -19,7 +20,6 @@ export class Helpers {
   static blendColors(color1: string, color2: string) {
     let backdrop = Color(this.hexToRgbA(color1));
     let source = Color(this.hexToRgbA(color2));
-    let n = backdrop.mix(source);
     return backdrop.mix(source).rgb().string();
   }
 
@@ -78,4 +78,13 @@ export class Helpers {
     }
     return color;
   };
+
+  /**
+   * Returns a lorem ipsum paragraph.
+   * @returns {string}
+   */
+  static loremIpsum(): string {
+    // TODO: Check if debug mode
+    return faker.fake("{{lorem.paragraph}}");
+  }
 }
