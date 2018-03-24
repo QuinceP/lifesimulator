@@ -1,6 +1,4 @@
-// app/translate/translate.service.ts
-
-import {Injectable, Inject} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { _translations } from './translation'; // import our opaque token
 
 @Injectable()
@@ -22,8 +20,8 @@ export class TranslateService {
       { display: '华语', value: 'zh' },
     ];
 
-    // set current langage
-    this.selectLang('es');
+    // set current language
+    this.selectLang('en');
   }
 
   public use(lang: string): void {
