@@ -13,7 +13,11 @@ import { TimeService } from '../../services/time-service';
 export class CareerListPage {
   careers: Career[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public careerSvc: CareerService, public playerSvc: PlayerService, public timeSvc: TimeService) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public careerSvc: CareerService,
+              public playerSvc: PlayerService,
+              public timeSvc: TimeService) {
     this.careers = this.careerSvc.Careers;
   }
 

@@ -6,21 +6,19 @@
       <span class="time-display">{{timeSvc.date.format('HH:mm:ss')}}</span>
     </ion-buttons>
   </ion-navbar>
+  <status-bar></status-bar>
 </ion-header>
 
-
 <ion-content padding>
-  <ion-card class="job-card"  *ngFor="let job of career.jobs; let i = index"
+  <ion-card class="job-card" *ngFor="let job of career.jobs; let i = index"
             [ngClass]="[job.careerLevel < highestLevel() + 2? '' : 'disabled', job.careerLevel === playerSvc.player.job.careerLevel + 1? 'next':'', (job.careerLevel === playerSvc.player.job.careerLevel) ? 'current':'']">
-    <ion-card-header>
+    <ion-card-header no-padding>
       <ion-item>
-        <ion-thumbnail item-start>
           <h1 class="career-level" [ngStyle]="{'color': getJobColor(job)}">{{job.careerLevel}}</h1>
-        </ion-thumbnail>
-
+        {{job.title | translate}}
       </ion-item>
       <ion-item>
-        {{job.title}}
+       <p class="job-description"> {{job.description}}</p>
       </ion-item>
       <ion-item>
         {{job.hourlyRate | currency: 'USD':'1.2-2'}}/hr

@@ -7,6 +7,9 @@ page-career-detail {
       font-size: 350%;
     }
   }
+  .job-description {
+    white-space: normal;
+  }
 }
   .job-card.next {
     border: 5px solid color($colors, secondary);
@@ -17,5 +20,9 @@ page-career-detail {
     ion-item {
       background: rgb(34, 203, 134);
     }
+  }
+  .disabled .job-description, .next .job-description {
+    //TODO: Hide the job description programatically
+    display: none;
   }
 }

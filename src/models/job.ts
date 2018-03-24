@@ -7,6 +7,7 @@ export interface Requirement {
 
 export class Job {
   private _title: string;
+  private _description: string;
   private _hourlyRate: number;
   private _careerLevel: number;
   private _totalExp: number;
@@ -14,12 +15,18 @@ export class Job {
   private _career: string;
   private _requirements: Requirement[];
 
-  constructor(title: string, careerLevel: number, hourlyRate: number, career: string, requirements: Requirement[] = []) {
+  constructor(title: string,
+              careerLevel: number,
+              hourlyRate: number,
+              career: string,
+              requirements: Requirement[] = [],
+              description: string = '') {
     this.title = title;
     this.careerLevel = careerLevel;
     this.hourlyRate = hourlyRate;
     this.career = career;
     this.requirements = requirements;
+    this.description = description;
   }
 
   get title(): string {
@@ -76,5 +83,13 @@ export class Job {
 
   set requirements(value: Requirement[]) {
     this._requirements = value;
+  }
+
+  get description(): string {
+    return this._description;
+  }
+
+  set description(value: string) {
+    this._description = value;
   }
 }
