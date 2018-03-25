@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { PlayerService } from '../../services/player-service';
-import { Person } from '../../models/person';
+import { Gender, Person } from '../../models/person';
 import { TimeService } from '../../services/time-service';
 import { Action } from '../../models/action';
 import { TranslateService } from '../../utilities/translate/translate-service';
@@ -18,7 +18,7 @@ export class HomePage {
   statusComponent;
   Helpers;
   statusTypes;
-
+  Gender;
   constructor(public navCtrl: NavController,
               private playerSvc: PlayerService,
               public timeSvc: TimeService,
@@ -29,6 +29,7 @@ export class HomePage {
     this.player = this.playerSvc.player;
     this.Helpers = Helpers;
     this.statusTypes = StatusTypes;
+    this.Gender = Gender;
   }
 
   eat() {

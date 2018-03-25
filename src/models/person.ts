@@ -2,6 +2,11 @@ import { Job } from './job';
 import { Career } from './career';
 import { House } from './house';
 
+export enum Gender {
+  Female = "female",
+  Male = "male"
+}
+
 export class Person {
   private _firstName: string;
   private _lastName: string;
@@ -23,6 +28,7 @@ export class Person {
   private _ascensions: number;
   private _house: House;
   private _pastCareers: Career[] = [];
+  private _gender: Gender;
 
   get firstName(): string {
     return this._firstName;
@@ -209,12 +215,19 @@ export class Person {
     this._house = value;
   }
 
-
   get pastCareers(): Career[] {
     return this._pastCareers;
   }
 
   set pastCareers(value: Career[]) {
     this._pastCareers = value;
+  }
+
+  get gender(): Gender {
+    return this._gender;
+  }
+
+  set gender(value: Gender) {
+    this._gender = value;
   }
 }

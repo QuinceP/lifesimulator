@@ -23,6 +23,14 @@
         <h4 class="label-title">{{player.age}} Years Old</h4>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col class="label-col" col-6>
+        <h4 class="label-title">Gender</h4>
+      </ion-col>
+      <ion-col class="label-col" col-6>
+        <ion-icon class="label-title" [name]="player.gender === Gender.Female ? 'female' : 'male'"></ion-icon>
+      </ion-col>
+    </ion-row>
     <ion-row class="needs-button-row">
       <ion-col>
         <button ion-button icon-only (click)="eat()">

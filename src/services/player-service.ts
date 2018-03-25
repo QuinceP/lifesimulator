@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Person } from '../models/person';
+import { Gender, Person } from '../models/person';
 import { countries } from '../models/country';
 import { Helpers } from '../utilities/helpers';
 import CountryLanguage from 'country-language';
@@ -16,7 +16,7 @@ import { HousingService } from './housing-service';
 @Injectable()
 export class PlayerService {
   public player: Person;
-  playerSubject= new Subject<Person>();
+  playerSubject = new Subject<Person>();
   playerObservable = this.playerSubject.asObservable();
 
   /**
@@ -49,6 +49,7 @@ export class PlayerService {
     this.player = new Person();
     this.generateName(country);
     this.player.nationality = country.Name;
+    this.player.gender = PlayerService.randomGender();
     this.player.age = 18;
     this.player.money = 100;
     this.player.mood = 85;
@@ -154,6 +155,15 @@ export class PlayerService {
         this.player.lastName = name.lastName;
       }
     });
+  }
+
+  /**
+   * Flips a coin to return a gender.
+   * @returns {Gender}
+   */
+  static randomGender(): Gender{
+    let coinFlip = Math.floor(Math.random() * Math.floor(2));
+    return coinFlip ? Gender.Female : Gender.Male;
   }
 }
 
