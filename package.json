@@ -33,6 +33,7 @@
     "colors": "^1.2.1",
     "compass-sass-mixins": "^0.12.7",
     "cordova-android": "7.0.0",
+    "cordova-ios": "4.5.4",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.16",
@@ -65,7 +66,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
