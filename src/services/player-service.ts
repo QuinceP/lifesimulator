@@ -60,10 +60,9 @@ export class PlayerService {
     this.player.charisma = Helpers.weightedRandom(100, 2);
     this.player.dexterity = Helpers.weightedRandom(100, 2);
     this.player.strength = Helpers.weightedRandom(100, 2);
-    this.player.career = this.careerSvc.Software;
-    this.player.pastCareers.push(this.careerSvc.Software);
-    this.player.pastCareers[0].highestLevel = 1;
-    this.player.job = this.careerSvc.Software.jobs[0];
+    this.player.career = this.careerSvc.Unemployed;
+    this.player.pastCareers = [];
+    this.player.job = this.careerSvc.Unemployed.jobs[0];
     this.player.house = this.housingSvc.homeless;
     this.showBirthAlert();
     this.playerSubject.next(this.player);

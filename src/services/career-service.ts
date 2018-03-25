@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Job } from '../models/job';
 import { Helpers } from '../utilities/helpers';
-import { Programming } from './skill-service';
+import { Programming, Science } from './skill-service';
 import { Career } from '../models/career';
 import { TranslateService } from '../utilities/translate/translate-service';
 import { Lumberjack } from './lumberjack';
@@ -23,27 +23,29 @@ export class CareerService {
       new Job('job-title-unemployed-1', 0, 0, 'Unemployed')
     ];
     this.SoftwareJobs = [
-      (new Job('', 1, 20, 'Software', [{ skill: Programming, level: 1 }])),
-      (new Job('', 2, 40, 'Software', [{ skill: Programming, level: 2 }])),
-      (new Job('', 3, 60, 'Software', [{ skill: Programming, level: 3 }])),
-      (new Job('', 4, 80, 'Software', [{ skill: Programming, level: 5 }])),
-      (new Job('', 5, 100, 'Software', [{ skill: Programming, level: 7 }])),
-      (new Job('', 6, 120, 'Software', [{ skill: Programming, level: 15 }])),
-      (new Job('', 7, 140, 'Software', [{ skill: Programming, level: 31 }])),
-      (new Job('', 8, 160, 'Software', [{ skill: Programming, level: 63 }])),
-      (new Job('', 9, 180, 'Software', [{ skill: Programming, level: 64 }]))
+      (new Job('', 1, 20, 'Software', [{ skill: Programming, level: 5 }])),
+      (new Job('', 2, 40, 'Software', [{ skill: Programming, level: 10 }])),
+      (new Job('', 3, 60, 'Software', [{ skill: Programming, level: 20 }])),
+      (new Job('', 4, 80, 'Software', [{ skill: Programming, level: 35 }])),
+      (new Job('', 5, 100, 'Software', [{ skill: Programming, level: 60 }])),
+      (new Job('', 6, 120, 'Software', [{ skill: Programming, level: 100 }])),
+      (new Job('', 7, 140, 'Software', [{ skill: Programming, level: 165 }])),
+      (new Job('', 8, 160, 'Software', [{ skill: Programming, level: 270 }])),
+      (new Job('', 9, 180, 'Software', [{ skill: Programming, level: 271 }]))
     ];
 
     this.MedicineJobs = [
-      (new Job('', 1, 20, 'Software', [{ skill: Programming, level: 1 }])),
-      (new Job('', 2, 40, 'Software', [{ skill: Programming, level: 2 }])),
-      (new Job('', 3, 60, 'Software', [{ skill: Programming, level: 3 }])),
-      (new Job('', 4, 80, 'Software', [{ skill: Programming, level: 5 }])),
-      (new Job('', 5, 100, 'Software', [{ skill: Programming, level: 7 }])),
-      (new Job('', 6, 120, 'Software', [{ skill: Programming, level: 15 }])),
-      (new Job('', 7, 140, 'Software', [{ skill: Programming, level: 31 }])),
-      (new Job('', 8, 160, 'Software', [{ skill: Programming, level: 63 }])),
-      (new Job('', 9, 180, 'Software', [{ skill: Programming, level: 64 }]))
+      (new Job('', 1, 20, 'Medicine', [{ skill: Science, level: 5 }])),
+      (new Job('', 2, 40, 'Medicine', [{ skill: Science, level: 10 }])),
+      (new Job('', 3, 60, 'Medicine', [{ skill: Science, level: 20 }])),
+      (new Job('', 4, 80, 'Medicine', [{ skill: Science, level: 35 }])),
+      (new Job('', 5, 100, 'Medicine', [{ skill: Science, level: 60 }])),
+      (new Job('', 6, 120, 'Medicine', [{ skill: Science, level: 100 }])),
+      (new Job('', 7, 140, 'Medicine', [{ skill: Science, level: 165 }])),
+      (new Job('', 8, 160, 'Medicine', [{ skill: Science, level: 270 }])),
+      (new Job('', 9, 180, 'Medicine', [{ skill: Science, level: 435 }])),
+      (new Job('', 10, 200, 'Medicine', [{ skill: Science, level: 705 }])),
+      (new Job('', 11, 220, 'Medicine', [{ skill: Science, level: 1140 }])),
     ];
 
     this.Unemployed = new Career('', this.UnemployedJobs);

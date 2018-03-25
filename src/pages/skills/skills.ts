@@ -27,8 +27,8 @@ export class SkillsPage {
 
   trainSkill() {
     let actionName = this.selectedSkill.name;
-    let action = new Action(actionName, 1, () => {
-      this.selectedSkill.currentExp += 100;
+    let action = new Action(actionName, 2, () => {
+      this.selectedSkill.currentExp += 5;
     });
 
     this.timeSvc.performTimedAction(action);

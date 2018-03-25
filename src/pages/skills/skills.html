@@ -13,10 +13,9 @@
 
   <div class="icon-demo" *ngFor="let skill of skillSvc.skills" ngClass="{{selectedSkill == skill ? 'selected-skill' : ''}}" (click)="selectSkill(skill)">
     <h6>{{skill.name}}</h6>
-    <ion-icon item- [name]="skill.icon" [color]="skill.color"></ion-icon>
+    <ion-icon [name]="skill.icon" [ngStyle]="{'color': skill.color}"></ion-icon>
 
     <h6>Level {{skill.level}}</h6>
-    <!--<progress-bar [progress]="(skill.getExpToNextLevel() / skill.getStartingExpToNextLevel()) * 100"></progress-bar>-->
     <h6>{{skill.getExpToNextLevel()}}</h6>
   </div>
 
