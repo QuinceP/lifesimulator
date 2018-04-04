@@ -16,5 +16,16 @@ page-home {
       }
     }
   }
+  .action-button-col {
+    button {
+      height: 3.3em;
+      width: 3.3em;
+    }
+  }
+  .action-button-col.debug-button-col {
+    button {
+      background-color: color($colors, danger);
+    }
+  }
 }
 

@@ -9,17 +9,19 @@ import { Lumberjack } from '../../services/lumberjack';
 import { StatusComponent, StatusTypes } from '../../components/status-bar/status-bar';
 import { Helpers } from '../../utilities/helpers';
 import { InventoryPage } from '../inventory/inventory';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  private player: Person;
+  player: Person;
   statusComponent;
   Helpers;
   statusTypes;
   Gender;
+  showDebugButtons = !environment.production;
 
   constructor(public navCtrl: NavController,
               private playerSvc: PlayerService,
