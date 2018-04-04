@@ -9,7 +9,6 @@ export abstract class Lumber {
 
 @Injectable()
 export class Lumberjack implements Lumber {
-
   info: any;
   warn: any;
   error: any;

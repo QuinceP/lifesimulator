@@ -56,7 +56,7 @@ import { Ng2OdometerModule } from 'ng2-odometer';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp, {mode: 'md'}),
+    IonicModule.forRoot(MyApp, { mode: 'md' }),
     ProgressBarModule,
     Ng2OdometerModule
   ],

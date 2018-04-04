@@ -10,58 +10,61 @@
 </ion-header>
 
 <ion-content padding>
-<ion-grid>
-  <ion-row>
-    <ion-col col-5>
-      <ion-row class="balance-title">
-        <h1>Pocket</h1>
-      </ion-row>
-      <ion-row>
-        <h1 class="account-balance">{{playerSvc.player.money | currency: 'USD':'1.2-2'}}</h1>
-      </ion-row>
-    </ion-col>
-    <ion-col col-1 class="money-flow">
-      <ion-row>
-        <ion-icon [name]="selectedAccountAction === accountActions.Withdraw ? 'arrow-forward' : 'arrow-back'"
-                  [ngStyle]="{'color': (selectedAccountAction === accountActions.Withdraw ? colors.danger : colors.primary)}">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-5>
+        <ion-row class="balance-title">
+          <h1>Pocket</h1>
+        </ion-row>
+        <ion-row>
+          <h1 class="account-balance">{{playerSvc.player.money | currency: 'USD':'1.2-2'}}</h1>
+        </ion-row>
+      </ion-col>
+      <ion-col col-1 class="money-flow">
+        <ion-row>
+          <ion-icon [name]="selectedAccountAction === accountActions.Withdraw ? 'arrow-forward' : 'arrow-back'"
+                    [ngStyle]="{'color': (selectedAccountAction === accountActions.Withdraw ? colors.danger : colors.primary)}">
 
-        </ion-icon>
-      </ion-row>
-      <ion-row>
-        <ion-icon [name]="selectedAccountAction === accountActions.Withdraw ? 'arrow-back' : 'arrow-forward'"
-        [ngStyle]="{'color': (selectedAccountAction === accountActions.Withdraw ? colors.primary : colors.danger)}">
+          </ion-icon>
+        </ion-row>
+        <ion-row>
+          <ion-icon [name]="selectedAccountAction === accountActions.Withdraw ? 'arrow-back' : 'arrow-forward'"
+                    [ngStyle]="{'color': (selectedAccountAction === accountActions.Withdraw ? colors.primary : colors.danger)}">
 
-        </ion-icon>
-      </ion-row>
-    </ion-col>
-    <ion-col col-5>
-     <ion-row class="balance-title">
-       <h1 >Checking</h1>
-     </ion-row>
-      <ion-row>
-        <h1 class="account-balance">{{financeSvc.accountBalance | currency: 'USD':'1.2-2'}}</h1>
-      </ion-row>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-select [(ngModel)]="selectedAccountAction"
-                [ngStyle]="{'background-color': (selectedAccountAction === accountActions.Deposit ? 'rgb(211,84,0, 0.4)' : 'rgb(26,188,156, 0.4)')}">
-      <ion-option [selected]="selectedAccountAction === accountActions.Deposit" [value]="accountActions.Deposit">Deposit</ion-option>
-      <ion-option [selected]="selectedAccountAction === accountActions.Withdraw" [value]="accountActions.Withdraw">Withdraw</ion-option>
-    </ion-select>
-    <ion-input type="number"
-               (ionChange)="change()"
-               [(ngModel)]="selectedActionAmount"
-               [ngStyle]="{'background-color': (selectedAccountAction === accountActions.Deposit ? 'rgb(211,84,0, 0.4)' : 'rgb(26,188,156, 0.4)')}">
+          </ion-icon>
+        </ion-row>
+      </ion-col>
+      <ion-col col-5>
+        <ion-row class="balance-title">
+          <h1>Checking</h1>
+        </ion-row>
+        <ion-row>
+          <h1 class="account-balance">{{financeSvc.accountBalance | currency: 'USD':'1.2-2'}}</h1>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-select [(ngModel)]="selectedAccountAction"
+                  [ngStyle]="{'background-color': (selectedAccountAction === accountActions.Deposit ? 'rgb(211,84,0, 0.4)' : 'rgb(26,188,156, 0.4)')}">
+        <ion-option [selected]="selectedAccountAction === accountActions.Deposit" [value]="accountActions.Deposit">
+          Deposit
+        </ion-option>
+        <ion-option [selected]="selectedAccountAction === accountActions.Withdraw" [value]="accountActions.Withdraw">
+          Withdraw
+        </ion-option>
+      </ion-select>
+      <ion-input type="number"
+                 [(ngModel)]="selectedActionAmount"
+                 [ngStyle]="{'background-color': (selectedAccountAction === accountActions.Deposit ? 'rgb(211,84,0, 0.4)' : 'rgb(26,188,156, 0.4)')}">
 
-    </ion-input>
-  </ion-row>
-  <ion-row>
-    <button ion-button block
-            [ngStyle]="{'background-color': (selectedAccountAction === accountActions.Deposit ? colors.danger : colors.primary)}"
-    (click)="selectedAccountAction === accountActions.Deposit ? deposit() : withdraw()">
-      {{selectedAccountAction === accountActions.Deposit ? 'Deposit': 'Withdraw'}}
-    </button>
-  </ion-row>
-</ion-grid>
+      </ion-input>
+    </ion-row>
+    <ion-row>
+      <button ion-button block
+              [ngStyle]="{'background-color': (selectedAccountAction === accountActions.Deposit ? colors.danger : colors.primary)}"
+              (click)="selectedAccountAction === accountActions.Deposit ? deposit() : withdraw()">
+        {{selectedAccountAction === accountActions.Deposit ? 'Deposit': 'Withdraw'}}
+      </button>
+    </ion-row>
+  </ion-grid>
 </ion-content>

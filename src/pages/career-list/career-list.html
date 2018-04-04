@@ -9,13 +9,12 @@
   <status-bar></status-bar>
 </ion-header>
 
-
 <ion-content padding>
   <ion-card>
     <ion-card-header>Careers</ion-card-header>
     <ion-list>
       <ion-item-group>
-        <ng-container *ngFor="let career of careers" >
+        <ng-container *ngFor="let career of careers">
           <ion-item ion-item detail-push (click)="goToCareerDetail(career)">
             <ion-thumbnail item-start>
               <img src="{{career.icon}}"/>

@@ -37,7 +37,6 @@ export class Action {
     this._timesTaken = value;
   }
 
-
   get actionFunction(): Function {
     return this._actionFunction;
   }

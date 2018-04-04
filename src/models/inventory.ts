@@ -7,8 +7,8 @@ export class Inventory {
     'books': StatBook[];
   };
 
-  constructor(){
-    this.items = {'books': []};
+  constructor() {
+    this.items = { 'books': [] };
   }
 
   get items(): { books: StatBook[] } {

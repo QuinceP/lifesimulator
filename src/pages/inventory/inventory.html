@@ -9,17 +9,16 @@
   <status-bar></status-bar>
 </ion-header>
 
-
 <ion-content padding>
-<ion-card>
-  <ion-list>
-    <ion-item *ngFor="let book of playerSvc.player.inventory.items.books">
-      <ion-icon item-start [name]="getStatIcon(book.stat)" [ngStyle]="{'color': getStatColor(book.stat)}">
-      </ion-icon>
-      <h2 class="book-title">{{book.title}}</h2>
-      <h2 class="book-price">{{book.price | currency:'USD':'symbol':'1.2-2'}}</h2>
-      <button ion-button item-end (click)="readBook(book)">Read (2h)</button>
-    </ion-item>
-  </ion-list>
-</ion-card>
+  <ion-card>
+    <ion-list>
+      <ion-item *ngFor="let book of playerSvc.player.inventory.items.books">
+        <ion-icon item-start [name]="getStatIcon(book.stat)" [ngStyle]="{'color': getStatColor(book.stat)}">
+        </ion-icon>
+        <h2 class="book-title">{{book.title}}</h2>
+        <h2 class="book-price">{{book.price | currency:'USD':'symbol':'1.2-2'}}</h2>
+        <button ion-button item-end (click)="readBook(book)">Read (2h)</button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>

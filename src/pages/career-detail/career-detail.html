@@ -14,18 +14,17 @@
             [ngClass]="[job.careerLevel < highestLevel() + 2? '' : 'disabled', job.careerLevel === highestLevel()+ 1? 'next':'', (job.careerLevel === highestLevel()) ? 'current':'']">
     <ion-card-header no-padding>
       <ion-item>
-          <h1 class="career-level" [ngStyle]="{'color': getJobColor(job)}">{{job.careerLevel}}</h1>
+        <h1 class="career-level" [ngStyle]="{'color': getJobColor(job)}">{{job.careerLevel}}</h1>
         {{job.title | translate | titlecase}}
       </ion-item>
       <ion-item>
-       <p class="job-description"> {{job.description | translate}}</p>
+        <p class="job-description"> {{job.description | translate}}</p>
       </ion-item>
       <ion-item>
         {{job.hourlyRate | currency: 'USD':'symbol':'1.2-2'}}/hr
 
       </ion-item>
       <ion-item>
-        <!--<button ion-button item-end large color="primary" [ngStyle]="job.careerLevel < highestLevel() + 2? '' : {'display': 'none'}" (click)="viewRequirements(job)">Requirements</button>-->
         <button ion-button item-end large color="primary" (click)="viewRequirements(job)">Requirements</button>
       </ion-item>
     </ion-card-header>

@@ -25,9 +25,6 @@ export class CareerPage {
     this.player = this.playerSvc.player;
   }
 
-  ionViewDidLoad() {
-  }
-
   goToCareersList() {
     this.navCtrl.push(CareerListPage);
   }

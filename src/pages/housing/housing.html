@@ -30,9 +30,10 @@
           <p class="word-wrap">{{loremIpsum[i]}}</p>
         </ion-item>
       </ion-list>
-      <button ion-button text-center large color="secondary" class="buy-button" [disabled]="house === playerSvc.player.house"
-      (click)="buyHouse(house)">
-      {{house === playerSvc.player.house ? 'Owned':'Buy'}}
+      <button ion-button text-center large color="secondary" class="buy-button"
+              [disabled]="house === playerSvc.player.house"
+              (click)="buyHouse(house)">
+        {{house === playerSvc.player.house ? 'Owned':'Buy'}}
       </button>
     </ion-card-content>
   </ion-card>

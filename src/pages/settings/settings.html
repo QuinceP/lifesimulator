@@ -8,7 +8,8 @@
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let lang of translateSvc.supportedLanguages">
-        <button  (click)="translateSvc.selectLang(lang.value)" class="btn btn-default" [class.btn-primary]="translateSvc.isCurrentLang(lang.value)">
+        <button (click)="translateSvc.selectLang(lang.value)" class="btn btn-default"
+                [class.btn-primary]="translateSvc.isCurrentLang(lang.value)">
           {{ lang.display }}
         </button>
       </ion-col>

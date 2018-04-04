@@ -66,7 +66,7 @@ export class ShoppingPage {
     }
   }
 
-  doGymActivity(book: StatBook){
+  doGymActivity(book: StatBook) {
     if (this.playerSvc.player.money >= book.price) {
       this.presentGymActivityConfirmation(book);
     }
@@ -75,7 +75,7 @@ export class ShoppingPage {
     }
   }
 
-  presentGymActivityConfirmation(book: StatBook){
+  presentGymActivityConfirmation(book: StatBook) {
     let alert = this.alertCtrl.create({
       title: 'Buy',
       message: 'Are you sure you want to ' + book.title + ' for $' + book.price + '?',
@@ -134,7 +134,7 @@ export class ShoppingPage {
   }
 
   handleTransaction(book: StatBook, quantity: number, putInInventory: boolean = true) {
-    if (putInInventory){
+    if (putInInventory) {
       for (let i = 0; i < quantity; i++) {
         this.playerSvc.player.inventory.items.books.push(book);
       }

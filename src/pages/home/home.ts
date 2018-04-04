@@ -20,6 +20,7 @@ export class HomePage {
   Helpers;
   statusTypes;
   Gender;
+
   constructor(public navCtrl: NavController,
               private playerSvc: PlayerService,
               public timeSvc: TimeService,
@@ -61,9 +62,6 @@ export class HomePage {
     }
   }
 
-  increaseNeed(nee) {
-  }
-
   die() {
     this.playerSvc.die();
     this.playerSvc.birth();
@@ -75,15 +73,15 @@ export class HomePage {
     this.player = this.playerSvc.player;
   }
 
-  getStatus(value: number, statusType: StatusTypes): string{
+  getStatus(value: number, statusType: StatusTypes): string {
     return StatusComponent.getStatus(value, statusType);
   }
 
-  getStatusLevel(value: number): number{
+  getStatusLevel(value: number): number {
     return StatusComponent.getStatusLevel(value);
   }
 
-  goToInventory(){
+  goToInventory() {
     this.navCtrl.push(InventoryPage);
   }
 }

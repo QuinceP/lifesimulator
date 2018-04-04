@@ -26,8 +26,15 @@ export class HousingService {
       bench,
       tent,
       attic,
-      bedroom, apartment1,
-      apartment2, tinyHouse, smallHouse, house, bigHouse, mansion, penthouse
+      bedroom,
+      apartment1,
+      apartment2,
+      tinyHouse,
+      smallHouse,
+      house,
+      bigHouse,
+      mansion,
+      penthouse
     ]
   }
 

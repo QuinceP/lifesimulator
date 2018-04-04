@@ -24,8 +24,8 @@ export class SkillService {
     );
   }
 
-  reset(){
-    for (let skill of this.skills){
+  reset() {
+    for (let skill of this.skills) {
       skill.level = 0;
     }
   }

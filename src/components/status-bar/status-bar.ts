@@ -32,23 +32,26 @@ export const Statuses = {
   selector: 'status-bar',
   templateUrl: 'status-bar.html'
 })
-export class StatusComponent implements OnInit, OnDestroy{
+export class StatusComponent implements OnInit, OnDestroy {
   Statuses = Statuses;
   StatusTypes = StatusTypes;
   Helpers = Helpers;
   player: Person;
+
   constructor(public playerSvc: PlayerService) {
     this.player = playerSvc.player;
   }
 
-  private data: any[] = [];
   private subscription: Subscription;
 
   ngOnInit(): void {
     this.subscription = this.playerSvc.playerObservable.subscribe(
-      (player) => { this.player = player; }
+      (player) => {
+        this.player = player;
+      }
     )
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -71,7 +74,7 @@ export class StatusComponent implements OnInit, OnDestroy{
     }
   }
 
-   static getStatus(value: number, statusType: StatusTypes): string {
+  static getStatus(value: number, statusType: StatusTypes): string {
     let statusLevel = StatusComponent.getStatusLevel(value);
 
     switch (statusType) {
@@ -104,11 +107,11 @@ export class StatusComponent implements OnInit, OnDestroy{
     }
   }
 
-  getStatus(value: number, statusType: StatusTypes): string{
+  getStatus(value: number, statusType: StatusTypes): string {
     return StatusComponent.getStatus(value, statusType);
   }
 
-  getStatusLevel(value: number): number{
+  getStatusLevel(value: number): number {
     return StatusComponent.getStatusLevel(value);
   }
 }

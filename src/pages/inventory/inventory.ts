@@ -66,7 +66,7 @@ export class InventoryPage {
     return color;
   }
 
-  readBook(book: StatBook){
+  readBook(book: StatBook) {
     this.playerSvc.readBook(book);
   }
 

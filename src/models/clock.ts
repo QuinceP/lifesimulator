@@ -8,7 +8,6 @@ export class Clock {
   private _hours: number = 0;
   private _minutes: number = 0;
 
-
   get years(): number {
     return this._years;
   }

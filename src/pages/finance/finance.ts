@@ -30,10 +30,6 @@ export class FinancePage {
               protected lumberjack: Lumberjack) {
   }
 
-  change() {
-    // lumberjack.info(this.selectedActionAmount)
-  }
-
   withdraw() {
     let withdrawalAmount: number = +this.selectedActionAmount;
     if (!isNaN(parseFloat(withdrawalAmount.toString())) && isFinite(withdrawalAmount)) {

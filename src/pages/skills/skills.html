@@ -10,19 +10,20 @@
 </ion-header>
 
 <ion-content>
-
-  <div class="icon-demo" *ngFor="let skill of skillSvc.skills" ngClass="{{selectedSkill == skill ? 'selected-skill' : ''}}" (click)="selectSkill(skill)">
+  <div class="icon-demo" *ngFor="let skill of skillSvc.skills"
+       ngClass="{{selectedSkill == skill ? 'selected-skill' : ''}}" (click)="selectSkill(skill)">
     <h6>{{skill.name}}</h6>
     <ion-icon [name]="skill.icon" [ngStyle]="{'color': skill.color}"></ion-icon>
 
     <h6>Level {{skill.level}}</h6>
     <h6>{{skill.getExpToNextLevel()}}</h6>
   </div>
-
 </ion-content>
 
 <ion-footer no-border>
   <ion-toolbar>
-    <button ion-button block [ngStyle]="{'background-color':selectedSkill.color}" (click)="trainSkill()">{{selectedSkill.action}}</button>
+    <button ion-button block [ngStyle]="{'background-color':selectedSkill.color}" (click)="trainSkill()">
+      {{selectedSkill.action}}
+    </button>
   </ion-toolbar>
 </ion-footer>

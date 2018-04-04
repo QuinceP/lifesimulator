@@ -43,13 +43,13 @@ export class MenuPage {
       { page: HomePage, name: 'Me', icon: 'person', color: "primary" },
       { page: CareerPage, name: 'Career', icon: 'briefcase', color: "secondary" },
       { page: FinancePage, name: 'Finance', icon: 'cash', color: "primary" },
-      { page: SkillsPage, name: 'Skills', icon: 'bulb' , color: "warning"},
+      { page: SkillsPage, name: 'Skills', icon: 'bulb', color: "warning" },
       { page: HousingPage, name: 'Housing', icon: 'home', color: "primary" },
       { page: SocialPage, name: 'Social', icon: 'people', color: "secondary" },
       { page: EducationPage, name: 'Education', icon: 'school', color: "danger" },
       { page: CasinoPage, name: 'Casino', icon: 'game-controller-a', color: "warning" },
       { page: ShoppingPage, name: 'Shopping', icon: 'pricetags', color: "secondary" },
-      { page: SettingsPage, name: 'Settings', icon: 'settings' , color: "primary"}
+      { page: SettingsPage, name: 'Settings', icon: 'settings', color: "primary" }
     ]
   }
 }

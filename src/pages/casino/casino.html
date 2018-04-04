@@ -1,24 +1,27 @@
-
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{'casino' | translate | titlecase}}</ion-title>
   </ion-navbar>
   <status-bar></status-bar>
 </ion-header>
 
-
 <ion-content padding>
   <ion-grid>
-<ion-row>
-  <ion-col>
-    <ion-row justify-content-center=""><ng2-odometer [animation]="'spin'" [number]="num1" [theme]="'slot-machine'"></ng2-odometer></ion-row>
-    <ion-row justify-content-center=""><ng2-odometer [animation]="'spin'" [number]="num2" [theme]="'slot-machine'"></ng2-odometer></ion-row>
-    <ion-row justify-content-center=""><ng2-odometer [animation]="'spin'" [number]="num3" [theme]="'slot-machine'"></ng2-odometer></ion-row>
-  </ion-col>
-  <ion-col align-items-center>
-    <button ion-button block (click)="spin()">Spin</button>
-  </ion-col>
-</ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-row justify-content-center="">
+          <ng2-odometer [animation]="'spin'" [number]="num1" [theme]="'slot-machine'"></ng2-odometer>
+        </ion-row>
+        <ion-row justify-content-center="">
+          <ng2-odometer [animation]="'spin'" [number]="num2" [theme]="'slot-machine'"></ng2-odometer>
+        </ion-row>
+        <ion-row justify-content-center="">
+          <ng2-odometer [animation]="'spin'" [number]="num3" [theme]="'slot-machine'"></ng2-odometer>
+        </ion-row>
+      </ion-col>
+      <ion-col align-items-center>
+        <button ion-button block (click)="spin()">Spin</button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

@@ -41,7 +41,6 @@ export class Person {
   private _gender: Gender;
   private _inventory: Inventory;
 
-
   constructor() {
     this._firstName = '';
     this._lastName = '';

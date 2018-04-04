@@ -91,10 +91,10 @@ export class TimeService {
 
   getYears() {
     this.years = Math.floor(this.days / 20) + 1;
-    if (this.years > this.lastSetYears){
+    if (this.years > this.lastSetYears) {
       let yearsPassed = this.years - this.lastSetYears;
       this.lumberjack.info(yearsPassed);
-      for (let i = 0; i < yearsPassed; i++){
+      for (let i = 0; i < yearsPassed; i++) {
         this.playerSvc.birthday();
       }
       this.lastSetYears = this.years;

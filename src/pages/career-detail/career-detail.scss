@@ -1,16 +1,16 @@
 page-career-detail {
-.job-card {
-  ion-thumbnail {
-    display: flex;
-    .career-level {
-      align-self: center;
-      font-size: 350%;
+  .job-card {
+    ion-thumbnail {
+      display: flex;
+      .career-level {
+        align-self: center;
+        font-size: 350%;
+      }
+    }
+    .job-description {
+      white-space: normal;
     }
   }
-  .job-description {
-    white-space: normal;
-  }
-}
   .job-card.next {
     border: 5px solid color($colors, secondary);
   }
