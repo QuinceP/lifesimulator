@@ -1,5 +1,5 @@
 page-finance {
-  .balance-title h1 {
+  .balance-title span {
     font-size: 100%;
   }
   .account-balance {
@@ -8,9 +8,15 @@ page-finance {
   }
 
   .money-flow {
-    display: inline-grid;
-    justify-content: center;
-    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 0;
     font-size: 150%;
+  }
+  .balance-row {
+    margin-bottom: 1em;
+  }
+  .account-balance-row, .wallet-title {
+    justify-content: flex-end;
   }
 }

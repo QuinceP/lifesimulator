@@ -11,13 +11,13 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row>
-      <ion-col col-5>
-        <ion-row class="balance-title">
-          <h1>Pocket</h1>
+    <ion-row class="balance-row">
+      <ion-col col-5 class="balance-col">
+        <ion-row class="balance-title wallet-title">
+          <span>Pocket</span>
         </ion-row>
-        <ion-row>
-          <h1 class="account-balance">{{playerSvc.player.money | currency: 'USD':'1.2-2'}}</h1>
+        <ion-row class="account-balance-row">
+          <span class="account-balance">{{playerSvc.player.money | currency: 'USD':'1.2-2'}}</span>
         </ion-row>
       </ion-col>
       <ion-col col-1 class="money-flow">
@@ -34,12 +34,12 @@
           </ion-icon>
         </ion-row>
       </ion-col>
-      <ion-col col-5>
-        <ion-row class="balance-title">
-          <h1>Checking</h1>
+      <ion-col col-5 class="balance-col">
+        <ion-row class="balance-title bank-title">
+          <span>Checking</span>
         </ion-row>
         <ion-row>
-          <h1 class="account-balance">{{financeSvc.accountBalance | currency: 'USD':'1.2-2'}}</h1>
+          <span class="account-balance">{{financeSvc.accountBalance | currency: 'USD':'1.2-2'}}</span>
         </ion-row>
       </ion-col>
     </ion-row>
