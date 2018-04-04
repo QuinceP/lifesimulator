@@ -1,8 +1,11 @@
 import { Skill } from './skill';
+import { Stat } from './person';
 
 export interface Requirement {
-  skill: Skill;
-  level: number;
+  skill?: Skill;
+  level?: number;
+  stat?: Stat;
+  statLevel?: number;
 }
 
 export class Job {

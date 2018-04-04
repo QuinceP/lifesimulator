@@ -55,4 +55,10 @@
       </ion-row>
     </ion-col>
   </ion-row>
+  <ion-row class="status-row">
+    <ion-col class="label-col money-col">
+      <ion-icon name="cash"></ion-icon>
+      <h4 class="label-title">&nbsp;{{player.money | currency:'USD':'symbol':'1.2-2'}}</h4>
+    </ion-col>
+  </ion-row>
 </ion-grid>

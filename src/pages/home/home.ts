@@ -8,6 +8,7 @@ import { TranslateService } from '../../utilities/translate/translate-service';
 import { Lumberjack } from '../../services/lumberjack';
 import { StatusComponent, StatusTypes } from '../../components/status-bar/status-bar';
 import { Helpers } from '../../utilities/helpers';
+import { InventoryPage } from '../inventory/inventory';
 
 @Component({
   selector: 'page-home',
@@ -80,5 +81,9 @@ export class HomePage {
 
   getStatusLevel(value: number): number{
     return StatusComponent.getStatusLevel(value);
+  }
+
+  goToInventory(){
+    this.navCtrl.push(InventoryPage);
   }
 }

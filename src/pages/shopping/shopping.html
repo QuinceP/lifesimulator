@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'Shopping' | translate | titlecase}}</ion-title>
+    <ion-buttons end class="clock">
+      <span class="time-display">{{'Day' | translate | titlecase}} {{timeSvc.days}}&nbsp;</span>
+      <span class="time-display">{{timeSvc.date.format('HH:mm:ss')}}</span>
+    </ion-buttons>
+  </ion-navbar>
+  <status-bar></status-bar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-segment [(ngModel)]="store">
+    <ion-segment-button [value]="Stores.Bookstore">
+      {{Stores.Bookstore}}
+    </ion-segment-button>
+    <ion-segment-button [value]="Stores.Gym">
+      {{Stores.Gym}}
+    </ion-segment-button>
+  </ion-segment>
+  <ion-card [ngSwitch]="store">
+    <ng-container *ngSwitchCase="Stores.Bookstore">
+      <ion-thumbnail>
+        <img src="assets/imgs/shopping/bookstore.jpg"/>
+      </ion-thumbnail>
+      <ion-list>
+        <ion-item *ngFor="let book of bookstoreBooks">
+          <ion-icon item-start [name]="getStatIcon(book.stat)" [ngStyle]="{'color': getStatColor(book.stat)}">
+          </ion-icon>
+          <h2 class="book-title">{{book.title}}</h2>
+          <h2 class="book-price">{{book.price | currency:'USD':'symbol':'1.2-2'}}</h2>
+          <button ion-button item-end (click)="buyBook(book)">Buy</button>
+          <button ion-button item-end (click)="buyBook(book, 5)">Buy 5</button>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <ng-container *ngSwitchCase="Stores.Gym">
+      <ion-thumbnail>
+        <img src="assets/imgs/shopping/gym.jpg"/>
+      </ion-thumbnail>
+      <ion-list>
+        <ion-item *ngFor="let activity of gymActivities">
+          <ion-icon item-start [name]="getStatIcon(activity.stat)" [ngStyle]="{'color': getStatColor(activity.stat)}">
+          </ion-icon>
+          <h2 class="book-title">{{activity.title | titlecase}}</h2>
+          <h2 class="book-price">{{activity.price | currency:'USD':'symbol':'1.2-2'}}</h2>
+          <button ion-button item-end (click)="doGymActivity(activity)">Work Out</button>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  </ion-card>
+</ion-content>

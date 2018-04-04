@@ -29,6 +29,9 @@ import { Lumberjack } from '../services/lumberjack';
 import { ConsoleLoggerService } from '../services/console-logger-service';
 import { StatusComponent } from '../components/status-bar/status-bar';
 import { StatusBar } from '@ionic-native/status-bar';
+import { ShoppingPage } from '../pages/shopping/shopping';
+import { InventoryPage } from '../pages/inventory/inventory';
+import { Ng2OdometerModule } from 'ng2-odometer';
 
 @NgModule({
   declarations: [
@@ -45,14 +48,17 @@ import { StatusBar } from '@ionic-native/status-bar';
     EducationPage,
     SkillsPage,
     CasinoPage,
+    ShoppingPage,
     SettingsPage,
+    InventoryPage,
     TranslatePipe,
     StatusComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {mode: 'md'}),
-    ProgressBarModule
+    ProgressBarModule,
+    Ng2OdometerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,6 +75,8 @@ import { StatusBar } from '@ionic-native/status-bar';
     EducationPage,
     SkillsPage,
     CasinoPage,
+    ShoppingPage,
+    InventoryPage,
     SettingsPage
   ],
   providers: [

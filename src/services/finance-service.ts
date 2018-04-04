@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class FinanceService {
-  private _accountBalance: number = 1000;
+  private _accountBalance: number = 0;
 
   constructor() {
   }

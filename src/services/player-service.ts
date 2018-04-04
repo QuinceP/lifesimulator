@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Gender, Person } from '../models/person';
+import { Gender, Person, Stat } from '../models/person';
 import { countries } from '../models/country';
 import { Helpers } from '../utilities/helpers';
 import CountryLanguage from 'country-language';
@@ -9,6 +9,10 @@ import { AlertController } from 'ionic-angular';
 import { CareerService } from './career-service';
 import { Subject } from 'rxjs/Subject';
 import { HousingService } from './housing-service';
+import { StatBook } from '../pages/shopping/shopping';
+import { Inventory } from '../models/inventory';
+import { SkillService } from './skill-service';
+import { FinanceService } from './finance-service';
 
 /**
  * Class to provide player data.
@@ -29,7 +33,9 @@ export class PlayerService {
   constructor(protected lumberjack: Lumberjack,
               protected alertCtrl: AlertController,
               protected careerSvc: CareerService,
-              protected housingSvc: HousingService) {
+              protected housingSvc: HousingService,
+              protected skillSvc: SkillService,
+              protected financeSvc: FinanceService) {
     this.birth();
   }
 
@@ -51,7 +57,7 @@ export class PlayerService {
     this.player.nationality = country.Name;
     this.player.gender = PlayerService.randomGender();
     this.player.age = 18;
-    this.player.money = 100;
+    this.player.money = 0;
     this.player.mood = 85;
     this.player.hunger = 85;
     this.player.health = 85;
@@ -65,6 +71,9 @@ export class PlayerService {
     this.player.pastCareers = [];
     this.player.job = this.careerSvc.Unemployed.jobs[0];
     this.player.house = this.housingSvc.homeless;
+    this.player.inventory = new Inventory();
+    this.financeSvc.accountBalance = 0;
+    this.skillSvc.reset();
     this.showBirthAlert();
     this.playerSubject.next(this.player);
   }
@@ -90,6 +99,21 @@ export class PlayerService {
       message: 'You died.',
       buttons: [{
         text: 'Dismiss',
+        cssClass: 'game-alert'
+      }],
+    });
+    alert.present();
+  }
+
+  /**
+   * Age the player
+   */
+  birthday() {
+    this.player.age += 1;
+    let alert = this.alertCtrl.create({
+      message: 'It\'s your birthday! You are now ' + this.player.age + '.',
+      buttons: [{
+        text: 'Yay!',
         cssClass: 'game-alert'
       }],
     });
@@ -161,9 +185,96 @@ export class PlayerService {
    * Flips a coin to return a gender.
    * @returns {Gender}
    */
-  static randomGender(): Gender{
+  static randomGender(): Gender {
     let coinFlip = Math.floor(Math.random() * Math.floor(2));
     return coinFlip ? Gender.Female : Gender.Male;
+  }
+
+  readBook(book: StatBook, isInventoryBook: boolean = true, type: string = "book") {
+    let prev: number = 0;
+    let now: number = 0;
+
+    switch (book.stat) {
+      case Stat.Appearance:
+        prev = this.player.appearance;
+        this.player.appearance += book.increase;
+        now = this.player.appearance;
+        break;
+      case Stat.Intelligence:
+        prev = this.player.intelligence;
+        this.player.intelligence += book.increase;
+        now = this.player.intelligence;
+        break;
+      case Stat.Strength:
+        prev = this.player.strength;
+        this.player.strength += book.increase;
+        now = this.player.strength;
+        break;
+      case Stat.Agility:
+        prev = this.player.agility;
+        this.player.agility += book.increase;
+        now = this.player.agility;
+        break;
+      case Stat.Dexterity:
+        prev = this.player.dexterity;
+        this.player.dexterity += book.increase;
+        now = this.player.dexterity;
+        break;
+      case Stat.Charisma:
+        prev = this.player.charisma;
+        this.player.charisma += book.increase;
+        now = this.player.charisma;
+    }
+    if (isInventoryBook) {
+      this.removeBookFromInventory(book);
+    }
+
+    let message: string = '';
+    switch (type) {
+      case "book":
+        message = 'You read "' + book.title + '". Your '
+          + book.stat + ' has increased by ' + book.increase + '. (' + prev.toString() + '->' + now + ')';
+        break;
+      case Stat.Strength:
+        message = 'You lifted weights. Your '
+          + book.stat + ' has increased by ' + book.increase + '. (' + prev.toString() + '->' + now + ')';
+        break;
+      case Stat.Agility:
+        message = 'You went for a run. Your '
+          + book.stat + ' has increased by ' + book.increase + '. (' + prev.toString() + '->' + now + ')';
+        break;
+      case Stat.Dexterity:
+        message = 'You did gymnastics. Your '
+          + book.stat + ' has increased by ' + book.increase + '. (' + prev.toString() + '->' + now + ')';
+        break;
+    }
+
+    let alert = this.alertCtrl.create({
+      message: message,
+      buttons: [{
+        text: 'Ok',
+        cssClass: 'game-alert'
+      }],
+    }).present();
+  }
+
+  addBookToInventory(book: StatBook) {
+    this.player.inventory.items.books.push(book);
+  }
+
+  removeBookFromInventory(book: StatBook) {
+    try {
+      let index = this.player.inventory.items.books.indexOf(book);
+      if (index > -1) {
+        this.player.inventory.items.books.splice(index, 1);
+      }
+      else {
+        throw Error('Could not remove book from inventory.');
+      }
+    }
+    catch (err) {
+      this.lumberjack.error(err);
+    }
   }
 }
 

@@ -1,10 +1,20 @@
 import { Job } from './job';
 import { Career } from './career';
 import { House } from './house';
+import { Inventory } from './inventory';
 
 export enum Gender {
   Female = "female",
   Male = "male"
+}
+
+export enum Stat {
+  Appearance = "Appearance",
+  Intelligence = "Intelligence",
+  Strength = "Strength",
+  Agility = "Agility",
+  Dexterity = "Dexterity",
+  Charisma = "Charisma"
 }
 
 export class Person {
@@ -29,6 +39,33 @@ export class Person {
   private _house: House;
   private _pastCareers: Career[] = [];
   private _gender: Gender;
+  private _inventory: Inventory;
+
+
+  constructor() {
+    this._firstName = '';
+    this._lastName = '';
+    this._age = 0;
+    this._mood = 100;
+    this._hunger = 100;
+    this._health = 100;
+    this._appearance = 0;
+    this._intelligence = 0;
+    this._strength = 0;
+    this._agility = 0;
+    this._dexterity = 0;
+    this._charisma = 0;
+    this._nationality = '';
+    this._ethnicity = '';
+    this._money = 0;
+    this._job = new Job('job-title-unemployed-1', 0, 0, 'Unemployed');
+    this._career = undefined;
+    this._ascensions = 0;
+    this._house = undefined;
+    this._pastCareers = [];
+    this._gender = Gender.Female;
+    this._inventory = new Inventory();
+  }
 
   get firstName(): string {
     return this._firstName;
@@ -229,5 +266,13 @@ export class Person {
 
   set gender(value: Gender) {
     this._gender = value;
+  }
+
+  get inventory(): Inventory {
+    return this._inventory;
+  }
+
+  set inventory(value: Inventory) {
+    this._inventory = value;
   }
 }

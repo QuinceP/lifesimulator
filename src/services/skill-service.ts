@@ -6,6 +6,8 @@ export const Programming = new Skill('Programming', 'laptop', 'Program', Helpers
 export const Art = new Skill('Painting', 'color-palette', 'Paint', Helpers.progressColors.secondary);
 export const Music = new Skill('Music', 'musical-notes', 'Practice', Helpers.progressColors.primary);
 export const Science = new Skill('Science', 'flask', 'Experiment', Helpers.progressColors.warning);
+export const Mathematics = new Skill('Math', 'calculator', 'Prove Theorems', Helpers.progressColors.danger);
+export const Business = new Skill('Business', 'trending-up', 'Make Sales', Helpers.progressColors.secondary);
 
 @Injectable()
 export class SkillService {
@@ -16,8 +18,16 @@ export class SkillService {
       Programming,
       Art,
       Music,
-      Science
+      Science,
+      Mathematics,
+      Business
     );
+  }
+
+  reset(){
+    for (let skill of this.skills){
+      skill.level = 0;
+    }
   }
 
   get skills(): Skill[] {

@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <ion-card class="job-card" *ngFor="let job of career.jobs; let i = index"
-            [ngClass]="[job.careerLevel < highestLevel() + 2? '' : 'disabled', job.careerLevel === playerSvc.player.job.careerLevel + 1? 'next':'', (job.careerLevel === playerSvc.player.job.careerLevel) ? 'current':'']">
+            [ngClass]="[job.careerLevel < highestLevel() + 2? '' : 'disabled', job.careerLevel === highestLevel()+ 1? 'next':'', (job.careerLevel === highestLevel()) ? 'current':'']">
     <ion-card-header no-padding>
       <ion-item>
           <h1 class="career-level" [ngStyle]="{'color': getJobColor(job)}">{{job.careerLevel}}</h1>
@@ -21,7 +21,12 @@
        <p class="job-description"> {{job.description | translate}}</p>
       </ion-item>
       <ion-item>
-        {{job.hourlyRate | currency: 'USD':'1.2-2'}}/hr
+        {{job.hourlyRate | currency: 'USD':'symbol':'1.2-2'}}/hr
+
+      </ion-item>
+      <ion-item>
+        <!--<button ion-button item-end large color="primary" [ngStyle]="job.careerLevel < highestLevel() + 2? '' : {'display': 'none'}" (click)="viewRequirements(job)">Requirements</button>-->
+        <button ion-button item-end large color="primary" (click)="viewRequirements(job)">Requirements</button>
       </ion-item>
     </ion-card-header>
   </ion-card>
@@ -29,6 +34,6 @@
 
 <ion-footer no-border>
   <ion-toolbar>
-    <button ion-button block color="secondary" (click)="apply()">Apply</button>
+    <button ion-button block large color="secondary" (click)="apply()">Apply</button>
   </ion-toolbar>
 </ion-footer>

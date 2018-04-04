@@ -30,6 +30,7 @@ export class TimeService {
   private _date: moment.Moment;
   private _startDate: moment.Moment;
   private _years: number = 0;
+  private _lastSetYears: number = 1;
   private _days: number = 0;
 
   constructor(private playerSvc: PlayerService,
@@ -47,7 +48,9 @@ export class TimeService {
     this.startDate = moment(this.date);
     this.days = 0;
     this.years = 0;
+    this.lastSetYears = 1;
     this.lumberjack.warn('Time reset to beginning.');
+    this.getYears();
   }
 
   get years(): number {
@@ -86,6 +89,26 @@ export class TimeService {
     this.days = this.date.diff(this.startDate, 'days');
   }
 
+  getYears() {
+    this.years = Math.floor(this.days / 20) + 1;
+    if (this.years > this.lastSetYears){
+      let yearsPassed = this.years - this.lastSetYears;
+      this.lumberjack.info(yearsPassed);
+      for (let i = 0; i < yearsPassed; i++){
+        this.playerSvc.birthday();
+      }
+      this.lastSetYears = this.years;
+    }
+  }
+
+  get lastSetYears(): number {
+    return this._lastSetYears;
+  }
+
+  set lastSetYears(value: number) {
+    this._lastSetYears = value;
+  }
+
   static starvationRate(): number {
     return +((100 / STARVATION_HOURS).toFixed(2));
   }
@@ -105,6 +128,7 @@ export class TimeService {
     action.act(actionCount).then(() => {
         this.date.add(action.durationInHours, 'hours');
         this.getDays();
+        this.getYears();
         if (this.playerSvc.player.health <= 0 || this.playerSvc.player.hunger <= 0 || this.playerSvc.player.mood <= 0) {
           this.playerSvc.die();
           this.playerSvc.birth();

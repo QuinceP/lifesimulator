@@ -5,6 +5,7 @@ import { Skill } from '../../models/skill';
 import { Helpers } from '../../utilities/helpers';
 import { Action } from '../../models/action';
 import { TimeService } from '../../services/time-service';
+import { PlayerService } from '../../services/player-service';
 
 @Component({
   selector: 'page-skills',
@@ -13,7 +14,11 @@ import { TimeService } from '../../services/time-service';
 export class SkillsPage {
   private selectedSkill: Skill;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public skillSvc: SkillService, public timeSvc: TimeService) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public skillSvc: SkillService,
+              public timeSvc: TimeService,
+              public playerSvc: PlayerService) {
     this.selectedSkill = this.skillSvc.skills[0];
   }
 
@@ -26,11 +31,31 @@ export class SkillsPage {
   }
 
   trainSkill() {
-    let actionName = this.selectedSkill.name;
+    let actionName: string = this.selectedSkill.name;
+    let baseExp: number = 50;
     let action = new Action(actionName, 2, () => {
-      this.selectedSkill.currentExp += 5;
+      this.selectedSkill.currentExp += baseExp + this.getExperienceBonus(this.selectedSkill, baseExp);
     });
 
     this.timeSvc.performTimedAction(action);
+  }
+
+  getExperienceBonus(skill: Skill, baseExp: number): number {
+    let lowercaseSkillName: string = skill.name.toLowerCase();
+    let bonusExp: number = 0;
+    let bonusSkillLevel: number = 0;
+    switch (lowercaseSkillName) {
+      case 'programming':
+      case 'science':
+        bonusSkillLevel = this.playerSvc.player.intelligence;
+        break;
+      default:
+        break;
+    }
+
+    if (bonusSkillLevel > 50) {
+      bonusExp = Math.floor((bonusSkillLevel / 100) * baseExp);
+    }
+    return bonusExp;
   }
 }
