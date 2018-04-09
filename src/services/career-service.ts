@@ -15,12 +15,14 @@ export class CareerService {
   Software: Career;
   Medicine: Career;
   Sales: Career;
+  Dishwasher: Career;
 
   //Jobs[]
   UnemployedJobs: Job[];
   SoftwareJobs: Job[];
   MedicineJobs: Job[];
   SalesJobs: Job[];
+  DishwasherJobs: Job[];
 
   constructor(public translateSvc: TranslateService,
               public lumberjack: Lumberjack) {
@@ -102,16 +104,20 @@ export class CareerService {
       (new Job('', 10, 600, '', [{ skill: Business, level: 35 }, { stat: Stat.Charisma, statLevel: 100 }]))
     ];
 
+    this.DishwasherJobs = [new Job('', 1, 5.15,'', null)];
+
 
     this.Unemployed = new Career('', this.UnemployedJobs);
     this.Software = new Career('Software', this.SoftwareJobs, 'software.png', Helpers.progressColors.primary);
     this.Medicine = new Career('Medicine', this.MedicineJobs, 'medical.png', Helpers.progressColors.danger);
     this.Sales = new Career('Sales', this.SalesJobs, 'business.png', Helpers.progressColors.secondary);
+    this.Dishwasher = new Career('Dishwasher', this.DishwasherJobs, 'dishwasher.png', Helpers.progressColors.dark);
 
     this.Careers = [
       this.Software,
       this.Medicine,
-      this.Sales
+      this.Sales,
+      this.Dishwasher
     ];
     this.setDescriptionsAndTitles();
   }

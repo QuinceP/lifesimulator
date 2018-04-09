@@ -33,29 +33,54 @@
     </ion-row>
     <ion-row class="needs-button-row">
       <ion-col class="action-button-col">
-        <button class="food-button" ion-button icon-only (click)="eat()">
-          <ion-icon name="pizza"></ion-icon>
-        </button>
+        <ion-row class="action-price-row">
+          <span>{{foodCost | currency: 'USD':'1.2-2'}}</span>
+        </ion-row>
+        <ion-row class="action-button-row">
+          <button class="food-button" ion-button icon-only (click)="eat()">
+            <ion-icon name="pizza"></ion-icon>
+          </button>
+        </ion-row>
       </ion-col>
       <ion-col class="action-button-col">
-        <button class="mood-button" ion-button icon-only (click)="mood()">
-          <ion-icon name="happy"></ion-icon>
-        </button>
+        <ion-row class="action-price-row">
+          <span>{{funCost | currency: 'USD':'1.2-2'}}</span>
+        </ion-row>
+        <ion-row class="action-button-row">
+          <button class="mood-button" ion-button icon-only (click)="mood()">
+            <ion-icon name="happy"></ion-icon>
+          </button>
+        </ion-row>
       </ion-col>
       <ion-col class="action-button-col">
+        <ion-row class="action-price-row">
+          <span>{{doctorCost | currency: 'USD':'1.2-2'}}</span>
+        </ion-row>
+        <ion-row class="action-button-row">
         <button class="doctor-button" ion-button icon-only (click)="doctor()">
           <ion-icon name="medkit"></ion-icon>
         </button>
+        </ion-row>
       </ion-col>
       <ion-col class="action-button-col debug-button-col" *ngIf="showDebugButtons">
+        <ion-row class="action-price-row">
+          <span>&nbsp;</span>
+        </ion-row>
+        <ion-row class="action-button-row">
         <button class="birth-button" ion-button icon-only (click)="refresh()">
           <ion-icon name="refresh-circle"></ion-icon>
         </button>
+        </ion-row>
       </ion-col>
       <ion-col class="action-button-col debug-button-col" *ngIf="showDebugButtons">
+        <ion-row class="action-price-row">
+          <span>&nbsp;</span>
+        </ion-row>
+        <ion-row class="action-button-row">
         <button class="death-button" ion-button icon-only (click)="die()">
           <ion-icon name="nuclear"></ion-icon>
         </button>
+        </ion-row>
       </ion-col>
     </ion-row>
     <ion-row>

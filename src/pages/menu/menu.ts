@@ -14,6 +14,7 @@ import { TranslateService } from '../../utilities/translate/translate-service';
 import { Lumberjack } from '../../services/lumberjack';
 import { PlayerService } from '../../services/player-service';
 import { ShoppingPage } from '../shopping/shopping';
+import { StatsPage } from '../stats/stats';
 
 /**
  * An item on the main menu, containing its display and navigation properties.
@@ -44,12 +45,13 @@ export class MenuPage {
       { page: CareerPage, name: 'Career', icon: 'briefcase', color: "secondary" },
       { page: FinancePage, name: 'Finance', icon: 'cash', color: "primary" },
       { page: SkillsPage, name: 'Skills', icon: 'bulb', color: "warning" },
-      { page: HousingPage, name: 'Housing', icon: 'home', color: "primary" },
+      { page: HousingPage, name: 'Housing', icon: 'home', color: "warning" },
       { page: SocialPage, name: 'Social', icon: 'people', color: "secondary" },
       { page: EducationPage, name: 'Education', icon: 'school', color: "danger" },
       { page: CasinoPage, name: 'Casino', icon: 'game-controller-a', color: "warning" },
       { page: ShoppingPage, name: 'Shopping', icon: 'pricetags', color: "secondary" },
-      { page: SettingsPage, name: 'Settings', icon: 'settings', color: "primary" }
+      { page: SettingsPage, name: 'Settings', icon: 'settings', color: "primary" },
+      { page: StatsPage, name: 'Stats', icon: 'stats', color: "danger" },
     ]
   }
 }

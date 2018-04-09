@@ -6,6 +6,7 @@ import { CareerListPage } from '../career-list/career-list';
 import { TimeService } from '../../services/time-service';
 import { CareerService } from '../../services/career-service';
 import { Action } from '../../models/action';
+import { GameplayStatsService } from '../../services/gameplay-stats-service';
 
 @Component({
   selector: 'page-career',
@@ -21,6 +22,7 @@ export class CareerPage {
               private timeSvc: TimeService,
               private toastCtrl: ToastController,
               private careerSvc: CareerService,
+              private statSvc: GameplayStatsService,
               private changeDetectorRef: ChangeDetectorRef) {
     this.player = this.playerSvc.player;
   }
@@ -33,6 +35,7 @@ export class CareerPage {
     let earned = hours * this.player.job.hourlyRate;
     let workAction = new Action('Work', hours, () => {
       this.player.money += earned;
+      this.statSvc.setStat(this.statSvc.StatNames.MoneyEarned, earned);
     });
 
     this.timeSvc.performTimedAction(workAction, hours);

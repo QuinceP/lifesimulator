@@ -9,6 +9,12 @@ page-home {
     }
   }
 
+  .label-col.money-col {
+    ion-icon {
+      //color: color($colors, primary);
+    }
+  }
+
   .progress-col {
     progress-bar {
       div.progress-outer {
@@ -17,9 +23,13 @@ page-home {
     }
   }
   .action-button-col {
+    flex-direction: column;
     button {
       height: 3.3em;
       width: 3.3em;
+    }
+    .action-price-row, .action-button-row {
+      justify-content: center;
     }
   }
   .action-button-col.debug-button-col {

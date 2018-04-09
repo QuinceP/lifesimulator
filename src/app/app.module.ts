@@ -32,6 +32,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { ShoppingPage } from '../pages/shopping/shopping';
 import { InventoryPage } from '../pages/inventory/inventory';
 import { Ng2OdometerModule } from 'ng2-odometer';
+import { StatsPage } from '../pages/stats/stats';
+import { GameplayStatsService } from '../services/gameplay-stats-service';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { Ng2OdometerModule } from 'ng2-odometer';
     ShoppingPage,
     SettingsPage,
     InventoryPage,
+    StatsPage,
     TranslatePipe,
     StatusComponent
   ],
@@ -77,7 +80,8 @@ import { Ng2OdometerModule } from 'ng2-odometer';
     CasinoPage,
     ShoppingPage,
     InventoryPage,
-    SettingsPage
+    SettingsPage,
+    StatsPage
   ],
   providers: [
     StatusBar,
@@ -90,7 +94,8 @@ import { Ng2OdometerModule } from 'ng2-odometer';
     FinanceService,
     HousingService,
     SkillService,
-    TranslateService
+    TranslateService,
+    GameplayStatsService
   ]
 })
 export class AppModule {

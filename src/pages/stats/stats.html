@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Stats</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-grid>
+  <ion-row *ngFor="let stat of stats">
+    <ion-col><h3>{{stat.text.toTitleCase()}}:</h3></ion-col>
+    <ion-col><h3>{{stat.count}}</h3></ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

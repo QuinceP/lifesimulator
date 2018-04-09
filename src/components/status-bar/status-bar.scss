@@ -4,7 +4,7 @@ status-bar {
     .label-title {
       margin: 0;
     }
-    ion-icon {
+    ion-icon[name="cash"] {
       font-size: 1.9em;
       color: color($colors, primary);
     }

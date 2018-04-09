@@ -8,20 +8,35 @@ export const Music = new Skill('Music', 'musical-notes', 'Practice', Helpers.pro
 export const Science = new Skill('Science', 'flask', 'Experiment', Helpers.progressColors.warning);
 export const Mathematics = new Skill('Math', 'calculator', 'Prove Theorems', Helpers.progressColors.danger);
 export const Business = new Skill('Business', 'trending-up', 'Make Sales', Helpers.progressColors.secondary);
+export const Culinary = new Skill('Culinary', 'restaurant', 'Cook', Helpers.progressColors.warning);
+export const StressManagement = new Skill('Stress Management', 'thermometer', 'Meditate', Helpers.progressColors.danger);
+export const HealthyLiving = new Skill('Healthy Living', 'leaf', 'Research Health Tips', Helpers.progressColors.primary);
 
 @Injectable()
 export class SkillService {
-  private _skills: Skill[] = [];
+  Programming: Skill = Programming;
+  Art: Skill = Art;
+  Music: Skill = Music;
+  Science: Skill = Science;
+  Mathematics: Skill = Mathematics;
+  Business: Skill = Business;
+  Culinary: Skill = Culinary;
+  StressManagement: Skill = StressManagement;
+  HealthyLiving: Skill = HealthyLiving;
+
+  private _skills: Skill[] = [
+    Programming,
+    Art,
+    Music,
+    Science,
+    Mathematics,
+    Business,
+    Culinary,
+    StressManagement,
+    HealthyLiving
+  ];
 
   constructor() {
-    this._skills.push(
-      Programming,
-      Art,
-      Music,
-      Science,
-      Mathematics,
-      Business
-    );
   }
 
   reset() {
@@ -37,4 +52,5 @@ export class SkillService {
   set skills(value: Skill[]) {
     this._skills = value;
   }
+
 }
