@@ -131,7 +131,6 @@ export class TimeService {
         this.getYears();
         if (this.playerSvc.player.health <= 0 || this.playerSvc.player.hunger <= 0 || this.playerSvc.player.mood <= 0) {
           this.playerSvc.die();
-          this.playerSvc.birth();
           this.bigBang(true);
         }
       },

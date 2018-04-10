@@ -139,10 +139,10 @@ export class HomePage {
   }
 
   die() {
-    this.gameplayStatsSvc.stats[GameplayStatNames.Death].count += 1;
-    this.playerSvc.die();
-    this.playerSvc.birth();
-    this.player = this.playerSvc.player;
+    this.timeSvc.performTimedAction(new Action('Die', 0.25, () => {
+      this.player = this.playerSvc.player;
+      this.player.hunger = 0;
+    }));
   }
 
   refresh() {

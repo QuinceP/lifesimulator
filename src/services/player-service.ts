@@ -29,6 +29,8 @@ export class PlayerService {
    * @param {AlertController} alertCtrl
    * @param careerSvc
    * @param housingSvc
+   * @param skillSvc
+   * @param financeSvc
    */
   constructor(protected lumberjack: Lumberjack,
               protected alertCtrl: AlertController,
@@ -103,6 +105,9 @@ export class PlayerService {
       }],
     });
     alert.present();
+    alert.onDidDismiss(()=> {
+      this.birth();
+    })
   }
 
   /**

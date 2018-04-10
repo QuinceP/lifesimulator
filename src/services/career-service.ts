@@ -104,7 +104,7 @@ export class CareerService {
       (new Job('', 10, 600, '', [{ skill: Business, level: 35 }, { stat: Stat.Charisma, statLevel: 100 }]))
     ];
 
-    this.DishwasherJobs = [new Job('', 1, 5.15,'', null)];
+    this.DishwasherJobs = [new Job('', 1, 5.15,'', [])];
 
 
     this.Unemployed = new Career('', this.UnemployedJobs);
