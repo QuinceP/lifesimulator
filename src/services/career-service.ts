@@ -6,7 +6,7 @@ import { Career } from '../models/career';
 import { TranslateService } from '../utilities/translate/translate-service';
 import { Lumberjack } from './lumberjack';
 import { Stat } from '../models/person';
-
+export const UNEMPLOYMENT_RATE = 0.04;
 @Injectable()
 export class CareerService {
   //Careers
@@ -16,6 +16,10 @@ export class CareerService {
   Medicine: Career;
   Sales: Career;
   Dishwasher: Career;
+  Music: Career;
+  Art: Career;
+  Education: Career;
+  Military: Career;
 
   //Jobs[]
   UnemployedJobs: Job[];
@@ -23,6 +27,10 @@ export class CareerService {
   MedicineJobs: Job[];
   SalesJobs: Job[];
   DishwasherJobs: Job[];
+  MusicJobs: Job[];
+  ArtJobs: Job[];
+  EducationJobs: Job[];
+  MilitaryJobs: Job[];
 
   constructor(public translateSvc: TranslateService,
               public lumberjack: Lumberjack) {
@@ -104,10 +112,17 @@ export class CareerService {
       (new Job('', 10, 600, '', [{ skill: Business, level: 35 }, { stat: Stat.Charisma, statLevel: 100 }]))
     ];
 
-    this.DishwasherJobs = [new Job('', 1, 5.15,'', [])];
+    this.DishwasherJobs = [new Job('', 1, 5.15, '', [])];
+
+    this.MusicJobs = [
+      new Job('', 1, 7.25, '', [])
+    ];
+    this.ArtJobs = [];
+    this.EducationJobs = [];
+    this.MilitaryJobs = [];
 
 
-    this.Unemployed = new Career('', this.UnemployedJobs);
+    this.Unemployed = new Career('Unemployed', this.UnemployedJobs);
     this.Software = new Career('Software', this.SoftwareJobs, 'software.png', Helpers.progressColors.primary);
     this.Medicine = new Career('Medicine', this.MedicineJobs, 'medical.png', Helpers.progressColors.danger);
     this.Sales = new Career('Sales', this.SalesJobs, 'business.png', Helpers.progressColors.secondary);
@@ -132,12 +147,3 @@ export class CareerService {
     }
   }
 }
-
-
-// export const Business: Career = new Career('', undefined, 'business.png', Helpers.progressColors.secondary);
-// export const Music: Career = new Career('', undefined, 'music.png', Helpers.progressColors.primary);
-// export const Art: Career = new Career('', undefined, 'art.png', Helpers.progressColors.secondary);
-// export const Education: Career = new Career('', undefined, 'education.png', Helpers.progressColors.warning);
-// export const Military: Career = new Career('', undefined, 'military.png', Helpers.progressColors.danger);
-
-//Helpers.getColor(Helpers.getPercentage(job.careerLevel, job.career.jobs.length))

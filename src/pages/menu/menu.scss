@@ -1,7 +1,11 @@
 page-menu {
+  h3 {
+    font-size: 1.3em;
+  }
   ion-col {
     ion-icon {
       font-size: $button-size;
+      width: 44px;
     }
   }
 }

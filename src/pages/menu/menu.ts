@@ -15,6 +15,7 @@ import { Lumberjack } from '../../services/lumberjack';
 import { PlayerService } from '../../services/player-service';
 import { ShoppingPage } from '../shopping/shopping';
 import { StatsPage } from '../stats/stats';
+import { AdService } from '../../services/ad-service';
 
 /**
  * An item on the main menu, containing its display and navigation properties.
@@ -38,7 +39,9 @@ export class MenuPage {
               public timeSvc: TimeService,
               public translateSvc: TranslateService,
               public lumberjack: Lumberjack,
-              public playerSvc: PlayerService) {
+              public playerSvc: PlayerService,
+              public adService: AdService) {
+    this.adService.showBanner();
 
     this.pages = [
       { page: HomePage, name: 'Me', icon: 'person', color: "primary" },
@@ -47,8 +50,8 @@ export class MenuPage {
       { page: SkillsPage, name: 'Skills', icon: 'bulb', color: "warning" },
       { page: HousingPage, name: 'Housing', icon: 'home', color: "warning" },
       { page: SocialPage, name: 'Social', icon: 'people', color: "secondary" },
-      { page: EducationPage, name: 'Education', icon: 'school', color: "danger" },
-      { page: CasinoPage, name: 'Casino', icon: 'game-controller-a', color: "warning" },
+      // { page: EducationPage, name: 'Education', icon: 'school', color: "danger" },
+      // { page: CasinoPage, name: 'Casino', icon: 'game-controller-a', color: "warning" },
       { page: ShoppingPage, name: 'Shopping', icon: 'pricetags', color: "secondary" },
       { page: SettingsPage, name: 'Settings', icon: 'settings', color: "primary" },
       { page: StatsPage, name: 'Stats', icon: 'stats', color: "danger" },

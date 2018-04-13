@@ -3,6 +3,7 @@ page-home {
     display: inline-block;
     .label-title {
       margin: 0;
+      font-size: 1.3em;
     }
     ion-icon {
       color: white;
@@ -36,6 +37,9 @@ page-home {
     button {
       background-color: color($colors, danger);
     }
+  }
+  ion-grid.main-grid {
+    margin-top: -1.5em;
   }
 }
 

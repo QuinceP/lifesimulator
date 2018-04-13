@@ -1,3 +1,46 @@
 page-social {
+  #card-stack {
+    width: 100%;
+    height: 45vh;
+    //background: #047915;
+    //border: 10px solid #4cb338;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    position: relative;
+    h2 {
+      white-space: normal;
+    }
+  }
 
+  #card-stack ion-card {
+    border-radius: 5px;
+    position: absolute;
+    text-align: center;
+    top: 3%;
+    height: 100%;
+  }
+
+  .yes-button span {
+    color: color($colors, secondary);
+  }
+  .no-button span {
+    color: color($colors, danger);
+  }
+
+  swing-card {
+    background: white !important;
+    h2 {
+      white-space: normal;
+    }
+  }
+
+  .recent-card {
+    text-align: center;
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+  }
 }

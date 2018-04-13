@@ -12,8 +12,8 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col text-center *ngFor="let page of pages" (click)="navCtrl.setRoot(page.page)">
-        <h3>{{page.name | translate | titlecase}}</h3>
+      <ion-col col-4 text-center *ngFor="let page of pages" (click)="navCtrl.setRoot(page.page)">
+        <h3 class="nowrap">{{page.name | translate | titlecase}}</h3>
         <ion-icon [color]="page.color" text-center [name]="page.icon"></ion-icon>
       </ion-col>
     </ion-row>

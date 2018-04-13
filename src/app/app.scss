@@ -35,6 +35,8 @@ h1, h3, h4, h5, h6, span, ion-input, ion-select {
   color: color($colors, dark);
 }
 
+$top-bar-font-size: 1.3em;
+
 .clock {
   display: flex;
   align-items: center;
@@ -44,7 +46,7 @@ h1, h3, h4, h5, h6, span, ion-input, ion-select {
   }
   .time-display {
     padding: 0 12px;
-    font-size: 2rem;
+    font-size: $top-bar-font-size;
     font-weight: 500;
     color: #fff;
   }
@@ -79,6 +81,10 @@ ion-select, ion-input {
   white-space: normal;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 progress-bar {
   .progress-outer {
     padding: 0 !important;
@@ -100,3 +106,14 @@ progress-bar {
 button {
   height: $button-size;
 }
+
+.label-title {
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.toolbar-title.toolbar-title-md, .time-display .clock {
+  font-size: $top-bar-font-size;
+}
+
+

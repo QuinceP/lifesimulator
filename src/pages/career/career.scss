@@ -5,6 +5,7 @@ page-career {
       width: 150px;
       height: 150px;
       align-self: center;
+      object-fit: contain;
     }
   }
   .needs-button-row {
@@ -23,5 +24,8 @@ page-career {
         }
       }
     }
+  }
+  ion-grid.main-grid {
+    margin-top: -1.5em;
   }
 }

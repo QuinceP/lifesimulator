@@ -9,6 +9,9 @@ page-skills {
     background-size: cover;
 
     text-align: center;
+    h6 {
+      font-size: 1em;
+    }
   }
   .icon-demo ion-icon {
     font-size: 4em;
@@ -16,6 +19,7 @@ page-skills {
   .icon-demo ion-row {
     height: 100%;
     flex-wrap: wrap;
+    justify-content: center;
   }
   .icon-demo ion-col {
     flex: 0 0 25%;

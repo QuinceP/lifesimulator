@@ -34,7 +34,10 @@ import { InventoryPage } from '../pages/inventory/inventory';
 import { Ng2OdometerModule } from 'ng2-odometer';
 import { StatsPage } from '../pages/stats/stats';
 import { GameplayStatsService } from '../services/gameplay-stats-service';
-
+import { CurrencyPipe } from '@angular/common';
+import { SwingModule } from 'angular2-swing';
+import { AdMobFree } from '@ionic-native/admob-free';
+import { AdService } from '../services/ad-service';
 @NgModule({
   declarations: [
     MyApp,
@@ -61,7 +64,8 @@ import { GameplayStatsService } from '../services/gameplay-stats-service';
     BrowserModule,
     IonicModule.forRoot(MyApp, { mode: 'md' }),
     ProgressBarModule,
-    Ng2OdometerModule
+    Ng2OdometerModule,
+    SwingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -95,7 +99,11 @@ import { GameplayStatsService } from '../services/gameplay-stats-service';
     HousingService,
     SkillService,
     TranslateService,
-    GameplayStatsService
+    GameplayStatsService,
+    CurrencyPipe,
+    AdMobFree,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AdService
   ]
 })
 export class AppModule {

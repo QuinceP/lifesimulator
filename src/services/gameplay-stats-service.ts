@@ -4,6 +4,7 @@ export interface GameplayStat {
   name: string;
   text: string;
   count: number;
+  type?: string;
 }
 
 export const GameplayStatNames = {
@@ -19,8 +20,11 @@ export class GameplayStatsService {
   };
 
   public stats: { [index: string]: GameplayStat } = {
-    "Death": { name: 'death', text: 'died', count: 0 },
-    "MoneyEarned": { name: 'money earned', text: 'money earned', count: 0 },
+    "Death": { name: 'death', text: 'died', count: 0, type: 'number'},
+    "MoneyEarned": { name: 'money earned', text: 'money earned', count: 0, type: 'cash'},
+    // "TimesEaten": { name: 'times eaten', text: 'times eaten', count: 0, type: 'cash'},
+    // "TimesHadFun": { name: 'had fun', text: 'had fun', count: 0, type: 'cash'},
+    // "Times": { name: 'had fun', text: 'had fun', count: 0, type: 'cash'},
   };
 
   setStat(statName: string, value: number) {

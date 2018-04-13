@@ -13,6 +13,7 @@ import { StatBook } from '../pages/shopping/shopping';
 import { Inventory } from '../models/inventory';
 import { SkillService } from './skill-service';
 import { FinanceService } from './finance-service';
+import { Career } from '../models/career';
 
 /**
  * Class to provide player data.
@@ -53,22 +54,8 @@ export class PlayerService {
    * Generates a new Player.
    */
   birth() {
-    let country = PlayerService.randomCountry();
-    this.player = new Person();
-    this.generateName(country);
-    this.player.nationality = country.Name;
-    this.player.gender = PlayerService.randomGender();
+    this.player = this.randomPerson();
     this.player.age = 18;
-    this.player.money = 0;
-    this.player.mood = 85;
-    this.player.hunger = 85;
-    this.player.health = 85;
-    this.player.appearance = Helpers.weightedRandom(100, 2);
-    this.player.intelligence = Helpers.weightedRandom(100, 2);
-    this.player.agility = Helpers.weightedRandom(100, 2);
-    this.player.charisma = Helpers.weightedRandom(100, 2);
-    this.player.dexterity = Helpers.weightedRandom(100, 2);
-    this.player.strength = Helpers.weightedRandom(100, 2);
     this.player.career = this.careerSvc.Unemployed;
     this.player.pastCareers = [];
     this.player.job = this.careerSvc.Unemployed.jobs[0];
@@ -78,6 +65,37 @@ export class PlayerService {
     this.skillSvc.reset();
     this.showBirthAlert();
     this.playerSubject.next(this.player);
+  }
+
+  randomPerson(): Person {
+    let person = new Person();
+    let country = PlayerService.randomCountry();
+    let fullName = this.generateName(country);
+    if (fullName){
+      person.firstName = fullName.firstName;
+      person.lastName = fullName.lastName;
+    }
+    else {
+      person.firstName = 'John';
+      person.lastName = 'Doe';
+    }
+
+    person.career = this.careerSvc.Unemployed;
+    person.job = this.careerSvc.Unemployed.jobs[0];
+    person.nationality = country.Name;
+    person.gender = PlayerService.randomGender();
+    person.age = 18;
+    person.money = 0;
+    person.mood = 85;
+    person.hunger = 85;
+    person.health = 85;
+    person.appearance = Helpers.weightedRandom(100, 2);
+    person.intelligence = Helpers.weightedRandom(100, 2);
+    person.agility = Helpers.weightedRandom(100, 2);
+    person.charisma = Helpers.weightedRandom(100, 2);
+    person.dexterity = Helpers.weightedRandom(100, 2);
+    person.strength = Helpers.weightedRandom(100, 2);
+    return person;
   }
 
   showBirthAlert() {
@@ -105,7 +123,7 @@ export class PlayerService {
       }],
     });
     alert.present();
-    alert.onDidDismiss(()=> {
+    alert.onDidDismiss(() => {
       this.birth();
     })
   }
@@ -165,13 +183,14 @@ export class PlayerService {
   }
 
   /**
-   * Generates a random name given a CountryIdentifier and sets it as the player name.
+   * Generates a random name given a CountryIdentifier.
    * @param {CountryIdentifier} countryIdentifier
    */
-  generateName(countryIdentifier: CountryIdentifier) {
-    CountryLanguage.getCountry(countryIdentifier.Code, (err, country: { languages: string[] }) => {
+  generateName(countryIdentifier: CountryIdentifier): FullName | void {
+    return CountryLanguage.getCountry(countryIdentifier.Code, (err, country: { languages: string[] }) => {
       if (err) {
         this.lumberjack.info(err);
+        return { firstName: 'John', lastName: 'Doe' };
       }
       else {
         let languageStrings: string[] = PlayerService.languageStrings(country);
@@ -179,9 +198,7 @@ export class PlayerService {
           languageStrings = ['en'];
         }
         let names = PlayerService.names(languageStrings);
-        let name = names[Math.floor(Math.random() * names.length)];
-        this.player.firstName = name.firstName;
-        this.player.lastName = name.lastName;
+        return names[Math.floor(Math.random() * names.length)];
       }
     });
   }
