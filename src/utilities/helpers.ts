@@ -1,5 +1,6 @@
 import Color from 'color';
 import faker from 'faker';
+import { environment } from '../environments/environment';
 
 export class Helpers {
 
@@ -86,5 +87,11 @@ export class Helpers {
   static loremIpsum(): string {
     // TODO: Check if debug mode
     return faker.fake("{{lorem.paragraph}}");
+  }
+
+  static debugAction(action: ()=> any){
+    if (!environment.production){
+      action();
+    }
   }
 }

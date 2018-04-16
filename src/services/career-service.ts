@@ -5,10 +5,15 @@ import { Business, Mathematics, Programming, Science } from './skill-service';
 import { Career } from '../models/career';
 import { TranslateService } from '../utilities/translate/translate-service';
 import { Lumberjack } from './lumberjack';
-import { Stat } from '../models/person';
+import { Person, Stat } from '../models/person';
+import { SaveService } from './save-service';
+import { Skill } from '../models/skill';
+
 export const UNEMPLOYMENT_RATE = 0.04;
+
 @Injectable()
 export class CareerService {
+  saveKey = 'careers';
   //Careers
   Careers: Career[];
   Unemployed: Career;
@@ -33,7 +38,8 @@ export class CareerService {
   MilitaryJobs: Job[];
 
   constructor(public translateSvc: TranslateService,
-              public lumberjack: Lumberjack) {
+              public lumberjack: Lumberjack,
+              public saveSvc: SaveService) {
     this.UnemployedJobs = [
       new Job('job-title-unemployed-1', 0, 0, 'Unemployed')
     ];
@@ -135,6 +141,7 @@ export class CareerService {
       this.Dishwasher
     ];
     this.setDescriptionsAndTitles();
+
   }
 
   setDescriptionsAndTitles() {
@@ -145,5 +152,54 @@ export class CareerService {
         job.career = career.title.toLowerCase();
       }
     }
+  }
+
+  reset() {
+    for (let career of this.Careers) {
+      career.highestLevel = 0;
+      for (let job of career.jobs) {
+        job.careerLevel = 0;
+      }
+    }
+  }
+
+  load(): Promise<any> {
+    return this.saveSvc.load(this.saveKey).then((val) => {
+      if (val) {
+        this.lumberjack.info(this.saveKey + ' loaded.');
+        let assertedValue: Career[] = val as Career[];
+        for (let i = 0; i < assertedValue.length; i++) {
+          assertedValue[i] = Object.assign(new Career(), val[i]);
+          for (let j in assertedValue[i].jobs) {
+            assertedValue[i].jobs[j] = Object.assign(new Job(), assertedValue[i].jobs[j]);
+            for (let k in assertedValue[i].jobs[j].requirements) {
+              if (assertedValue[i].jobs[j].requirements[k].skill) {
+                assertedValue[i].jobs[j].requirements[k].skill = Object.assign(
+                  new Skill(), assertedValue[i].jobs[j].requirements[k].skill);
+
+              }
+            }
+          }
+        }
+
+        this.lumberjack.info(assertedValue);
+        this.Careers = assertedValue;
+      }
+      else {
+        this.lumberjack.warn(this.saveKey + 'not loaded.');
+      }
+    }).catch((error) => {
+      this.lumberjack.error(error);
+    });
+  }
+
+  save() {
+    let value: Career[] = this.Careers;
+    this.saveSvc.save(this.saveKey, value).then((val) => {
+      this.lumberjack.info(this.saveKey + ' saved successfully ' + new Date().toUTCString());
+    }).catch((error) => {
+      this.lumberjack.error('Could not save ' + this.saveKey + '.');
+      this.lumberjack.error(error);
+    })
   }
 }

@@ -14,14 +14,16 @@
     <ion-card-header>Careers</ion-card-header>
     <ion-list>
       <ion-item-group>
-        <ng-container *ngFor="let career of careers">
-          <ion-item ion-item detail-push (click)="goToCareerDetail(career)">
-            <ion-thumbnail item-start>
-              <img src="{{career.icon}}"/>
-            </ion-thumbnail>
-            {{career.title | translate | titlecase}} {{highestLevel(career)}}/{{career.jobs.length}}
-            <ion-icon item-end name="arrow-forward"></ion-icon>
-          </ion-item>
+        <ng-container *ngIf="careers.length > 0">
+          <ng-container *ngFor="let career of careers">
+            <ion-item ion-item detail-push (click)="goToCareerDetail(career)">
+              <ion-thumbnail item-start>
+                <img src="{{career.icon}}"/>
+              </ion-thumbnail>
+              {{career.title | translate | titlecase}} {{highestLevel(career)}}/{{career.jobs.length}}
+              <ion-icon item-end name="arrow-forward"></ion-icon>
+            </ion-item>
+          </ng-container>
         </ng-container>
       </ion-item-group>
     </ion-list>

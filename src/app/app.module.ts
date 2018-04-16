@@ -38,6 +38,11 @@ import { CurrencyPipe } from '@angular/common';
 import { SwingModule } from 'angular2-swing';
 import { AdMobFree } from '@ionic-native/admob-free';
 import { AdService } from '../services/ad-service';
+import { IonicStorageModule } from '@ionic/storage';
+import { SaveService } from '../services/save-service';
+import { BugReportPage } from '../pages/bug-report/bug-report';
+import { BugReportService } from '../services/bug-report-service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -57,15 +62,17 @@ import { AdService } from '../services/ad-service';
     SettingsPage,
     InventoryPage,
     StatsPage,
+    BugReportPage,
     TranslatePipe,
     StatusComponent
   ],
   imports: [
     BrowserModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp, { mode: 'md' }),
     ProgressBarModule,
     Ng2OdometerModule,
-    SwingModule
+    SwingModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -85,7 +92,8 @@ import { AdService } from '../services/ad-service';
     ShoppingPage,
     InventoryPage,
     SettingsPage,
-    StatsPage
+    StatsPage,
+    BugReportPage
   ],
   providers: [
     StatusBar,
@@ -103,7 +111,9 @@ import { AdService } from '../services/ad-service';
     CurrencyPipe,
     AdMobFree,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AdService
+    AdService,
+    SaveService,
+    BugReportService
   ]
 })
 export class AppModule {

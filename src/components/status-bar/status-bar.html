@@ -7,13 +7,13 @@
             <h4 class="label-title">Mood</h4>
           </ion-row>
           <ion-row>
-            <span class="status-span">{{getStatus(player.mood, StatusTypes.Mood)}}</span>
+            <span *ngIf="player" class="status-span">{{getStatus(player.mood, StatusTypes.Mood)}}</span>
           </ion-row>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="progress-col">
-          <progress-bar [progress]="player.mood"
+          <progress-bar *ngIf="player" [progress]="player.mood"
                         [color]="Helpers.getColor(player.mood)"></progress-bar>
         </ion-col>
       </ion-row>
@@ -25,13 +25,13 @@
             <h4 class="label-title">Hunger</h4>
           </ion-row>
           <ion-row>
-            <span class="status-span">{{getStatus(player.hunger, StatusTypes.Hunger)}}</span>
+            <span *ngIf="player" class="status-span">{{getStatus(player.hunger, StatusTypes.Hunger)}}</span>
           </ion-row>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="progress-col">
-          <progress-bar [progress]="player.hunger"
+          <progress-bar *ngIf="player" [progress]="player.hunger"
                         [color]="Helpers.getColor(player.hunger)"></progress-bar>
         </ion-col>
       </ion-row>
@@ -43,13 +43,13 @@
             <h4 class="label-title">Health</h4>
           </ion-row>
           <ion-row>
-            <span class="status-span">{{getStatus(player.health, StatusTypes.Health)}}</span>
+            <span *ngIf="player" class="status-span">{{getStatus(player.health, StatusTypes.Health)}}</span>
           </ion-row>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="progress-col">
-          <progress-bar [progress]="player.health"
+          <progress-bar *ngIf="player" [progress]="player.health"
                         [color]="Helpers.getColor(player.health)"></progress-bar>
         </ion-col>
       </ion-row>
@@ -58,7 +58,7 @@
   <ion-row class="status-row">
     <ion-col class="label-col money-col">
       <ion-icon color="primary" name="cash"></ion-icon>
-      <h4 class="label-title">&nbsp;{{player.money | currency:'USD':'symbol':'1.2-2'}}</h4>
+      <h4 class="label-title" *ngIf="player">&nbsp;{{player.money | currency:'USD':'symbol':'1.2-2'}}</h4>
     </ion-col>
   </ion-row>
 </ion-grid>

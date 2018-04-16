@@ -1,3 +1,6 @@
 page-settings {
-
+  .selectedLang {
+    background-color: color($colors, primary);
+    color: white;
+  }
 }

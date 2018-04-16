@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import { DoCheck, Injectable, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angular/core';
 import { Gender, Person, Stat } from '../models/person';
 import { countries } from '../models/country';
-import { Helpers } from '../utilities/helpers';
 import CountryLanguage from 'country-language';
 import faker from 'faker';
 import { Lumberjack } from './lumberjack';
@@ -13,13 +12,21 @@ import { StatBook } from '../pages/shopping/shopping';
 import { Inventory } from '../models/inventory';
 import { SkillService } from './skill-service';
 import { FinanceService } from './finance-service';
+import { supportedLocales } from '../utilities/translate/translation';
+import { Helpers } from '../utilities/helpers';
+import { SaveService } from './save-service';
+import { Job } from '../models/job';
+import { AdService } from './ad-service';
 import { Career } from '../models/career';
+import { House } from '../models/house';
+import { Skill } from '../models/skill';
 
 /**
  * Class to provide player data.
  */
 @Injectable()
 export class PlayerService {
+  saveKey = 'player';
   public player: Person;
   playerSubject = new Subject<Person>();
   playerObservable = this.playerSubject.asObservable();
@@ -32,14 +39,17 @@ export class PlayerService {
    * @param housingSvc
    * @param skillSvc
    * @param financeSvc
+   * @param saveSvc
    */
   constructor(protected lumberjack: Lumberjack,
               protected alertCtrl: AlertController,
               protected careerSvc: CareerService,
               protected housingSvc: HousingService,
               protected skillSvc: SkillService,
-              protected financeSvc: FinanceService) {
-    this.birth();
+              protected financeSvc: FinanceService,
+              protected saveSvc: SaveService,
+              protected adSvc: AdService) {
+
   }
 
   /**
@@ -55,23 +65,60 @@ export class PlayerService {
    */
   birth() {
     this.player = this.randomPerson();
-    this.player.age = 18;
     this.player.career = this.careerSvc.Unemployed;
     this.player.pastCareers = [];
     this.player.job = this.careerSvc.Unemployed.jobs[0];
-    this.player.house = this.housingSvc.homeless;
     this.player.inventory = new Inventory();
     this.financeSvc.accountBalance = 0;
     this.skillSvc.reset();
     this.showBirthAlert();
     this.playerSubject.next(this.player);
+    this.lumberjack.info('New player born 👶🏾');
+    this.save();
+  }
+
+  load(): Promise<any>{
+    return this.saveSvc.load(this.saveKey).then((val)=>{
+      if (val){
+        this.lumberjack.info(this.saveKey + ' loaded.');
+        let player: Person = Object.assign(new Person(), val);
+        player.job = Object.assign(new Job(), player.job);
+        player.career = Object.assign(new Career(), player.career);
+        player.inventory = Object.assign(new Inventory(), player.inventory);
+        player.house = Object.assign(new House(), player.house);
+        for (let pastCareer in player.pastCareers){
+          player.pastCareers[pastCareer] = Object.assign(new Career(), player.pastCareers[pastCareer]);
+        }
+
+        this.lumberjack.info(player);
+        this.player = player;
+        this.playerSubject.next(player)
+      }
+      else {
+        this.lumberjack.warn(this.saveKey + ' not loaded.');
+        this.birth();
+        this.lumberjack.info('Birth - new save');
+      }
+    }).catch((error)=> {
+      this.lumberjack.error(error);
+    });
+  }
+
+  save(){
+    let value = this.player;
+    this.saveSvc.save(this.saveKey,  value).then((val) => {
+      this.lumberjack.info(this.saveKey + ' saved successfully ' + new Date().toUTCString());
+    }).catch((error) => {
+      this.lumberjack.error('Could not save ' + this.saveKey +'.');
+      this.lumberjack.error(error);
+    })
   }
 
   randomPerson(): Person {
     let person = new Person();
     let country = PlayerService.randomCountry();
     let fullName = this.generateName(country);
-    if (fullName){
+    if (fullName) {
       person.firstName = fullName.firstName;
       person.lastName = fullName.lastName;
     }
@@ -81,7 +128,8 @@ export class PlayerService {
     }
 
     person.career = this.careerSvc.Unemployed;
-    person.job = this.careerSvc.Unemployed.jobs[0];
+    person.job = new Job('job-title-unemployed-1', 0, 0, 'Unemployed');
+    person.house = this.housingSvc.homeless;
     person.nationality = country.Name;
     person.gender = PlayerService.randomGender();
     person.age = 18;
@@ -122,9 +170,11 @@ export class PlayerService {
         cssClass: 'game-alert'
       }],
     });
-    alert.present();
+    alert.present().then(()=> {this.adSvc.launchInterstitial()});
     alert.onDidDismiss(() => {
       this.birth();
+      this.lumberjack.info('Birth after death');
+      this.save();
     })
   }
 
@@ -316,46 +366,4 @@ export interface FullName {
   lastName: string;
 }
 
-/**
- * Supported language locales for the application.
- * @type {string[]}
- */
-export const supportedLocales = [
-  'az',
-  'cz',
-  'de',
-  'de_AT',
-  'de_CH',
-  'en',
-  'en_AU',
-  'en_BORK',
-  'en_CA',
-  'en_GB',
-  'en_IE',
-  'en_IND',
-  'en_US',
-  'en_au_ocker',
-  'es',
-  'es_MX',
-  'fa',
-  'fr',
-  'fr_CA',
-  'ge',
-  'id_ID',
-  'it',
-  'ja',
-  'ko',
-  'nb_NO',
-  'nep',
-  'nl',
-  'pl',
-  'pt_BR',
-  'ru',
-  'sk',
-  'sv',
-  'tr',
-  'uk',
-  'vi',
-  'zh_CN',
-  'zh_TW',
-];
+

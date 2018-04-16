@@ -13,7 +13,7 @@ export class Skill {
 
   private levelUpObserver: Observable<any>;
 
-  constructor(name: string, icon: string, action: string, color: string){
+  constructor(name: string = '', icon: string = '', action: string ='', color: string = ''){
     this.name = name;
     this.icon = icon;
     this.currentExp = 0;

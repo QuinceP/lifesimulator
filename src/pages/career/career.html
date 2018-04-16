@@ -53,7 +53,7 @@
       <ion-col>
         <ion-buttons start>
           <button #workButton ion-button block large icon-start [ngStyle]="{'background-color': player.career.color}"
-                  (click)="work()" [disabled]="player.career == careerSvc.Unemployed">
+                  (click)="work()" [disabled]="player.job.title == unemployed">
             <ion-icon name="time"></ion-icon>
             Work 1 Hour
           </button>
@@ -63,7 +63,7 @@
         <ion-buttons end>
           <button #workButton ion-button block large icon-start (click)="work(8)"
                   [ngStyle]="{'background-color': player.career.color}"
-                  [disabled]="player.career == careerSvc.Unemployed">
+                  [disabled]="player.job.title == unemployed">
             <ion-icon name="time"></ion-icon>
             Work 8 Hours
           </button>

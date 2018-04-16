@@ -9,7 +9,7 @@ export class House {
   private _title: string = 'Tent';
   private _price: number = 20000;
 
-  constructor(title: string, price: number, img: string) {
+  constructor(title?: string, price?: number, img?: string) {
     this.title = title;
     this.price = price;
     this.img = img;

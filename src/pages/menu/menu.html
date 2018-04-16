@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-grid>
+  <ion-grid class="main-grid">
     <ion-row>
       <ion-col col-4 text-center *ngFor="let page of pages" (click)="navCtrl.setRoot(page.page)">
         <h3 class="nowrap">{{page.name | translate | titlecase}}</h3>

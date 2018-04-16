@@ -82,6 +82,16 @@
         </button>
         </ion-row>
       </ion-col>
+      <ion-col class="action-button-col debug-button-col" *ngIf="showDebugButtons">
+        <ion-row class="action-price-row">
+          <span>&nbsp;</span>
+        </ion-row>
+        <ion-row class="action-button-row">
+          <button class="death-button" ion-button icon-only (click)="wait()">
+            <ion-icon name="clock"></ion-icon>
+          </button>
+        </ion-row>
+      </ion-col>
     </ion-row>
     <ion-row>
       <button class="inventory-button" ion-button block (click)="goToInventory()">

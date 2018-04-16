@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { PlayerService } from '../../services/player-service';
 import { Helpers } from '../../utilities/helpers';
 import { Subscription } from 'rxjs/Subscription';
@@ -32,14 +32,14 @@ export const Statuses = {
   selector: 'status-bar',
   templateUrl: 'status-bar.html'
 })
-export class StatusComponent implements OnInit, OnDestroy {
+export class StatusComponent implements OnInit, OnDestroy, OnChanges {
   Statuses = Statuses;
   StatusTypes = StatusTypes;
   Helpers = Helpers;
-  player: Person;
+  player: Person = new Person();
 
-  constructor(public playerSvc: PlayerService) {
-    this.player = playerSvc.player;
+  constructor(public playerSvc: PlayerService, public changeDetector: ChangeDetectorRef) {
+    this.player = this.playerSvc.player;
   }
 
   private subscription: Subscription;
@@ -47,7 +47,22 @@ export class StatusComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.playerSvc.playerObservable.subscribe(
       (player) => {
-        this.player = player;
+        if (player) {
+          this.player = player;
+          this.changeDetector.detectChanges();
+        }
+      }
+    )
+  }
+
+  ngOnChanges(){
+    this.subscription = this.playerSvc.playerObservable.subscribe(
+      (player) => {
+        console.log(player)
+        if (player) {
+          this.player = player;
+          this.changeDetector.detectChanges();
+        }
       }
     )
   }

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Skill } from '../models/skill';
 import { Helpers } from '../utilities/helpers';
+import { SaveService } from './save-service';
+import { Lumberjack } from './lumberjack';
+import { Career } from '../models/career';
 
 export const Programming = new Skill('Programming', 'laptop', 'Program', Helpers.progressColors.primary);
 export const Art = new Skill('Painting', 'color-palette', 'Paint', Helpers.progressColors.secondary);
@@ -14,6 +17,7 @@ export const HealthyLiving = new Skill('Healthy Living', 'leaf', 'Research Healt
 
 @Injectable()
 export class SkillService {
+  saveKey = 'skills';
   Programming: Skill = Programming;
   Art: Skill = Art;
   Music: Skill = Music;
@@ -36,7 +40,7 @@ export class SkillService {
     HealthyLiving
   ];
 
-  constructor() {
+  constructor(public saveSvc: SaveService, public lumberjack: Lumberjack) {
   }
 
   reset() {
@@ -51,6 +55,36 @@ export class SkillService {
 
   set skills(value: Skill[]) {
     this._skills = value;
+  }
+
+  load():Promise<any>{
+    return this.saveSvc.load(this.saveKey).then((val)=>{
+      if (val){
+        this.lumberjack.info(this.saveKey + ' loaded.');
+        let assertedValue: Skill[] = val as Skill[];
+        for (let i = 0; i < assertedValue.length; i++){
+          assertedValue[i] = Object.assign(new Skill(), val[i]);
+        }
+
+        this.lumberjack.info(assertedValue);
+        this.skills = assertedValue;
+      }
+      else {
+        this.lumberjack.warn(this.saveKey + ' not loaded.');
+      }
+    }).catch((error)=> {
+      this.lumberjack.error(error);
+    });
+  }
+
+  save(){
+    let value = this.skills;
+    this.saveSvc.save(this.saveKey,  value).then((val) => {
+      this.lumberjack.info(this.saveKey + ' saved successfully ' + new Date().toUTCString());
+    }).catch((error) => {
+      this.lumberjack.error('Could not save ' + this.saveKey +'.');
+      this.lumberjack.error(error);
+    })
   }
 
 }

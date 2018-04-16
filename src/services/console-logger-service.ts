@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Lumberjack } from './lumberjack';
+import { environment } from '../environments/environment';
 
-// export let isDebugMode = environment.isDebugMode;
-export let isDebugMode = true;
+export let isDebugMode = environment.production === false;
 
 const noop = (): any => undefined;
 

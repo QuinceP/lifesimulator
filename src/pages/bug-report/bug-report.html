@@ -1,0 +1,22 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Bug Report</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-grid>
+  <ion-row>
+    <ion-input [(ngModel)]="summary" class="summary-input" placeholder="Short Summary" maxlength="80"></ion-input>
+  </ion-row>
+  <ion-row>
+    <ion-textarea [(ngModel)]="description" class="description-textarea" placeholder="Describe your problem in detail here"></ion-textarea>
+  </ion-row>
+  <ion-row>
+    <button ion-button large block (click)="submit()" [disabled]="description.trim() == '' || summary.trim() == ''">Submit</button>
+  </ion-row>
+</ion-grid>
+</ion-content>

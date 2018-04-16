@@ -3,6 +3,9 @@ import * as moment from 'moment';
 import { Action } from '../models/action';
 import { PlayerService } from './player-service';
 import { Lumberjack } from './lumberjack';
+import { CareerService } from './career-service';
+import { SkillService } from './skill-service';
+import { FinanceService } from './finance-service';
 
 /**
  * Hours needed to decrease hunger stat from 100 to 0.
@@ -34,7 +37,10 @@ export class TimeService {
   private _days: number = 0;
 
   constructor(private playerSvc: PlayerService,
-              protected lumberjack: Lumberjack) {
+              protected lumberjack: Lumberjack,
+              private careerSvc: CareerService,
+              private skillSvc: SkillService,
+              protected finSvc: FinanceService) {
     this.bigBang();
   }
 
@@ -133,9 +139,17 @@ export class TimeService {
           this.playerSvc.die();
           this.bigBang(true);
         }
+        this.save();
       },
       (err) => {
         this.lumberjack.error(err);
       });
+  }
+
+  save(){
+    this.playerSvc.save();
+    this.careerSvc.save();
+    this.skillSvc.save();
+    this.finSvc.save();
   }
 }

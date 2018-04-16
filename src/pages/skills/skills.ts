@@ -6,6 +6,7 @@ import { Helpers } from '../../utilities/helpers';
 import { Action } from '../../models/action';
 import { TimeService } from '../../services/time-service';
 import { PlayerService } from '../../services/player-service';
+import { Lumberjack } from '../../services/lumberjack';
 
 @Component({
   selector: 'page-skills',
@@ -13,13 +14,21 @@ import { PlayerService } from '../../services/player-service';
 })
 export class SkillsPage {
   private selectedSkill: Skill;
+  private skills: Skill[];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public skillSvc: SkillService,
               public timeSvc: TimeService,
-              public playerSvc: PlayerService) {
-    this.selectedSkill = this.skillSvc.skills[0];
+              public playerSvc: PlayerService,
+              public lumberjack: Lumberjack) {
+  }
+
+  ionViewCanEnter(){
+    this.skills = this.skillSvc.skills;
+    this.lumberjack.info(this.skillSvc);
+    this.lumberjack.info(this.skills);
+    this.selectedSkill = this.skills[0];
   }
 
   selectSkill(skill: Skill) {

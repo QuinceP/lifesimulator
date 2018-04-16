@@ -9,7 +9,7 @@ export class Career {
   private _color: string;
   private _highestLevel: number = 0;
 
-  constructor(title: string, jobs: Job[], icon: string = "unemployed.png", color: string = "#000000") {
+  constructor(title: string = '', jobs: Job[] = [], icon: string = "unemployed.png", color: string = "#000000") {
     this.jobs = jobs;
     this.title = title;
     this.icon = icon;

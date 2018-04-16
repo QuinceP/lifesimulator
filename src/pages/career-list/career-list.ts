@@ -5,6 +5,7 @@ import { PlayerService } from '../../services/player-service';
 import { CareerDetailPage } from '../career-detail/career-detail';
 import { Career } from '../../models/career';
 import { TimeService } from '../../services/time-service';
+import { Lumberjack } from '../../services/lumberjack';
 
 @Component({
   selector: 'page-career-list',
@@ -17,14 +18,18 @@ export class CareerListPage {
               public navParams: NavParams,
               public careerSvc: CareerService,
               public playerSvc: PlayerService,
-              public timeSvc: TimeService) {
+              public timeSvc: TimeService,
+              public lumberjack: Lumberjack) {
+  }
+
+  ionViewCanEnter(){
     this.careers = this.careerSvc.Careers;
   }
 
   highestLevel(career: Career) {
-    if (this.playerSvc.player.pastCareers.indexOf(career) > -1) {
-      let i = this.playerSvc.player.pastCareers.indexOf(career);
-      return this.playerSvc.player.pastCareers[i].highestLevel;
+    let c = this.playerSvc.player.pastCareers.find(c => c.title === career.title);
+    if (c){
+      return c.highestLevel;
     }
     else {
       return 0;

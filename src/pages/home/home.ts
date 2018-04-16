@@ -145,6 +145,12 @@ export class HomePage {
     }));
   }
 
+  wait(){
+    this.timeSvc.performTimedAction(new Action('Nothing', 0.25, () => {
+      this.player = this.playerSvc.player;
+    }));
+  }
+
   refresh() {
     this.playerSvc.birth();
     this.player = this.playerSvc.player;

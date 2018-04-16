@@ -10,6 +10,7 @@ import { SkillService } from '../../services/skill-service';
 import { TranslateService } from '../../utilities/translate/translate-service';
 import { Stat } from '../../models/person';
 import { Lumberjack } from '../../services/lumberjack';
+import { Skill } from '../../models/skill';
 
 @Component({
   selector: 'page-career-detail',
@@ -17,6 +18,7 @@ import { Lumberjack } from '../../services/lumberjack';
 })
 export class CareerDetailPage {
   private career: Career;
+  private skills: Skill[];
   private Helpers: Helpers;
   private progressColors = Helpers.progressColors;
   private mint: string;
@@ -31,14 +33,20 @@ export class CareerDetailPage {
               public translateSvc: TranslateService,
               public lumberjack: Lumberjack,
               public alertCtrl: AlertController) {
-    this.career = navParams.get('career');
+
     this.mint = Helpers.hexToRgbA(this.progressColors.primary, 0.4);
   }
 
+  ionViewCanEnter() {
+    this.career = this.navParams.get('career') as Career;
+    this.skills = this.skillSvc.skills;
+    this.lumberjack.info(this.career);
+  }
+
   highestLevel() {
-    if (this.playerSvc.player.pastCareers.indexOf(this.career) > -1) {
-      let i = this.playerSvc.player.pastCareers.indexOf(this.career);
-      return this.playerSvc.player.pastCareers[i].highestLevel;
+    let c = this.playerSvc.player.pastCareers.find(c => c.title === this.career.title);
+    if (c){
+      return c.highestLevel;
     }
     else {
       return 0;
@@ -47,9 +55,10 @@ export class CareerDetailPage {
 
   getRequirements(): Requirement[] {
     let requirements: Requirement[];
-    if (this.playerSvc.player.pastCareers.indexOf(this.career) > -1) {
-      let i = this.playerSvc.player.pastCareers.indexOf(this.career);
-      let level = this.playerSvc.player.pastCareers[i].highestLevel;
+    let career = this.playerSvc.player.pastCareers.find(c => c.title === this.career.title);
+
+    if (career) {
+    let level = career.highestLevel;
       requirements = this.career.jobs[level].requirements;
     }
     else {
@@ -66,10 +75,17 @@ export class CareerDetailPage {
     if (requirements) {
       for (let requirement of requirements) {
         if (requirement.skill && requirement.level) {
-          let skillIndex = this.skillSvc.skills.indexOf(requirement.skill);
-          if (!(skillIndex > -1 && this.skillSvc.skills[skillIndex].level >= requirement.level)) {
+          let skill = this.skills.find(s => s.name === requirement.skill.name);
+
+          if (skill.level < requirement.level) {
             met = false;
             failedReqs.push(requirement);
+            this.lumberjack.info('have', skill.level);
+            this.lumberjack.info('need', requirement.level);
+          }
+          else {
+            this.lumberjack.info('have', skill.level);
+            this.lumberjack.info('need', requirement.level);
           }
         }
 
@@ -113,11 +129,14 @@ export class CareerDetailPage {
   }
 
   apply() {
+    this.lumberjack.info('highest level', this.highestLevel());
+    this.lumberjack.info('length', this.career.jobs.length);
     if (this.highestLevel() < this.career.jobs.length) {
       let job: Job;
-      if (this.playerSvc.player.pastCareers.indexOf(this.career) > -1) {
-        let i = this.playerSvc.player.pastCareers.indexOf(this.career);
-        let level = this.playerSvc.player.pastCareers[i].highestLevel;
+      let career = this.playerSvc.player.pastCareers.find(c => c.title === this.career.title);
+
+      if (career) {
+        let level = career.highestLevel;
         job = this.career.jobs[level];
       }
       else {
@@ -130,14 +149,16 @@ export class CareerDetailPage {
         this.playerSvc.player.job = job;
         this.playerSvc.player.career = this.career;
 
-        if (this.playerSvc.player.pastCareers.indexOf(this.career) > -1) {
-          let i = this.playerSvc.player.pastCareers.indexOf(this.career);
+        if (career) {
+          let i = this.playerSvc.player.pastCareers.findIndex(c => c.title === this.career.title);
           this.playerSvc.player.pastCareers[i].highestLevel += 1;
         }
         else {
           this.playerSvc.player.pastCareers.push(this.career);
           this.playerSvc.player.pastCareers[this.playerSvc.player.pastCareers.length - 1].highestLevel = 1;
         }
+
+        this.playerSvc.save();
 
         let toast = this.toastCtrl.create({
           message: 'You got the ' + this.translateSvc.instant(job.title).toTitleCase() + ' job!',

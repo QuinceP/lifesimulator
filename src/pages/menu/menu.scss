@@ -1,4 +1,8 @@
 page-menu {
+  ion-grid.main-grid {
+    margin-top: 1.5em;
+    height: 100%;
+  }
   h3 {
     font-size: 1.3em;
   }
@@ -7,5 +11,13 @@ page-menu {
       font-size: $button-size;
       width: 44px;
     }
+  }
+
+  .version-display {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: right;
   }
 }

@@ -10,7 +10,8 @@
 </ion-header>
 
 <ion-content>
-  <div class="icon-demo" *ngFor="let skill of skillSvc.skills"
+<ng-container *ngIf="skills.length > 0">
+  <div class="icon-demo" *ngFor="let skill of skills"
        ngClass="{{selectedSkill == skill ? 'selected-skill' : ''}}" (click)="selectSkill(skill)">
     <h6>{{skill.name}}</h6>
     <ion-row><ion-icon [name]="skill.icon" [ngStyle]="{'color': skill.color}"></ion-icon></ion-row>
@@ -18,6 +19,7 @@
     <h6>Level {{skill.level}}</h6>
     <h6>{{skill.getExpToNextLevel()}}</h6>
   </div>
+</ng-container>
 </ion-content>
 
 <ion-footer no-border>

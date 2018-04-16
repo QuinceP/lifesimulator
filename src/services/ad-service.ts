@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeInterstitialConfig } from '@ionic-native/admob-free';
 import { Lumberjack } from './lumberjack';
 import { Platform } from 'ionic-angular';
+import { environment } from '../environments/environment';
 
 @Injectable()
 
@@ -13,9 +14,9 @@ export class AdService {
   }
 
   showBanner() {
-    if (this.platform.is('cordova') && !this.platform.is('browser')){
+    if (this.platform.is('cordova') && !this.platform.is('core')){
       let bannerConfig: AdMobFreeBannerConfig = {
-        isTesting: true, // Remove in production
+        isTesting: environment.production == false, // Remove in production
         autoShow: true
         //id: Your Ad Unit ID goes here
       };
@@ -29,18 +30,20 @@ export class AdService {
   }
 
   launchInterstitial() {
+    if (this.platform.is('cordova') && !this.platform.is('core')) {
 
-    let interstitialConfig: AdMobFreeInterstitialConfig = {
-      isTesting: true, // Remove in production
-      autoShow: true
-      //id: Your Ad Unit ID goes here
-    };
+      let interstitialConfig: AdMobFreeInterstitialConfig = {
+        isTesting: true, // Remove in production
+        autoShow: true
+        //id: Your Ad Unit ID goes here
+      };
 
-    this.adMob.interstitial.config(interstitialConfig);
+      this.adMob.interstitial.config(interstitialConfig);
 
-    this.adMob.interstitial.prepare().then(() => {
-      // success
-    });
+      this.adMob.interstitial.prepare().then(() => {
+        // success
+      });
 
+    }
   }
 }

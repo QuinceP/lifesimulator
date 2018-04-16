@@ -18,10 +18,10 @@ export class Job {
   private _career: string;
   private _requirements: Requirement[];
 
-  constructor(title: string,
-              careerLevel: number,
-              hourlyRate: number,
-              career: string,
+  constructor(title: string = '',
+              careerLevel: number = 0,
+              hourlyRate: number = 0,
+              career: string = '',
               requirements: Requirement[] = [],
               description: string = '') {
     this.title = title;

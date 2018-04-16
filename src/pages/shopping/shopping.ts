@@ -137,6 +137,7 @@ export class ShoppingPage {
     if (putInInventory) {
       for (let i = 0; i < quantity; i++) {
         this.playerSvc.player.inventory.items.books.push(book);
+        this.playerSvc.save();
       }
     }
     this.playerSvc.player.money -= book.price * quantity;

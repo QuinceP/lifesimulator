@@ -1,0 +1,13 @@
+page-bug-report {
+  .summary-input, .description-textarea {
+    border: 2px solid black;
+    color: black;
+    background-color: white;
+  }
+  .summary-input {
+    margin-bottom: 1em;
+  }
+  .description-textarea {
+    height: 15em;
+  }
+}

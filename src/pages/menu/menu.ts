@@ -16,6 +16,14 @@ import { PlayerService } from '../../services/player-service';
 import { ShoppingPage } from '../shopping/shopping';
 import { StatsPage } from '../stats/stats';
 import { AdService } from '../../services/ad-service';
+import { Person } from '../../models/person';
+import { MyApp } from '../../app/app.component';
+import { SaveService } from '../../services/save-service';
+import { CareerService } from '../../services/career-service';
+import { FinanceService } from '../../services/finance-service';
+import { SkillService } from '../../services/skill-service';
+import { BugReportPage } from '../bug-report/bug-report';
+import { environment } from '../../environments/environment';
 
 /**
  * An item on the main menu, containing its display and navigation properties.
@@ -33,6 +41,7 @@ interface MenuItem {
 })
 export class MenuPage {
   pages: MenuItem[];
+  version: string = environment.version;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -40,8 +49,8 @@ export class MenuPage {
               public translateSvc: TranslateService,
               public lumberjack: Lumberjack,
               public playerSvc: PlayerService,
-              public adService: AdService) {
-    this.adService.showBanner();
+              public adService: AdService, public careerSvc: CareerService,
+              public skillSvc: SkillService, public finSvc: FinanceService) {
 
     this.pages = [
       { page: HomePage, name: 'Me', icon: 'person', color: "primary" },
@@ -49,12 +58,14 @@ export class MenuPage {
       { page: FinancePage, name: 'Finance', icon: 'cash', color: "primary" },
       { page: SkillsPage, name: 'Skills', icon: 'bulb', color: "warning" },
       { page: HousingPage, name: 'Housing', icon: 'home', color: "warning" },
-      { page: SocialPage, name: 'Social', icon: 'people', color: "secondary" },
+      // { page: SocialPage, name: 'Social', icon: 'people', color: "secondary" },
       // { page: EducationPage, name: 'Education', icon: 'school', color: "danger" },
       // { page: CasinoPage, name: 'Casino', icon: 'game-controller-a', color: "warning" },
       { page: ShoppingPage, name: 'Shopping', icon: 'pricetags', color: "secondary" },
-      { page: SettingsPage, name: 'Settings', icon: 'settings', color: "primary" },
       { page: StatsPage, name: 'Stats', icon: 'stats', color: "danger" },
+      { page: SettingsPage, name: 'Settings', icon: 'settings', color: "primary" },
+      { page: BugReportPage, name: 'Report Bug', icon: 'bug', color: "danger" },
     ]
   }
+
 }

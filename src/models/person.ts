@@ -2,6 +2,12 @@ import { Job } from './job';
 import { Career } from './career';
 import { House } from './house';
 import { Inventory } from './inventory';
+import { CountryIdentifier, FullName, PlayerService } from '../services/player-service';
+import { Helpers } from '../utilities/helpers';
+import CountryLanguage from 'country-language';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { Subject } from 'rxjs/Subject';
 
 export enum Gender {
   Female = "female",
@@ -18,52 +24,31 @@ export enum Stat {
 }
 
 export class Person {
-  private _firstName: string;
-  private _lastName: string;
-  private _age: number;
-  private _mood: number;
-  private _hunger: number;
-  private _health: number;
-  private _appearance: number;
-  private _intelligence: number;
-  private _strength: number;
-  private _agility: number;
-  private _dexterity: number;
-  private _charisma: number;
-  private _nationality: string;
-  private _ethnicity: string;
-  private _money: number;
-  private _job: Job;
-  private _career: Career;
-  private _ascensions: number;
-  private _house: House;
+  private _firstName: string = '';
+  private _lastName: string = '';
+  private _age: number = 0;
+  private _mood: number = 1;
+  private _hunger: number = 1;
+  private _health: number = 1;
+  private _appearance: number = 1;
+  private _intelligence: number = 1;
+  private _strength: number = 1;
+  private _agility: number = 1;
+  private _dexterity: number = 1;
+  private _charisma: number = 1;
+  private _nationality: string = '';
+  private _ethnicity: string = '';
+  private _money: number = 0;
+  private _job: Job = new Job();
+  private _career: Career = new Career();
+  private _ascensions: number = 0;
+  private _house: House = new House();
   private _pastCareers: Career[] = [];
-  private _gender: Gender;
-  private _inventory: Inventory;
+  private _gender: Gender = Gender.Female;
+  private _inventory: Inventory = new Inventory();
 
   constructor() {
-    this._firstName = '';
-    this._lastName = '';
-    this._age = 0;
-    this._mood = 100;
-    this._hunger = 100;
-    this._health = 100;
-    this._appearance = 0;
-    this._intelligence = 0;
-    this._strength = 0;
-    this._agility = 0;
-    this._dexterity = 0;
-    this._charisma = 0;
-    this._nationality = '';
-    this._ethnicity = '';
-    this._money = 0;
-    this._job = new Job('job-title-unemployed-1', 0, 0, 'Unemployed');
-    this._career = undefined;
-    this._ascensions = 0;
-    this._house = undefined;
-    this._pastCareers = [];
-    this._gender = Gender.Female;
-    this._inventory = new Inventory();
+
   }
 
   get firstName(): string {
@@ -80,6 +65,7 @@ export class Person {
   }
 
   set lastName(value: string) {
+
     this._lastName = value;
   }
 
@@ -88,8 +74,8 @@ export class Person {
   }
 
   set age(value: number) {
-    this._age = value;
 
+    this._age = value;
   }
 
   get mood(): number {
@@ -106,6 +92,8 @@ export class Person {
     else {
       this._mood = value;
     }
+
+
   }
 
   get appearance(): number {
@@ -114,6 +102,7 @@ export class Person {
 
   set appearance(value: number) {
     this._appearance = (value >= 100 ? 100 : value);
+
   }
 
   get intelligence(): number {
@@ -185,6 +174,7 @@ export class Person {
 
   set nationality(value: string) {
     this._nationality = value;
+
   }
 
   get ethnicity(): string {
@@ -193,6 +183,7 @@ export class Person {
 
   set ethnicity(value: string) {
     this._ethnicity = value;
+
   }
 
   get career(): Career {
@@ -200,6 +191,7 @@ export class Person {
   }
 
   set career(value: Career) {
+
     this._career = value;
   }
 
@@ -208,6 +200,7 @@ export class Person {
   }
 
   set ascensions(value: number) {
+
     this._ascensions = value;
   }
 
@@ -225,6 +218,7 @@ export class Person {
     else {
       this._hunger = value;
     }
+
   }
 
   get health(): number {
@@ -241,6 +235,7 @@ export class Person {
     else {
       this._health = value;
     }
+
   }
 
   get house(): House {
@@ -249,6 +244,7 @@ export class Person {
 
   set house(value: House) {
     this._house = value;
+
   }
 
   get pastCareers(): Career[] {
@@ -257,6 +253,7 @@ export class Person {
 
   set pastCareers(value: Career[]) {
     this._pastCareers = value;
+
   }
 
   get gender(): Gender {
@@ -265,6 +262,7 @@ export class Person {
 
   set gender(value: Gender) {
     this._gender = value;
+
   }
 
   get inventory(): Inventory {
@@ -273,5 +271,6 @@ export class Person {
 
   set inventory(value: Inventory) {
     this._inventory = value;
+
   }
 }

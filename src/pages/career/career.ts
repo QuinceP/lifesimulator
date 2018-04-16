@@ -7,6 +7,7 @@ import { TimeService } from '../../services/time-service';
 import { CareerService } from '../../services/career-service';
 import { Action } from '../../models/action';
 import { GameplayStatsService } from '../../services/gameplay-stats-service';
+import { Lumberjack } from '../../services/lumberjack';
 
 @Component({
   selector: 'page-career',
@@ -14,6 +15,7 @@ import { GameplayStatsService } from '../../services/gameplay-stats-service';
 })
 export class CareerPage {
   private player: Person;
+  private unemployed = 'job-title-unemployed-1';
   @ViewChildren('workButton') workButtons: QueryList<ElementRef>;
 
   constructor(public navCtrl: NavController,
@@ -23,8 +25,14 @@ export class CareerPage {
               private toastCtrl: ToastController,
               private careerSvc: CareerService,
               private statSvc: GameplayStatsService,
-              private changeDetectorRef: ChangeDetectorRef) {
+              private changeDetectorRef: ChangeDetectorRef,
+              public lumberjack: Lumberjack) {
+  }
+
+  ionViewCanEnter(){
     this.player = this.playerSvc.player;
+    this.lumberjack.info(this.playerSvc);
+    this.lumberjack.info(this.player);
   }
 
   goToCareersList() {
@@ -42,7 +50,7 @@ export class CareerPage {
 
     this.toastCtrl.create({
       message: '+ $' + earned,
-      duration: 500,
+      duration: 300,
       position: 'top'
     }).present();
   }
