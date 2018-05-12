@@ -3,9 +3,11 @@ page-settings {
     background-color: color($colors, primary);
     color: white;
   }
-
   ion-col {
     display: flex;
     justify-content: center;
+  }
+  .version-row {
+    align-items: center;
   }
 }

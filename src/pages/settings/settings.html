@@ -9,8 +9,13 @@
     <ion-row justify-content-center>
       <h1>Version</h1>
     </ion-row>
-    <ion-row justify-content-center>
-      <h3>{{version}} "{{codename}}"</h3>
+    <ion-row justify-content-center class="version-row">
+      <ion-col justify-content-center>
+        <h3>{{version}} "{{codename}}"</h3>
+      </ion-col>
+      <ion-col justify-content-center>
+        <button (click)="presentUpdateAlert()" class="btn btn-default">Update Notes</button>
+      </ion-col>
     </ion-row>
     <ion-row justify-content-center>
       <h1>Language</h1>

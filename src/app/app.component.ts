@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, Platform } from 'ionic-angular';
+import { AlertController, Events, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabPage } from '../pages/tab/tab';
@@ -13,6 +13,7 @@ import { AdService } from '../services/ad-service';
 import { environment } from '../environments/environment';
 import { GameplayStatsService } from '../services/gameplay-stats-service';
 import { SettingsService } from '../services/settings-service';
+import { BugReportService } from '../services/bug-report-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,7 +34,13 @@ export class MyApp {
     public adService: AdService,
     public alertCtrl: AlertController,
     public gameplayStatsSvc: GameplayStatsService,
-    public settingsSvc: SettingsService) {
+    public settingsSvc: SettingsService,
+    public bugSvc: BugReportService,
+    public events: Events) {
+
+    events.subscribe('presentUpdateAlert', () => {
+      this.showAlert();
+    });
 
     this.settingsSvc.getActiveTheme().subscribe(val => {
       this.selectedTheme = val;
@@ -49,13 +56,6 @@ export class MyApp {
         splashScreen.hide();
         this.presentUpdateAlert();
       });
-
-
-      // if (platform.is('cordova')) {
-      // }
-      // else {
-      //   this.lumberjack.info('Player not loaded.');
-      // }
     });
   }
 
@@ -72,33 +72,37 @@ export class MyApp {
 
   presentUpdateAlert() {
     this.saveService.load('version').then((result) => {
+      this.lumberjack.info('saved version', result, 'current version', environment.version);
       if (!result || result != environment.version) {
-        this.saveService.clear().then(() => {
-          this.alertCtrl.create({
-            title: 'Welcome to Untitled Life Sim',
-            message: 'Update Notes v' + environment.version + '&nbsp;' + '\"' + environment.codename + '\"' + '\n\n' +
-            'New Features' + '\n' +
-            '&nbsp;&#8226;&nbsp;Added dynamic theming - choose light, dark or default themes in settings' + '\n' + '\n' +
-            'Enhancements' + '\n' +
-            "&nbsp;&#8226;&nbsp;Moved transaction success toast to top" + '\n' +
-            "&nbsp;&#8226;&nbsp;Gameplay stats update" + '\n' +
-            "&nbsp;&nbsp;&#8226;&nbsp;Added more tracked stats (all/life time):" + '\n' +
-            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Hours Worked" + '\n' +
-            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Times Eaten" + '\n' +
-            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Times Had Fun" + '\n' +
-            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Times Healed" + '\n' +
-            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Death" + '\n' + '\n' +
-            'Bug Fixes' + '\n' +
-            "&nbsp;&nbsp;&#8226;&nbsp;Fixed player stat rounding error" + '\n' +
-            "&nbsp;&nbsp;&#8226;&nbsp;Fixed bug where skills did not reset on death" + '\n' +
-            "&nbsp;&nbsp;&#8226;&nbsp;Fixed bug that crashed the player page and granted player immortality",
-            buttons: [{ text: 'Ok' },
-            ],
-            cssClass: 'prewrap'
-          }).present();
+          this.showAlert();
           this.saveService.save('version', environment.version);
-        });
+
       }
     })
+  }
+
+  showAlert(){
+    this.alertCtrl.create({
+      title: 'Welcome to Untitled Life Sim',
+      message: 'Update Notes v' + environment.version + '&nbsp;' + '\"' + environment.codename + '\"' + '\n\n' +
+      'New Features' + '\n' +
+      '&nbsp;&#8226;&nbsp;Added dynamic theming - choose light, dark or default themes in settings' + '\n' + '\n' +
+      'Enhancements' + '\n' +
+      "&nbsp;&#8226;&nbsp;Moved transaction success toast to top" + '\n' +
+      "&nbsp;&#8226;&nbsp;Gameplay stats update" + '\n' +
+      "&nbsp;&nbsp;&#8226;&nbsp;Added more tracked stats (all/life time):" + '\n' +
+      "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Hours Worked" + '\n' +
+      "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Times Eaten" + '\n' +
+      "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Times Had Fun" + '\n' +
+      "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Times Healed" + '\n' +
+      "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Death" + '\n' + '\n' +
+      'Bug Fixes' + '\n' +
+      "&nbsp;&nbsp;&#8226;&nbsp;Fixed player stat rounding error" + '\n' +
+      "&nbsp;&nbsp;&#8226;&nbsp;Fixed bug where skills did not reset on death" + '\n' +
+      "&nbsp;&nbsp;&#8226;&nbsp;Fixed bug that crashed the player page and granted player immortality",
+      buttons: [{ text: 'Ok' },
+      ],
+      cssClass: 'prewrap'
+    }).present();
   }
 }

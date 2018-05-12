@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Events, NavController, NavParams } from 'ionic-angular';
 import { TranslateService } from '../../utilities/translate/translate-service';
 import { SettingsService } from '../../services/settings-service';
 import { Themes } from '../../utilities/helpers';
@@ -19,7 +19,8 @@ export class SettingsPage implements OnInit {
     public navCtrl: NavController,
     public navParams: NavParams,
     public translateSvc: TranslateService,
-    public settingsSvc: SettingsService) {
+    public settingsSvc: SettingsService,
+    public events: Events) {
 
     this.themes = this.makeEnum(Themes);
     this.settingsSvc.getActiveTheme().subscribe(val => this.selectedTheme = val);
@@ -44,5 +45,9 @@ export class SettingsPage implements OnInit {
 
   getThemeDisplayName(theme: string){
     return theme.replace("-theme", "").toTitleCase();
+  }
+
+  presentUpdateAlert(){
+    this.events.publish('presentUpdateAlert');
   }
 }
