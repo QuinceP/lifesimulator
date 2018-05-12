@@ -1,0 +1,41 @@
+.light-theme {
+  ion-content {
+    background: #ffffff !important;
+  }
+  $app_colors: (
+    primary: #1abc9c,
+    secondary: #3498db,
+    danger: #d35400,
+    warning: #f1c40f,
+    light: #ecf0f1,
+    dark: #95a5a6
+  );
+
+  h1, h3, h4, h5, h6, span, ion-input, ion-select {
+    color: #000000;
+  }
+
+  .clock .time-display {
+    color: #000000;
+  }
+
+  .toolbar-title-md {
+    color: #000000;
+  }
+
+  button, ion-card {
+    border: 1px solid black;
+  }
+
+  .progress-col progress-bar div.progress-outer {
+    border: 1px solid black;
+  }
+
+  .tabs-md .tabbar {
+    border: 1px solid black;
+  }
+
+  .icon-demo {
+    border: 1px solid black;
+  }
+}

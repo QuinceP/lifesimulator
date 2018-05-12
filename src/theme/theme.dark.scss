@@ -1,0 +1,25 @@
+.dark-theme {
+  ion-content {
+    background: #000000 !important;
+  }
+  $app_colors: (
+    primary: #1abc9c,
+    secondary: #3498db,
+    danger: #d35400,
+    warning: #f1c40f,
+    light: #ecf0f1,
+    dark: #95a5a6
+  );
+
+  h1, h3, h4, h5, h6, span, ion-input, ion-select {
+    color: white;
+  }
+
+  .tabs-md .tabbar {
+    background-color: #333333 !important;
+  }
+
+  .tab-button-text {
+    color: #f8f8f8 !important;
+  }
+}

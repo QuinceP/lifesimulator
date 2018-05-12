@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { PlayerService } from '../../services/player-service';
 import { Person } from '../../models/person';
@@ -13,9 +13,10 @@ import { Lumberjack } from '../../services/lumberjack';
   selector: 'page-career',
   templateUrl: 'career.html',
 })
-export class CareerPage {
+export class CareerPage implements OnInit{
   private player: Person;
   private unemployed = 'job-title-unemployed-1';
+  private background_color: string;
   @ViewChildren('workButton') workButtons: QueryList<ElementRef>;
 
   constructor(public navCtrl: NavController,
@@ -29,6 +30,9 @@ export class CareerPage {
               public lumberjack: Lumberjack) {
   }
 
+  ngOnInit(){
+    this.getBackgroundColor();
+  }
   ionViewCanEnter(){
     this.player = this.playerSvc.player;
     this.lumberjack.info(this.playerSvc);
@@ -56,5 +60,11 @@ export class CareerPage {
       duration: 300,
       position: 'top'
     }).present();
+  }
+
+  getBackgroundColor() {
+    this.lumberjack.info(this.player.career.color);
+    this.background_color = this.player.career.color == "#000000" ? '#ffffff' : this.player.career.color;
+    return this.background_color;
   }
 }

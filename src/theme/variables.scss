@@ -59,6 +59,9 @@ $toolbar-background: transparent;
 // default are overridden.
 
 @import "ionic.theme.default";
+@import "theme.dark.scss";
+@import "theme.default.scss";
+@import "theme.light.scss";
 
 // Ionicons
 // --------------------------------------------------

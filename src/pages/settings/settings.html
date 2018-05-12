@@ -6,8 +6,11 @@
 
 <ion-content>
   <ion-grid>
+    <ion-row justify-content-center>
+      <h1>Language</h1>
+    </ion-row>
     <ion-row>
-      <ion-col *ngFor="let lang of translateSvc.supportedLanguages">
+      <ion-col justify-content-center *ngFor="let lang of translateSvc.supportedLanguages">
         <button (click)="translateSvc.selectLang(lang.value)" class="btn btn-default"
                 [class.selectedLang]="translateSvc.isCurrentLang(lang.value)">
           {{ lang.display }}
@@ -15,7 +18,14 @@
       </ion-col>
     </ion-row>
     <ion-row justify-content-center>
-      <h1>{{'hello' | translate}}</h1>
+      <h1>Theme</h1>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-col justify-content-center *ngFor="let theme of themes">
+      <button (click)="setActiveTheme(theme)" class="btn btn-default">
+        {{getThemeDisplayName(theme)}}
+      </button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

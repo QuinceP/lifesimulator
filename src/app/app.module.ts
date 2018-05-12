@@ -42,6 +42,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { SaveService } from '../services/save-service';
 import { BugReportPage } from '../pages/bug-report/bug-report';
 import { BugReportService } from '../services/bug-report-service';
+import { SettingsService } from '../services/settings-service';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { BugReportService } from '../services/bug-report-service';
     HousingService,
     SkillService,
     TranslateService,
+    SettingsService,
     GameplayStatsService,
     CurrencyPipe,
     AdMobFree,

@@ -12,13 +12,15 @@ import { FinanceService } from '../services/finance-service';
 import { AdService } from '../services/ad-service';
 import { environment } from '../environments/environment';
 import { GameplayStatsService } from '../services/gameplay-stats-service';
+import { Helpers, Themes } from '../utilities/helpers';
+import { SettingsService } from '../services/settings-service';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage: any = TabPage;
-
+  selectedTheme: string;
 
   constructor(
     platform: Platform,
@@ -31,7 +33,13 @@ export class MyApp {
     public finSvc: FinanceService,
     public adService: AdService,
     public alertCtrl: AlertController,
-    public gameplayStatsSvc: GameplayStatsService) {
+    public gameplayStatsSvc: GameplayStatsService,
+    public settingsSvc: SettingsService) {
+
+    this.settingsSvc.getActiveTheme().subscribe(val =>{
+       this.selectedTheme = val;
+       this.lumberjack.info('changed theme to', this.selectedTheme);
+    });
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

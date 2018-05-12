@@ -95,3 +95,9 @@ export class Helpers {
     }
   }
 }
+
+export const Themes = {
+  Dark: "dark-theme",
+  Light: "light-theme",
+  Default: "default-theme"
+};

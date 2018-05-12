@@ -1,0 +1,16 @@
+.default-theme {
+  ion-content {
+    background: #485556 !important;
+  }  $app_colors: (
+    primary: #1abc9c,
+    secondary: #3498db,
+    danger: #d35400,
+    warning: #f1c40f,
+    light: #ecf0f1,
+    dark: #95a5a6
+  );
+
+  h1, h3, h4, h5, h6, span, ion-input, ion-select {
+    color: white;
+  }
+}

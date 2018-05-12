@@ -44,15 +44,14 @@
             </ion-row>
           </ion-card-content>
         </ion-card>
-        <button ion-button block class="find-job-button" color="secondary"
-                [ngStyle]="{'background-color': player.career.color}" (click)="goToCareersList()">Find a Job
+        <button ion-button block class="find-job-button" (click)="goToCareersList()">Find a Job
         </button>
       </ion-col>
     </ion-row>
     <ion-row class="needs-button-row">
       <ion-col>
         <ion-buttons start>
-          <button #workButton ion-button block large icon-start [ngStyle]="{'background-color': player.career.color}"
+          <button #workButton class="work-button" ion-button block large icon-start
                   (click)="work()" [disabled]="player.job.title == unemployed">
             <ion-icon name="time"></ion-icon>
             Work 1 Hour
@@ -62,7 +61,7 @@
       <ion-col>
         <ion-buttons end>
           <button #workButton ion-button block large icon-start (click)="work(8)"
-                  [ngStyle]="{'background-color': player.career.color}"
+                  class="work-button"
                   [disabled]="player.job.title == unemployed">
             <ion-icon name="time"></ion-icon>
             Work 8 Hours
