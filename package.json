@@ -1,8 +1,8 @@
 {
   "name": "lifesim",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "version": "0.1.0-alpha",
+  "author": "Ganymede Games",
+  "homepage": "http://ganymedegames.com/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
