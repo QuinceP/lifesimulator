@@ -2,12 +2,6 @@ import { Job } from './job';
 import { Career } from './career';
 import { House } from './house';
 import { Inventory } from './inventory';
-import { CountryIdentifier, FullName, PlayerService } from '../services/player-service';
-import { Helpers } from '../utilities/helpers';
-import CountryLanguage from 'country-language';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import { Subject } from 'rxjs/Subject';
 
 export enum Gender {
   Female = "female",
@@ -90,10 +84,8 @@ export class Person {
       this._mood = 0;
     }
     else {
-      this._mood = value;
+      this._mood = Math.round(value);
     }
-
-
   }
 
   get appearance(): number {
@@ -101,7 +93,7 @@ export class Person {
   }
 
   set appearance(value: number) {
-    this._appearance = (value >= 100 ? 100 : value);
+    this._appearance = (value >= 100 ? 100 : Math.round(value));
 
   }
 
@@ -110,7 +102,7 @@ export class Person {
   }
 
   set intelligence(value: number) {
-    this._intelligence = (value >= 100 ? 100 : value);
+    this._intelligence = (value >= 100 ? 100 : Math.round(value));
 
   }
 
@@ -119,7 +111,7 @@ export class Person {
   }
 
   set strength(value: number) {
-    this._strength = (value >= 100 ? 100 : value);
+    this._strength = (value >= 100 ? 100 : Math.round(value));
 
   }
 
@@ -128,7 +120,7 @@ export class Person {
   }
 
   set agility(value: number) {
-    this._agility = (value >= 100 ? 100 : value);
+    this._agility = (value >= 100 ? 100 : Math.round(value));
 
   }
 
@@ -137,7 +129,7 @@ export class Person {
   }
 
   set dexterity(value: number) {
-    this._dexterity = (value >= 100 ? 100 : value);
+    this._dexterity = (value >= 100 ? 100 : Math.round(value));
 
   }
 
@@ -146,7 +138,7 @@ export class Person {
   }
 
   set charisma(value: number) {
-    this._charisma = (value >= 100 ? 100 : value);
+    this._charisma = (value >= 100 ? 100 : Math.round(value));
 
   }
 
@@ -216,7 +208,7 @@ export class Person {
       this._hunger = 0;
     }
     else {
-      this._hunger = value;
+      this._hunger = Math.round(value);
     }
 
   }
@@ -233,7 +225,7 @@ export class Person {
       this._health = 0;
     }
     else {
-      this._health = value;
+      this._health = Math.round(value);
     }
 
   }
