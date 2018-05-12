@@ -141,6 +141,7 @@ export class TimeService {
           this.playerSvc.die();
           this.bigBang(true);
           this.gameplayStatsSvc.resetLifetimeStats();
+          this.skillSvc.reset();
         }
         this.save();
       },

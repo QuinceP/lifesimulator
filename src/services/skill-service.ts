@@ -28,7 +28,7 @@ export class SkillService {
   StressManagement: Skill = StressManagement;
   HealthyLiving: Skill = HealthyLiving;
 
-  private _skills: Skill[] = [
+  private defaultSkills: Skill[] = [
     Programming,
     Art,
     Music,
@@ -40,13 +40,13 @@ export class SkillService {
     HealthyLiving
   ];
 
+  private _skills: Skill[] = this.defaultSkills;
+
   constructor(public saveSvc: SaveService, public lumberjack: Lumberjack) {
   }
 
   reset() {
-    for (let skill of this.skills) {
-      skill.level = 0;
-    }
+    this.skills = this.defaultSkills;
   }
 
   get skills(): Skill[] {
@@ -86,5 +86,4 @@ export class SkillService {
       this.lumberjack.error(error);
     })
   }
-
 }
