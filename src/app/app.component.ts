@@ -12,7 +12,6 @@ import { FinanceService } from '../services/finance-service';
 import { AdService } from '../services/ad-service';
 import { environment } from '../environments/environment';
 import { GameplayStatsService } from '../services/gameplay-stats-service';
-import { Helpers, Themes } from '../utilities/helpers';
 import { SettingsService } from '../services/settings-service';
 
 @Component({
@@ -36,9 +35,9 @@ export class MyApp {
     public gameplayStatsSvc: GameplayStatsService,
     public settingsSvc: SettingsService) {
 
-    this.settingsSvc.getActiveTheme().subscribe(val =>{
-       this.selectedTheme = val;
-       this.lumberjack.info('changed theme to', this.selectedTheme);
+    this.settingsSvc.getActiveTheme().subscribe(val => {
+      this.selectedTheme = val;
+      this.lumberjack.info('changed theme to', this.selectedTheme);
     });
 
     platform.ready().then(() => {
@@ -72,19 +71,33 @@ export class MyApp {
   }
 
   presentUpdateAlert() {
-    this.saveService.load('shown_update').then((result) => {
-      if (!result) {
-        this.alertCtrl.create({
-          title: 'Welcome to Untitled Life Sim',
-          message: 'Update Notes v' + environment.version + '\n\n' +
-          '&#8226;&nbsp;Added saving' + '\n' +
-          '&#8226;&nbsp;Added bug reports to menu' + '\n' +
-          '&#8226;&nbsp;Added test ads' + '\n',
-          buttons: [{ text: 'Ok' },
-          ],
-          cssClass: 'prewrap'
-        }).present();
-        this.saveService.save('shown_update', true);
+    this.saveService.load('version').then((result) => {
+      if (!result || result != environment.version) {
+        this.saveService.clear().then(() => {
+          this.alertCtrl.create({
+            title: 'Welcome to Untitled Life Sim',
+            message: 'Update Notes v' + environment.version + '&nbsp;' + '\"' + environment.codename + '\"' + '\n\n' +
+            'New Features' + '\n' +
+            '&nbsp;&#8226;&nbsp;Added dynamic theming - choose light, dark or default themes in settings' + '\n' + '\n' +
+            'Enhancements' + '\n' +
+            "&nbsp;&#8226;&nbsp;Moved transaction success toast to top" + '\n' +
+            "&nbsp;&#8226;&nbsp;Gameplay stats update" + '\n' +
+            "&nbsp;&nbsp;&#8226;&nbsp;Added more tracked stats (all/life time):" + '\n' +
+            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Hours Worked" + '\n' +
+            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Times Eaten" + '\n' +
+            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Times Had Fun" + '\n' +
+            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Times Healed" + '\n' +
+            "&nbsp;&nbsp;&nbsp;&#8226;&nbsp;Death" + '\n' + '\n' +
+            'Bug Fixes' + '\n' +
+            "&nbsp;&nbsp;&#8226;&nbsp;Fixed player stat rounding error" + '\n' +
+            "&nbsp;&nbsp;&#8226;&nbsp;Fixed bug where skills did not reset on death" + '\n' +
+            "&nbsp;&nbsp;&#8226;&nbsp;Fixed bug that crashed the player page and granted player immortality",
+            buttons: [{ text: 'Ok' },
+            ],
+            cssClass: 'prewrap'
+          }).present();
+          this.saveService.save('version', environment.version);
+        });
       }
     })
   }

@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TranslateService } from '../../utilities/translate/translate-service';
 import { SettingsService } from '../../services/settings-service';
 import { Themes } from '../../utilities/helpers';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html',
 })
-export class SettingsPage {
+export class SettingsPage implements OnInit {
   selectedTheme: string;
   themes: string[] = [];
+  version: string = environment.version;
+  codename: string = environment.codename;
 
   constructor(
     public navCtrl: NavController,
@@ -20,6 +23,11 @@ export class SettingsPage {
 
     this.themes = this.makeEnum(Themes);
     this.settingsSvc.getActiveTheme().subscribe(val => this.selectedTheme = val);
+  }
+
+  ngOnInit() {
+    this.version = environment.version;
+    this.codename = environment.codename;
   }
 
   setActiveTheme(theme: string) {
