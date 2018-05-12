@@ -34,7 +34,7 @@ export class FinancePage {
     let withdrawalAmount: number = +this.selectedActionAmount;
     if (!isNaN(parseFloat(withdrawalAmount.toString())) && isFinite(withdrawalAmount)) {
       if (this.financeSvc.accountBalance < +this.selectedActionAmount) {
-        this.lumberjack.info('insuffiecient funds')
+        this.lumberjack.info('insufficient funds')
         withdrawalAmount = this.financeSvc.accountBalance;
         this.playerSvc.player.money += withdrawalAmount;
         this.financeSvc.accountBalance = 0;
@@ -46,19 +46,14 @@ export class FinancePage {
       }
     }
 
-    this.toastCtrl.create({
-      duration: 1500,
-      closeButtonText: 'Ok',
-      showCloseButton: true,
-      message: 'Withdrew ' + withdrawalAmount
-    }).present();
+    this.presentTransactionSuccessToast(AccountActions.Withdraw, withdrawalAmount);
   }
 
   deposit() {
     let depositAmount: number = +this.selectedActionAmount;
     if (!isNaN(parseFloat(depositAmount.toString())) && isFinite(depositAmount)) {
       if (this.playerSvc.player.money < +this.selectedActionAmount) {
-        this.lumberjack.info('insuffiecient funds')
+        this.lumberjack.info('insufficient funds');
         depositAmount = this.playerSvc.player.money;
         this.financeSvc.accountBalance += depositAmount;
         this.playerSvc.player.money = 0;
@@ -70,11 +65,27 @@ export class FinancePage {
       }
     }
 
-    this.toastCtrl.create({
+    this.presentTransactionSuccessToast(AccountActions.Deposit, depositAmount);
+  }
+
+  presentTransactionSuccessToast(action: AccountActions, amount: number){
+    let actionString: string = ' ';
+    switch (action){
+      case AccountActions.Withdraw:
+        actionString = 'Withdrew' + actionString;
+        break;
+      case AccountActions.Deposit:
+        actionString = 'Deposited' + actionString;
+        break;
+    }
+    let toastOptions = {
+      position: 'top',
       duration: 1500,
       closeButtonText: 'Ok',
       showCloseButton: true,
-      message: 'Deposited ' + depositAmount
-    }).present();
+      message: actionString + amount
+    };
+
+    this.toastCtrl.create(toastOptions).present();
   }
 }

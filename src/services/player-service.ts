@@ -20,8 +20,6 @@ import { AdService } from './ad-service';
 import { Career } from '../models/career';
 import { House } from '../models/house';
 import { GameplayStatsService } from './gameplay-stats-service';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 
 /**
  * Class to provide player data.
@@ -32,8 +30,7 @@ export class PlayerService {
   public player: Person;
   playerSubject = new Subject<Person>();
   playerObservable = this.playerSubject.asObservable();
-  deathObserver: Observer<any>;
-  deathObservable: Observable<any>;
+  deathSubject = new Subject<any>();
 
   /**
    * Births a new player upon initializing.
@@ -56,7 +53,6 @@ export class PlayerService {
               protected saveSvc: SaveService,
               protected adSvc: AdService,
               protected gameplayStatsSvc: GameplayStatsService) {
-    this.deathObservable = new Observable<any>(o => this.deathObserver = o);
   }
 
   /**
@@ -84,16 +80,16 @@ export class PlayerService {
     this.save();
   }
 
-  load(): Promise<any>{
-    return this.saveSvc.load(this.saveKey).then((val)=>{
-      if (val){
+  load(): Promise<any> {
+    return this.saveSvc.load(this.saveKey).then((val) => {
+      if (val) {
         this.lumberjack.info(this.saveKey + ' loaded.');
         let player: Person = Object.assign(new Person(), val);
         player.job = Object.assign(new Job(), player.job);
         player.career = Object.assign(new Career(), player.career);
         player.inventory = Object.assign(new Inventory(), player.inventory);
         player.house = Object.assign(new House(), player.house);
-        for (let pastCareer in player.pastCareers){
+        for (let pastCareer in player.pastCareers) {
           player.pastCareers[pastCareer] = Object.assign(new Career(), player.pastCareers[pastCareer]);
         }
 
@@ -106,17 +102,17 @@ export class PlayerService {
         this.birth();
         this.lumberjack.info('Birth - new save');
       }
-    }).catch((error)=> {
+    }).catch((error) => {
       this.lumberjack.error(error);
     });
   }
 
-  save(){
+  save() {
     let value = this.player;
-    this.saveSvc.save(this.saveKey,  value).then((val) => {
+    this.saveSvc.save(this.saveKey, value).then((val) => {
       this.lumberjack.info(this.saveKey + ' saved successfully ' + new Date().toUTCString());
     }).catch((error) => {
-      this.lumberjack.error('Could not save ' + this.saveKey +'.');
+      this.lumberjack.error('Could not save ' + this.saveKey + '.');
       this.lumberjack.error(error);
     })
   }
@@ -170,7 +166,7 @@ export class PlayerService {
    */
   die() {
     this.gameplayStatsSvc.setStat(this.gameplayStatsSvc.StatNames.Death, 1);
-    this.deathObserver.next(null);
+    this.deathSubject.next(null);
     this.lumberjack.info('Player has perished.');
     let alert = this.alertCtrl.create({
       message: 'You died.',
@@ -179,12 +175,16 @@ export class PlayerService {
         cssClass: 'game-alert'
       }],
     });
-    alert.present().then(()=> {this.adSvc.launchInterstitial()});
     alert.onDidDismiss(() => {
       this.birth();
       this.lumberjack.info('Birth after death');
       this.save();
-    })
+    });
+    alert.present().then(() => {
+      setTimeout(() => {
+        this.adSvc.launchInterstitial()
+      }, 1050);
+    });
   }
 
   /**

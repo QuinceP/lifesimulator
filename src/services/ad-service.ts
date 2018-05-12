@@ -24,8 +24,8 @@ export class AdService {
       this.adMob.banner.config(bannerConfig);
 
       this.adMob.banner.prepare().then(() => {
-        // success
-      }).catch(e => this.lumberjack);
+        this.lumberjack.info('Banner launched.');
+      }).catch(e => this.lumberjack.error(e));
     }
   }
 
@@ -42,6 +42,7 @@ export class AdService {
 
       this.adMob.interstitial.prepare().then(() => {
         // success
+        this.lumberjack.info('Interstitial launched.');
       });
 
     }
