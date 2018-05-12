@@ -1,4 +1,4 @@
-import { DoCheck, Injectable, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Gender, Person, Stat } from '../models/person';
 import { countries } from '../models/country';
 import CountryLanguage from 'country-language';
@@ -19,7 +19,9 @@ import { Job } from '../models/job';
 import { AdService } from './ad-service';
 import { Career } from '../models/career';
 import { House } from '../models/house';
-import { Skill } from '../models/skill';
+import { GameplayStatsService } from './gameplay-stats-service';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 /**
  * Class to provide player data.
@@ -30,6 +32,8 @@ export class PlayerService {
   public player: Person;
   playerSubject = new Subject<Person>();
   playerObservable = this.playerSubject.asObservable();
+  deathObserver: Observer<any>;
+  deathObservable: Observable<any>;
 
   /**
    * Births a new player upon initializing.
@@ -40,6 +44,8 @@ export class PlayerService {
    * @param skillSvc
    * @param financeSvc
    * @param saveSvc
+   * @param adSvc
+   * @param gameplayStatsSvc
    */
   constructor(protected lumberjack: Lumberjack,
               protected alertCtrl: AlertController,
@@ -48,8 +54,9 @@ export class PlayerService {
               protected skillSvc: SkillService,
               protected financeSvc: FinanceService,
               protected saveSvc: SaveService,
-              protected adSvc: AdService) {
-
+              protected adSvc: AdService,
+              protected gameplayStatsSvc: GameplayStatsService) {
+    this.deathObservable = new Observable<any>(o => this.deathObserver = o);
   }
 
   /**
@@ -162,6 +169,8 @@ export class PlayerService {
    * Action to take when player dies.
    */
   die() {
+    this.gameplayStatsSvc.setStat(this.gameplayStatsSvc.StatNames.Death, 1);
+    this.deathObserver.next(null);
     this.lumberjack.info('Player has perished.');
     let alert = this.alertCtrl.create({
       message: 'You died.',

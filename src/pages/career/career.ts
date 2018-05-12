@@ -44,6 +44,9 @@ export class CareerPage {
     let workAction = new Action('Work', hours, () => {
       this.player.money += earned;
       this.statSvc.setStat(this.statSvc.StatNames.MoneyEarned, earned);
+      this.statSvc.setStat(this.statSvc.StatNames.MoneyEarnedAllTime, earned);
+      this.statSvc.setStat(this.statSvc.StatNames.HoursWorked, hours);
+      this.statSvc.setStat(this.statSvc.StatNames.HoursWorkedAllTime, hours);
     });
 
     this.timeSvc.performTimedAction(workAction, hours);

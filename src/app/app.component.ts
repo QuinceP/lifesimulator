@@ -3,17 +3,15 @@ import { AlertController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabPage } from '../pages/tab/tab';
-import { TranslateService } from '../utilities/translate/translate-service';
 import { PlayerService } from '../services/player-service';
-import { Storage } from '@ionic/storage';
 import { Lumberjack } from '../services/lumberjack';
 import { SaveService } from '../services/save-service';
-import { Person } from '../models/person';
 import { CareerService } from '../services/career-service';
 import { SkillService } from '../services/skill-service';
 import { FinanceService } from '../services/finance-service';
 import { AdService } from '../services/ad-service';
 import { environment } from '../environments/environment';
+import { GameplayStatsService } from '../services/gameplay-stats-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -32,7 +30,8 @@ export class MyApp {
     public skillSvc: SkillService,
     public finSvc: FinanceService,
     public adService: AdService,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public gameplayStatsSvc: GameplayStatsService) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -58,21 +57,22 @@ export class MyApp {
         this.skillSvc.load(),
         this.careerSvc.load(),
         this.playerSvc.load(),
-        this.finSvc.load()
+        this.finSvc.load(),
+        this.gameplayStatsSvc.load()
       ]
     )
   }
 
-  presentUpdateAlert(){
-    this.saveService.load('shown_update').then((result)=> {
-      if (!result){
+  presentUpdateAlert() {
+    this.saveService.load('shown_update').then((result) => {
+      if (!result) {
         this.alertCtrl.create({
           title: 'Welcome to Untitled Life Sim',
-          message: 'Update Notes v' + environment.version +'\n\n' +
+          message: 'Update Notes v' + environment.version + '\n\n' +
           '&#8226;&nbsp;Added saving' + '\n' +
           '&#8226;&nbsp;Added bug reports to menu' + '\n' +
           '&#8226;&nbsp;Added test ads' + '\n',
-          buttons: [{text: 'Ok'},
+          buttons: [{ text: 'Ok' },
           ],
           cssClass: 'prewrap'
         }).present();

@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Lumberjack } from './lumberjack';
-import { Person } from '../models/person';
 
 @Injectable()
 

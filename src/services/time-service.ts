@@ -6,6 +6,7 @@ import { Lumberjack } from './lumberjack';
 import { CareerService } from './career-service';
 import { SkillService } from './skill-service';
 import { FinanceService } from './finance-service';
+import { GameplayStatsService } from './gameplay-stats-service';
 
 /**
  * Hours needed to decrease hunger stat from 100 to 0.
@@ -40,7 +41,8 @@ export class TimeService {
               protected lumberjack: Lumberjack,
               private careerSvc: CareerService,
               private skillSvc: SkillService,
-              protected finSvc: FinanceService) {
+              protected finSvc: FinanceService,
+              protected gameplayStatsSvc: GameplayStatsService) {
     this.bigBang();
   }
 
@@ -138,6 +140,7 @@ export class TimeService {
         if (this.playerSvc.player.health <= 0 || this.playerSvc.player.hunger <= 0 || this.playerSvc.player.mood <= 0) {
           this.playerSvc.die();
           this.bigBang(true);
+          this.gameplayStatsSvc.resetLifetimeStats();
         }
         this.save();
       },
@@ -151,5 +154,6 @@ export class TimeService {
     this.careerSvc.save();
     this.skillSvc.save();
     this.finSvc.save();
+    this.gameplayStatsSvc.save();
   }
 }

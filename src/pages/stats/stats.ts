@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GameplayStat, GameplayStatsService } from '../../services/gameplay-stats-service';
 import { CurrencyPipe } from '@angular/common';
+import { PlayerService } from '../../services/player-service';
 
 @Component({
   selector: 'page-stats',
@@ -13,7 +14,8 @@ export class StatsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public statsSvc: GameplayStatsService,
-              public currencyPipe: CurrencyPipe) {
+              public currencyPipe: CurrencyPipe,
+              public playerSvc: PlayerService) {
   }
 
   ionViewDidEnter(): void {
@@ -32,5 +34,10 @@ export class StatsPage {
       return this.currencyPipe.transform(stat.count, 'USD', true, '1.2-2')
     }
     return String(stat.count);
+  }
+
+  getStatDisplay(stat: GameplayStat): string {
+    let qualifier = stat.allTime ? ' (All Time)': '';
+    return stat.text.toTitleCase() + qualifier;
   }
 }

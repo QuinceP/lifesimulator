@@ -89,6 +89,8 @@ export class HomePage {
         let workAction = new Action('Eat', 0.25, () => {
           this.playerSvc.player.hunger += 15 + this.statBonus(StatusTypes.Hunger);
           this.playerSvc.player.money -= this.foodCost;
+          this.gameplayStatsSvc.setStat(this.gameplayStatsSvc.StatNames.TimesEaten, 1);
+          this.gameplayStatsSvc.setStat(this.gameplayStatsSvc.StatNames.TimesEatenAllTime, 1);
         });
 
         this.timeSvc.performTimedAction(workAction);
@@ -108,6 +110,8 @@ export class HomePage {
         let doctorAction = new Action('Go to Doctor', 0.25, () => {
           this.playerSvc.player.health += 15;
           this.playerSvc.player.money -= this.doctorCost;
+          this.gameplayStatsSvc.setStat(this.gameplayStatsSvc.StatNames.TimesHealed, 1);
+          this.gameplayStatsSvc.setStat(this.gameplayStatsSvc.StatNames.TimesHealedAllTime, 1);
         });
         this.timeSvc.performTimedAction(doctorAction);
       }
@@ -126,6 +130,8 @@ export class HomePage {
         let action = new Action('Play Videogames', 0.25, () => {
           this.playerSvc.player.mood += 15;
           this.playerSvc.player.money -= this.funCost;
+          this.gameplayStatsSvc.setStat(this.gameplayStatsSvc.StatNames.TimesHadFun, 1);
+          this.gameplayStatsSvc.setStat(this.gameplayStatsSvc.StatNames.TimesHadFunAllTime, 1);
         });
         this.timeSvc.performTimedAction(action);
       }
