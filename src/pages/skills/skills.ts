@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Events, NavController, NavParams, ToastController } from 'ionic-angular';
 import { SkillService } from '../../services/skill-service';
 import { Skill } from '../../models/skill';
 import { Helpers } from '../../utilities/helpers';
@@ -21,14 +21,29 @@ export class SkillsPage {
               public skillSvc: SkillService,
               public timeSvc: TimeService,
               public playerSvc: PlayerService,
-              public lumberjack: Lumberjack) {
+              public lumberjack: Lumberjack,
+              public events: Events,
+              public toastCtrl: ToastController) {
+    this.events.subscribe('level-up', () => {
+      this.presentLevelUpToast();
+    })
   }
 
-  ionViewCanEnter(){
+  ionViewCanEnter() {
     this.skills = this.skillSvc.skills;
     this.lumberjack.info(this.skillSvc);
     this.lumberjack.info(this.skills);
     this.selectedSkill = this.skills[0];
+  }
+
+  presentLevelUpToast() {
+    this.toastCtrl.create({
+      position: 'top',
+      showCloseButton: true,
+      closeButtonText: 'Ok',
+      message: 'Level up! ' + this.selectedSkill.name + ' now at ' + this.selectedSkill.level,
+      duration: 750
+    }).present();
   }
 
   selectSkill(skill: Skill) {
@@ -43,7 +58,11 @@ export class SkillsPage {
     let actionName: string = this.selectedSkill.name;
     let baseExp: number = 50;
     let action = new Action(actionName, 2, () => {
+      let prevLevel = this.selectedSkill.level;
       this.selectedSkill.currentExp += baseExp + this.getExperienceBonus(this.selectedSkill, baseExp);
+      if (this.selectedSkill.level > prevLevel){
+        this.events.publish('level-up');
+      }
     });
 
     this.timeSvc.performTimedAction(action);
@@ -58,6 +77,8 @@ export class SkillsPage {
       case 'science':
         bonusSkillLevel = this.playerSvc.player.intelligence;
         break;
+      case 'business':
+        bonusSkillLevel = this.playerSvc.player.charisma;
       default:
         break;
     }

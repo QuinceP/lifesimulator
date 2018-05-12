@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Job } from '../models/job';
 import { Helpers } from '../utilities/helpers';
-import { Business, Mathematics, Programming, Science } from './skill-service';
+import { Business, Mathematics, Music, Pedagogy, Programming, Science } from './skill-service';
 import { Career } from '../models/career';
 import { TranslateService } from '../utilities/translate/translate-service';
 import { Lumberjack } from './lumberjack';
-import { Person, Stat } from '../models/person';
+import { Stat } from '../models/person';
 import { SaveService } from './save-service';
 import { Skill } from '../models/skill';
 
@@ -118,27 +118,62 @@ export class CareerService {
       (new Job('', 10, 600, '', [{ skill: Business, level: 35 }, { stat: Stat.Charisma, statLevel: 100 }]))
     ];
 
-    this.DishwasherJobs = [new Job('', 1, 5.15, '', [])];
+    this.MilitaryJobs = [
+      (new Job('', 1, 7.25, '', [{ stat: Stat.Strength, statLevel: 10 }])),
+      (new Job('', 2, 9, '', [{ stat: Stat.Strength, statLevel: 20 }])),
+      (new Job('', 3, 13, '', [{ stat: Stat.Strength, statLevel: 30 }])),
+      (new Job('', 4, 30, '', [{ stat: Stat.Strength, statLevel: 40 }])),
+      (new Job('', 5, 50, '', [{ stat: Stat.Strength, statLevel: 50 }])),
+      (new Job('', 6, 100, '', [{ stat: Stat.Strength, statLevel: 60 }])),
+      (new Job('', 7, 200, '', [{ stat: Stat.Strength, statLevel: 70 }])),
+      (new Job('', 8, 300, '', [{ stat: Stat.Strength, statLevel: 80 }]))
+    ];
+
+    this.EducationJobs = [
+      (new Job('', 1, 7.25, '', [{ skill: Pedagogy, level: 10 }])),
+      (new Job('', 2, 9, '', [{ skill: Pedagogy, level: 20 }])),
+      (new Job('', 3, 13, '', [{ skill: Pedagogy, level: 30 }])),
+      (new Job('', 4, 30, '', [{ skill: Pedagogy, level: 40 }])),
+      (new Job('', 5, 50, '', [{ skill: Pedagogy, level: 50 }])),
+      (new Job('', 6, 100, '', [{ skill: Pedagogy, level: 60 }])),
+      (new Job('', 7, 200, '', [{ skill: Pedagogy, level: 70 }])),
+      (new Job('', 8, 300, '', [{ skill: Pedagogy, level: 80 }])),
+      (new Job('', 9, 400, '', [{ skill: Pedagogy, level: 90 }]))
+    ];
 
     this.MusicJobs = [
-      new Job('', 1, 7.25, '', [])
+      (new Job('', 1, 7.25, '', [])),
+      (new Job('', 2, 9, '', [{ skill: Music, level: 9 }, { stat: Stat.Charisma, statLevel: 20 }])),
+      (new Job('', 3, 13, '', [{ skill: Music, level: 12 }, { stat: Stat.Charisma, statLevel: 30 }])),
+      (new Job('', 4, 30, '', [{ skill: Music, level: 15 }, { stat: Stat.Charisma, statLevel: 40 }])),
+      (new Job('', 5, 50, '', [{ skill: Music, level: 30 }, { stat: Stat.Charisma, statLevel: 50 }])),
+      (new Job('', 6, 100, '', [{ skill: Music, level: 45 }, { stat: Stat.Charisma, statLevel: 60 }])),
+      (new Job('', 7, 200, '', [{ skill: Music, level: 60 }, { stat: Stat.Charisma, statLevel: 70 }])),
+      (new Job('', 8, 300, '', [{ skill: Music, level: 75 }, { stat: Stat.Charisma, statLevel: 80 }])),
+      (new Job('', 9, 400, '', [{ skill: Music, level: 90 }, { stat: Stat.Charisma, statLevel: 90 }])),
+      (new Job('', 10, 600, '', [{ skill: Music, level: 100 }, { stat: Stat.Charisma, statLevel: 100 }]))
     ];
-    this.ArtJobs = [];
-    this.EducationJobs = [];
-    this.MilitaryJobs = [];
 
+    this.DishwasherJobs = [new Job('', 1, 5.15, '', [])];
+    this.ArtJobs = [];
 
     this.Unemployed = new Career('Unemployed', this.UnemployedJobs);
     this.Software = new Career('Software', this.SoftwareJobs, 'software.png', Helpers.progressColors.primary);
     this.Medicine = new Career('Medicine', this.MedicineJobs, 'medical.png', Helpers.progressColors.danger);
     this.Sales = new Career('Sales', this.SalesJobs, 'business.png', Helpers.progressColors.secondary);
+    this.Music = new Career('Music', this.MusicJobs, 'music.png', Helpers.progressColors.primary);
+    this.Education = new Career('Education', this.EducationJobs, 'education.png', Helpers.progressColors.warning);
+    this.Military = new Career('Military', this.MilitaryJobs, 'military.png', Helpers.progressColors.danger);
     this.Dishwasher = new Career('Dishwasher', this.DishwasherJobs, 'dishwasher.png', Helpers.progressColors.dark);
 
     this.Careers = [
       this.Software,
       this.Medicine,
       this.Sales,
-      this.Dishwasher
+      this.Music,
+      this.Education,
+      this.Military,
+      this.Dishwasher,
     ];
     this.setDescriptionsAndTitles();
 

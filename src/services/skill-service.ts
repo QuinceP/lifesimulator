@@ -14,6 +14,7 @@ export const Business = new Skill('Business', 'trending-up', 'Make Sales', Helpe
 export const Culinary = new Skill('Culinary', 'restaurant', 'Cook', Helpers.progressColors.warning);
 export const StressManagement = new Skill('Stress Management', 'thermometer', 'Meditate', Helpers.progressColors.danger);
 export const HealthyLiving = new Skill('Healthy Living', 'leaf', 'Research Health Tips', Helpers.progressColors.primary);
+export const Pedagogy = new Skill('Pedagogy', 'school', 'Hold Teaching Seminar', Helpers.progressColors.secondary);
 
 @Injectable()
 export class SkillService {
@@ -27,6 +28,7 @@ export class SkillService {
   Culinary: Skill = Culinary;
   StressManagement: Skill = StressManagement;
   HealthyLiving: Skill = HealthyLiving;
+  Pedagogy: Skill = Pedagogy;
 
   private defaultSkills: Skill[] = [
     Programming,
@@ -37,7 +39,8 @@ export class SkillService {
     Business,
     Culinary,
     StressManagement,
-    HealthyLiving
+    HealthyLiving,
+    Pedagogy
   ];
 
   private _skills: Skill[] = this.defaultSkills;
