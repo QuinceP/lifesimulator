@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ganymedegames.lifesim" version="0.2.0-alpha" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ganymedegames.lifesim" version="0.2.1-alpha" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>lifesim</name>
     <description>A life simulator</description>
     <author email="ganymedegamesteam@gmail.com" href="http://ganymedegames.com/">Ganymede Games Team</author>
@@ -84,7 +84,8 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-admob-free" spec="^0.15.0" />
     <allow-navigation href="http://192.168.0.14:8100" />
-    <engine name="android" spec="7.0.0" />
     <engine name="ios" spec="4.5.4" />
     <engine name="browser" spec="5.0.3" />
+    <engine name="android" spec="~7.0.0" />
+    <plugin name="cordova-sqlite-storage" spec="^2.3.1" />
 </widget>

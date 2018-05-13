@@ -69,7 +69,9 @@ import { SettingsService } from '../services/settings-service';
   ],
   imports: [
     BrowserModule,
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: '__lifesim-localstorage',
+      driverOrder: ['sqlite', 'indexeddb', 'websql']}),
     IonicModule.forRoot(MyApp, { mode: 'md' }),
     ProgressBarModule,
     Ng2OdometerModule,
@@ -112,7 +114,7 @@ import { SettingsService } from '../services/settings-service';
     GameplayStatsService,
     CurrencyPipe,
     AdMobFree,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     AdService,
     SaveService,
     BugReportService

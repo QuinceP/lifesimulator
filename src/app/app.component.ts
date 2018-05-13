@@ -83,11 +83,18 @@ export class MyApp {
 
   showAlert(){
     this.alertCtrl.create({
-      title: 'Welcome to Untitled Life Sim',
+      title: 'Welcome to Untitled Life Sim ',
       message: 'Update Notes v' + environment.version + '&nbsp;' + '\"' + environment.codename + '\"' + '\n\n' +
       'New Features' + '\n' +
-      '&nbsp;&#8226;&nbsp;Added dynamic theming - choose light, dark or default themes in settings' + '\n' + '\n' +
+      '&nbsp;&#8226;&nbsp;Added dynamic theming - choose light, dark or default themes in settings' + '\n' +
+      '&nbsp;&#8226;&nbsp;Careers update' + '\n' +
+      '&nbsp;&#8226;&nbsp;Added Music, Military, and Education careers' + '\n' +
+      '&nbsp;&#8226;&nbsp;Careers update' + '\n' +
+      '&nbsp;&#8226;&nbsp;Added Pedagogy skill' + '\n' +
+      '&nbsp;&#8226;&nbsp;Added level up notification when training skills' + '\n' +
+      '&nbsp;&#8226;&nbsp;Business skill now has a bonus tied to Charisma' + '\n' +'\n' +
       'Enhancements' + '\n' +
+      "&nbsp;&#8226;&nbsp;Allow redisplaying version notes in settings" + '\n' +
       "&nbsp;&#8226;&nbsp;Moved transaction success toast to top" + '\n' +
       "&nbsp;&#8226;&nbsp;Gameplay stats update" + '\n' +
       "&nbsp;&nbsp;&#8226;&nbsp;Added more tracked stats (all/life time):" + '\n' +

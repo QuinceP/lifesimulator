@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  version: '0.2.0-alpha',
+  version: '0.2.1-alpha',
   codename: 'Banjo',
   bug_report_email: 'ganymedegames+ydokbwtis3ehmetqkpgy@boards.trello.com',
   trello_app_key: 'cd6ea4c09cc21957e741d931bfd9a49e',
